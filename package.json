@@ -1,26 +1,58 @@
 {
-  "name": "bizweave-temp",
+  "name": "bizweave",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:unit": "vitest run src/lib/agents/__tests__/contracts.test.ts",
+    "test:integration": "vitest run src/lib/agents/__tests__/orchestrator.integration.test.ts",
+    "test:scheduler": "vitest run src/lib/agents/__tests__/scheduler.test.ts",
+    "test:e2e": "playwright test",
+    "scheduler:tick": "curl -sS -X POST http://127.0.0.1:3000/api/internal/scheduler/tick -H \"x-scheduler-secret: ${SCHEDULER_SECRET:-dev-local-secret}\"",
+    "worker:scheduler": "node scripts/scheduler-worker.mjs",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "@prisma/config": "^7.8.0",
+    "bcryptjs": "^3.0.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "dotenv": "^17.4.2",
+    "effect": "^3.20.0",
+    "framer-motion": "^12.40.0",
+    "jose": "^6.2.3",
+    "lucide-react": "^1.16.0",
+    "nanoid": "^5.1.11",
     "next": "16.2.6",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.6.0",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@playwright/test": "^1.54.2",
     "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.2.6",
+    "prisma": "^7.8.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^2.1.5"
   }
 }

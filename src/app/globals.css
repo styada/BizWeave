@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-base: #0a0b0f;
+  --bg-elevated: #12141c;
+  --bg-surface: #1a1d28;
+  --bg-muted: #252836;
+  --accent-primary: #e8b84a;
+  --accent-glow: #f5d078;
+  --accent-secondary: #5eead4;
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --error: #f87171;
+  --safeguard: #818cf8;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 12px 48px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 40px rgba(232, 184, 74, 0.12);
+  --background: var(--bg-base);
+  --foreground: var(--text-primary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-instrument-serif);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(232, 184, 74, 0.14), transparent 30%),
+    radial-gradient(circle at 85% 12%, rgba(94, 234, 212, 0.1), transparent 35%),
+    radial-gradient(circle at 50% 120%, rgba(129, 140, 248, 0.08), transparent 40%),
+    var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+.font-serif {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+}
+
+.glass {
+  backdrop-filter: blur(24px);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.gradient-border-top {
+  border-top: 2px solid var(--accent-primary);
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    filter: saturate(100%);
+  }
+  50% {
+    filter: saturate(120%);
+  }
+}
+
+main {
+  animation: breathe 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main {
+    animation: none;
+  }
 }

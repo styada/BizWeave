@@ -1,0 +1,214 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  name         String?
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  apiKeys      ApiKey[]
+  businesses   Business[]
+}
+
+model ApiKey {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider     String
+  encryptedKey String
+  keyHint      String
+  isValid      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([userId, provider])
+}
+
+model Business {
+  id          String          @id @default(cuid())
+  userId      String
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  type        String
+  tagline     String?
+  description String?
+  location    String?
+  phone       String?
+  email       String?
+  status      String          @default("draft")
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  inventory   InventoryItem[]
+  agentRuns   AgentRun[]
+  site        GeneratedSite?
+  marketing   MarketingPlan?
+  approvalPolicies ApprovalPolicy[]
+  pendingActions   PendingAction[]
+  scheduledTasks   ScheduledTask[]
+  activityEvents   ActivityEvent[]
+}
+
+model InventoryItem {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  name       String
+  sku        String?
+  price      Float?
+  quantity   Int?
+  category   String?
+  createdAt  DateTime @default(now())
+}
+
+model AgentRun {
+  id          String     @id @default(cuid())
+  businessId  String
+  business    Business   @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  status      String     @default("pending")
+  currentStep String?
+  error       String?
+  createdAt   DateTime   @default(now())
+  completedAt DateTime?
+  logs        AgentLog[]
+  taskExecutionId String? @unique
+  taskExecution   TaskExecution? @relation(fields: [taskExecutionId], references: [id], onDelete: SetNull)
+  activityEvents  ActivityEvent[]
+  pendingActions  PendingAction[]
+
+  @@index([businessId, createdAt])
+}
+
+model AgentLog {
+  id        String   @id @default(cuid())
+  runId     String
+  run       AgentRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  agent     String
+  status    String
+  input     String?
+  output    String?
+  durationMs Int?
+  errorCode  String?
+  usedFallback Boolean @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([runId, createdAt])
+}
+
+model GeneratedSite {
+  id         String   @id @default(cuid())
+  businessId String   @unique
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  html       String
+  css        String
+  meta       String?
+  status     String   @default("draft")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model MarketingPlan {
+  id         String   @id @default(cuid())
+  businessId String   @unique
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  channels   String
+  content    String
+  schedule   String?
+  status     String   @default("draft")
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model ApprovalPolicy {
+  id               String   @id @default(cuid())
+  businessId       String
+  business         Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  actionType       String
+  enabled          Boolean  @default(true)
+  requiresApproval Boolean  @default(true)
+  minRiskLevel     String   @default("medium")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([businessId, actionType])
+}
+
+model PendingAction {
+  id             String    @id @default(cuid())
+  businessId     String
+  business       Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  runId          String?
+  run            AgentRun? @relation(fields: [runId], references: [id], onDelete: SetNull)
+  actionType     String
+  riskLevel      String
+  payload        String
+  status         String    @default("pending")
+  approverUserId String?
+  decisionReason String?
+  approvedAt     DateTime?
+  rejectedAt     DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([businessId, status, createdAt])
+}
+
+model ScheduledTask {
+  id          String    @id @default(cuid())
+  businessId  String
+  business    Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  agent       String
+  cadence     String
+  cronExpr    String?
+  enabled     Boolean   @default(true)
+  lastRunAt   DateTime?
+  nextRunAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  executions  TaskExecution[]
+
+  @@unique([businessId, agent])
+}
+
+model TaskExecution {
+  id              String         @id @default(cuid())
+  scheduledTaskId String
+  scheduledTask   ScheduledTask  @relation(fields: [scheduledTaskId], references: [id], onDelete: Cascade)
+  run             AgentRun?
+  status          String         @default("queued")
+  retryCount      Int            @default(0)
+  maxAttempts     Int            @default(3)
+  queuedAt        DateTime       @default(now())
+  nextAttemptAt   DateTime?
+  startedAt       DateTime?
+  completedAt     DateTime?
+  error           String?
+  deadLetteredAt  DateTime?
+  deadLetterReason String?
+
+  @@index([scheduledTaskId, queuedAt])
+  @@index([status, nextAttemptAt])
+}
+
+model ActivityEvent {
+  id         String    @id @default(cuid())
+  businessId String
+  business   Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  runId      String?
+  run        AgentRun? @relation(fields: [runId], references: [id], onDelete: SetNull)
+  agent      String?
+  eventType  String
+  level      String    @default("info")
+  message    String
+  payload    String?
+  createdAt  DateTime  @default(now())
+
+  @@index([businessId, createdAt])
+}

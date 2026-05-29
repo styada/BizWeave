@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bizweave
 
-## Getting Started
+**Your business, woven online while you sleep.**
 
-First, run the development server:
+Bizweave is a production-grade AI platform for **existing businesses** — liquor stores, retail shops, restaurants, and SaaS products. Connect your inventory, location, and brand. AI agents build your website, create marketing plans, set up support templates, and pass everything through a **Safeguard** last-bastion review before anything goes live.
+
+The pipeline now includes a **Trust Index** in the Safeguard verdict so every run is explainable and reliability-scored before publish.
+
+Bring Your Own Keys (BYOK) for OpenAI and Anthropic — your API keys are encrypted at rest with AES-256-GCM.
+
+## Features
+
+- **6-agent pipeline**: Intake → Planner → Builder → Marketing → Support → Safeguard
+- **BYOK**: OpenAI & Anthropic with connection testing
+- **Business onboarding**: Multi-step wizard with CSV inventory import
+- **Generated sites**: Mobile-first HTML/CSS preview
+- **Demo mode**: Works without API keys using intelligent templates
+- **Design system**: See [DESIGN.md](./DESIGN.md)
+
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Start local stack (Postgres + app)
+make docker-up
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Local dev without Docker
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+cp .env.example .env
 
-## Learn More
+# Start PostgreSQL locally (or via docker compose just for db)
+docker compose up -d db
 
-To learn more about Next.js, take a look at the following resources:
+# Push schema and run app
+npm run db:push
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Sign up** at `/signup`
+2. **Onboard** a business at `/onboarding`
+3. **Add API keys** (optional) at `/dashboard/settings/keys`
+4. **Run agents** from the business dashboard
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment variables
 
-## Deploy on Vercel
+| Variable | Description |
+|----------|-------------|
+| `DATABASE_URL` | PostgreSQL URL, e.g. `postgresql://postgres:postgres@localhost:5432/bizweave?schema=public` |
+| `AUTH_SECRET` | JWT session signing secret |
+| `ENCRYPTION_KEY` | 64-char hex or passphrase for AES-256-GCM |
+| `NEXT_PUBLIC_APP_URL` | App URL for redirects |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Tech stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Next.js 16 (App Router)
+- TypeScript, Tailwind CSS 4
+- Prisma 7 + PostgreSQL
+- Jose (JWT sessions), bcryptjs
+- Framer Motion, Lucide icons
+
+## Agent architecture
+
+All agents share safety rules in prompts and strict JSON contracts. The **Safeguard Agent** reviews every artifact before status moves to `live`, emits a **Trust Index** (0-100), and blocks publish when reliability is too low. Without a valid BYOK key, the pipeline uses production-quality template fallbacks so the product works end-to-end in demo mode.
+
+## Tests
+
+```bash
+make test-unit
+make test-integration
+make test-e2e
+```
+
+## Ops commands
+
+```bash
+make install
+make db-push
+make lint
+make build
+make docker-up
+make docker-down
+```
+
+## License
+
+MIT
