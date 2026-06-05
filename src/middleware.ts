@@ -1,55 +1,21 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { type NextRequest } from 'next/server'
 
-const COOKIE_NAME = "bizweave_session";
-
-const protectedPaths = ["/dashboard", "/onboarding"];
+import { updateSession } from '@/lib/supabase/middleware'
 
 export async function middleware(request: NextRequest) {
-  if (process.env.NODE_ENV !== "production") {
-    return NextResponse.next();
-  }
-
-  const { pathname } = request.nextUrl;
-
-  const isProtected = protectedPaths.some(
-    (p) => pathname === p || pathname.startsWith(`${p}/`)
-  );
-  const isAuthPage = pathname === "/login" || pathname === "/signup";
-
-  if (!isProtected && !isAuthPage) {
-    return NextResponse.next();
-  }
-
-  const token = request.cookies.get(COOKIE_NAME)?.value;
-  let isAuthenticated = false;
-
-  if (token && process.env.AUTH_SECRET) {
-    try {
-      const { jwtVerify } = await import("jose");
-      await jwtVerify(token, new TextEncoder().encode(process.env.AUTH_SECRET));
-      isAuthenticated = true;
-    } catch {
-      isAuthenticated = false;
-    }
-  }
-
-  if (isProtected && !isAuthenticated) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    url.searchParams.set("redirect", pathname);
-    return NextResponse.redirect(url);
-  }
-
-  if (isAuthPage && isAuthenticated) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
-    return NextResponse.redirect(url);
-  }
-
-  return NextResponse.next();
+  return await updateSession(request)
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/onboarding/:path*", "/login", "/signup"],
-};
+  matcher: [
+    /*
+     * Match all request paths except:
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     * - images - .svg, .png, .jpg, .jpeg, .gif, .webp
+     * Feel free to modify this pattern to include more paths.
+     */
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
+}

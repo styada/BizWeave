@@ -2,6 +2,7 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { createClient } from "@/lib/supabase/server";
 import bcrypt from "bcryptjs";
 
 export const COOKIE_NAME = "bizweave_session";
@@ -65,21 +66,90 @@ export async function destroySession() {
 export async function getSession(): Promise<SessionUser | null> {
   const cookieStore = await cookies();
   const token = cookieStore.get(COOKIE_NAME)?.value;
-  if (!token) return null;
 
-  try {
-    const { payload } = await jwtVerify(token, getSecret());
-    const id = payload.sub;
-    if (!id || typeof id !== "string") return null;
+  if (token) {
+    try {
+      const { payload } = await jwtVerify(token, getSecret());
+      const id = payload.sub;
+      if (!id || typeof id !== "string") return null;
 
-    const user = await db.user.findUnique({
-      where: { id },
-      select: { id: true, email: true, name: true },
-    });
-    return user;
-  } catch {
+      const user = await db.user.findUnique({
+        where: { id },
+        select: { id: true, email: true, name: true },
+      });
+      return user;
+    } catch {
+      // Fall through to Supabase session lookup when legacy cookie verification fails.
+    }
+  }
+
+  const supabase = await createClient();
+  const {
+    data: { user: supabaseUser },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error || !supabaseUser?.email) {
     return null;
   }
+
+  if (!supabaseUser.id) {
+    return null;
+  }
+
+  const metadata = supabaseUser.user_metadata ?? {};
+  const inferredName =
+    (typeof metadata.full_name === "string" && metadata.full_name.trim()) ||
+    (typeof metadata.name === "string" && metadata.name.trim()) ||
+    null;
+
+  const userBySupabaseId = await db.user.findUnique({
+    where: { supabaseAuthId: supabaseUser.id },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+    },
+  });
+
+  if (userBySupabaseId) {
+    return userBySupabaseId;
+  }
+
+  const existingByEmail = await db.user.findUnique({
+    where: { email: supabaseUser.email },
+    select: { id: true },
+  });
+
+  if (existingByEmail) {
+    return db.user.update({
+      where: { id: existingByEmail.id },
+      data: {
+        supabaseAuthId: supabaseUser.id,
+        name: inferredName,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+      },
+    });
+  }
+
+  return db.user.create({
+    data: {
+      supabaseAuthId: supabaseUser.id,
+      email: supabaseUser.email,
+      name: inferredName,
+      // Password is managed by Supabase for this flow; keep schema compatibility.
+      passwordHash: await hashPassword(crypto.randomUUID()),
+    },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+    },
+  });
 }
 
 export async function requireSession(): Promise<SessionUser> {

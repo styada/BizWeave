@@ -1,4 +1,4 @@
-.PHONY: install dev lint build test test-unit test-integration test-scheduler test-e2e db-generate db-push db-local-start db-local-bootstrap db-local-stop local-setup local-dev scheduler-tick scheduler-worker backend-sync backend-migrate backend-revision docker-up docker-down docker-logs
+.PHONY: install dev lint build test test-unit test-integration test-scheduler test-supabase test-supabase-db test-e2e db-generate db-push db-local-start db-local-bootstrap db-local-stop local-setup local-dev scheduler-tick scheduler-worker backend-sync backend-migrate backend-revision docker-up docker-down docker-logs
 
 install:
 	npm install
@@ -23,6 +23,12 @@ test-integration:
 
 test-scheduler:
 	npm run test:scheduler
+
+test-supabase:
+	npm run test -- src/lib/supabase/__tests__/
+
+test-supabase-db:
+	cd supabase && pgrx test || echo "pgrx not available; use 'supabase db test' instead"
 
 test-e2e:
 	npm run test:e2e
@@ -64,10 +70,10 @@ backend-sync:
 	cd backend && uv sync
 
 backend-migrate:
-	cd backend && uv run alembic upgrade head
+	ALEMBIC_BACKEND_ONLY=1 bash scripts/backend-alembic.sh upgrade head
 
 backend-revision:
-	cd backend && uv run alembic revision --autogenerate -m "new storage version"
+	ALEMBIC_BACKEND_ONLY=1 bash scripts/backend-alembic.sh revision --autogenerate -m "new storage version"
 
 docker-up:
 	docker compose up --build -d
@@ -77,3 +83,18 @@ docker-down:
 
 docker-logs:
 	docker compose logs -f frontend backend
+
+supabase-start:
+	npx supabase start
+
+supabase-stop:
+	npx supabase stop
+
+supabase-reset:
+	npx supabase db reset
+
+supabase-test-db:
+	npx supabase test db
+
+supabase-gen-types:
+	npx supabase gen types typescript --local > src/generated/supabase-types.ts

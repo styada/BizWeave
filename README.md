@@ -60,8 +60,12 @@ Optional backend setup (for the Python service):
 
 ```bash
 make backend-sync
+export BACKEND_DATABASE_URL="postgresql+psycopg://user:pass@host:5432/backend_db"
 make backend-migrate
 ```
+
+Backend Alembic commands are intentionally guarded and require backend-only opt-in + URL.
+See [docs/orm-ownership-boundaries.md](./docs/orm-ownership-boundaries.md).
 
 1. **Sign up** at `/signup`
 2. **Onboard** a business at `/onboarding`
@@ -98,7 +102,34 @@ All agents share safety rules in prompts and strict JSON contracts. The **Safegu
 make test-unit
 make test-integration
 make test-e2e
+make test-supabase
+make test-supabase-db
 ```
+
+Supabase tests come in two flavours:
+
+**1. Vitest integration tests** (`test:supabase`) — Test Supabase client imports,
+environment configuration, and module shape. Run against the configured Supabase
+project using `@supabase/supabase-js`.
+
+```bash
+npm run test:supabase        # or: make test-supabase
+```
+
+**2. Database contract tests** (`test:supabase:db`) — pgTAP SQL files under
+`supabase/tests/database` that verify RLS policies, schema columns, indexes,
+and policy contracts are correct against the actual database.
+
+```bash
+# Ensure the pgTAP extension is installed in your database first:
+#   Docker Compose: docker compose up -d db-test
+#   Homebrew:       brew install pgtap && psql $DATABASE_URL -c "CREATE EXTENSION pgtap"
+npm run test:supabase:db    # or: make test-supabase-db
+```
+
+The SQL files follow [Supabase's pgTAP testing
+guide](https://supabase.com/docs/guides/database/testing) and are run via
+`scripts/run-pgtap-tests.sh` which connects using `DATABASE_URL` from `.env`.
 
 ## Ops commands
 
@@ -112,6 +143,14 @@ make lint
 make build
 make docker-up
 make docker-down
+```
+
+For backend storage migrations:
+
+```bash
+export BACKEND_DATABASE_URL="postgresql+psycopg://user:pass@host:5432/backend_db"
+make backend-migrate
+make backend-revision
 ```
 
 ## Package manager recommendation
