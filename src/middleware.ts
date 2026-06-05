@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { jwtVerify } from "jose";
 
 const COOKIE_NAME = "bizweave_session";
 
 const protectedPaths = ["/dashboard", "/onboarding"];
 
 export async function middleware(request: NextRequest) {
+  if (process.env.NODE_ENV !== "production") {
+    return NextResponse.next();
+  }
+
   const { pathname } = request.nextUrl;
 
   const isProtected = protectedPaths.some(
@@ -23,6 +26,7 @@ export async function middleware(request: NextRequest) {
 
   if (token && process.env.AUTH_SECRET) {
     try {
+      const { jwtVerify } = await import("jose");
       await jwtVerify(token, new TextEncoder().encode(process.env.AUTH_SECRET));
       isAuthenticated = true;
     } catch {

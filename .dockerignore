@@ -8,3 +8,9 @@ test-results
 npm-debug.log
 .env
 .env.local
+backend
+docs
+tests
+dev.db
+*.log
+*.pid

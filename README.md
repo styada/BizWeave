@@ -20,11 +20,21 @@ Bring Your Own Keys (BYOK) for OpenAI and Anthropic — your API keys are encryp
 ## Quick start
 
 ```bash
-# Start local stack (Postgres + app)
+# Start local stack (frontend + backend + Postgres)
 make docker-up
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
+
+If Docker image pulls are flaky in your network, use the no-Docker local path below.
+
+If Docker Hub is timing out specifically for `node:22-bookworm-slim`, you can use a mirror image for the frontend build:
+
+```bash
+FRONTEND_NODE_IMAGE=public.ecr.aws/docker/library/node:22-bookworm-slim \
+POSTGRES_IMAGE=public.ecr.aws/docker/library/postgres:16-alpine \
+docker compose up --build
+```
 
 ### Local dev without Docker
 
@@ -32,12 +42,25 @@ Open [http://localhost:3000](http://localhost:3000).
 npm install
 cp .env.example .env
 
-# Start PostgreSQL locally (or via docker compose just for db)
-docker compose up -d db
+# One-command local setup (Homebrew PostgreSQL + role/db bootstrap + Prisma push)
+make local-setup
 
-# Push schema and run app
-npm run db:push
-npm run dev
+# Run the Next.js app
+make dev
+```
+
+`make local-setup` does all of the following:
+
+- Starts `postgresql@16` via Homebrew services
+- Ensures role `postgres` exists with password `postgres`
+- Ensures database `bizweave` exists and is owned by `postgres`
+- Pushes Prisma schema to `DATABASE_URL`
+
+Optional backend setup (for the Python service):
+
+```bash
+make backend-sync
+make backend-migrate
 ```
 
 1. **Sign up** at `/signup`
@@ -53,12 +76,15 @@ npm run dev
 | `AUTH_SECRET` | JWT session signing secret |
 | `ENCRYPTION_KEY` | 64-char hex or passphrase for AES-256-GCM |
 | `NEXT_PUBLIC_APP_URL` | App URL for redirects |
+| `NEXT_PUBLIC_BACKEND_URL` | Backend API base URL used by the frontend container |
+| `SCHEDULER_SECRET` | Secret for protected scheduler tick endpoints |
 
 ## Tech stack
 
 - Next.js 16 (App Router)
 - TypeScript, Tailwind CSS 4
 - Prisma 7 + PostgreSQL
+- Python 3.12 backend service with `uv` + Alembic storage migrations
 - Jose (JWT sessions), bcryptjs
 - Framer Motion, Lucide icons
 
@@ -78,12 +104,19 @@ make test-e2e
 
 ```bash
 make install
+make local-setup
+make local-dev
+make db-local-stop
 make db-push
 make lint
 make build
 make docker-up
 make docker-down
 ```
+
+## Package manager recommendation
+
+For the Node/TypeScript frontend, `pnpm` is the best overall choice for speed, reliability, and workspace ergonomics. `npm` is the simplest and most compatible, but slower. `bun` is fast, but the ecosystem maturity is still weaker for a Prisma + Next.js production stack. I kept the existing npm lockfile for now so the current app remains stable, but `pnpm` would be the best next-step migration if you want to modernize the frontend toolchain.
 
 ## License
 
