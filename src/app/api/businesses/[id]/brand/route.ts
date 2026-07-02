@@ -7,7 +7,7 @@ import { z } from "zod";
 const schema = z.object({
   motto: z.string().max(200).optional(),
   voice: z.string().max(500).optional(),
-  palette: z.record(z.string()).optional(),
+  palette: z.record(z.string(), z.string()).optional(),
   logoUrl: z.string().url().optional(),
 });
 
