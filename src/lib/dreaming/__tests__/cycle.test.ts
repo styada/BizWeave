@@ -8,6 +8,8 @@ const dbMock = {
   activityEvent: { create: vi.fn() },
   callLog: { count: vi.fn() },
   campaignSend: { count: vi.fn() },
+  conversation: { findFirst: vi.fn(), create: vi.fn() },
+  message: { create: vi.fn() },
 };
 
 vi.mock("@/lib/db", () => ({ db: dbMock }));
@@ -38,6 +40,9 @@ describe("runDreamingCycle", () => {
     dbMock.activityEvent.create.mockResolvedValue({});
     dbMock.callLog.count.mockResolvedValue(0);
     dbMock.campaignSend.count.mockResolvedValue(0);
+    dbMock.conversation.findFirst.mockResolvedValue(null);
+    dbMock.conversation.create.mockResolvedValue({ id: "conv_new" });
+    dbMock.message.create.mockResolvedValue({});
   });
 
   it("returns healthy mood with no issues", async () => {
@@ -55,5 +60,15 @@ describe("runDreamingCycle", () => {
     const result = await runDreamingCycle("biz_1", "user_1");
     expect(result.mood).toBe("critical");
     expect(result.proposals.length).toBeGreaterThan(0);
+  });
+
+  it("lands the brief in the operator chat (Phase D)", async () => {
+    const { runDreamingCycle } = await import("@/lib/dreaming/cycle");
+    await runDreamingCycle("biz_1", "user_1");
+    expect(dbMock.conversation.findFirst).toHaveBeenCalled();
+    expect(dbMock.message.create).toHaveBeenCalledTimes(1);
+    const msgCall = dbMock.message.create.mock.calls[0][0];
+    expect(msgCall.data.role).toBe("agent");
+    expect(msgCall.data.content).toContain("Joe");
   });
 });

@@ -92,6 +92,34 @@ export async function runDreamingCycle(businessId: string, userId: string): Prom
     })
     .catch(() => undefined);
 
+  // Phase D: land the brief in the operator chat as a Message from the agent
+  // on the most recent web conversation, or create a new one. Channel-tagged
+  // "digest" so the UI can render it distinctly.
+  try {
+    const conv =
+      (await db.conversation.findFirst({
+        where: { businessId, channel: "web" },
+        orderBy: { updatedAt: "desc" },
+        select: { id: true },
+      })) ??
+      (await db.conversation.create({
+        data: { businessId, channel: "web" },
+        select: { id: true },
+      }));
+    if (conv) {
+      await db.message.create({
+        data: {
+          conversationId: conv.id,
+          role: "agent",
+          content: brief,
+          // Channel is encoded in the content prefix for the chat UI to detect.
+        },
+      });
+    }
+  } catch {
+    // Chat persistence is best-effort; never fail the dreaming cycle over it.
+  }
+
   return { businessId, mood, proposals, brief };
 }
 
