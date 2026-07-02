@@ -11,6 +11,11 @@ import {
   ClipboardList,
   Check,
   Loader2,
+  Send,
+  Target,
+  LineChart,
+  Search,
+  Workflow,
 } from "lucide-react";
 
 const AGENT_ICONS: Record<AgentId, typeof Brain> = {
@@ -20,6 +25,11 @@ const AGENT_ICONS: Record<AgentId, typeof Brain> = {
   marketing: Megaphone,
   support: MessageCircle,
   safeguard: ShieldCheck,
+  outreach: Send,
+  ads: Target,
+  finance: LineChart,
+  "competitor-research": Search,
+  orchestrator: Workflow,
 };
 
 type StepStatus = "pending" | "running" | "complete" | "failed";
@@ -55,22 +65,22 @@ export function AgentPipeline({
             key={agent}
             className={cn(
               "flex items-center gap-4 rounded-xl border p-4 transition-all duration-300",
-              status === "running" && "border-[var(--accent-primary)]/40 bg-[var(--accent-primary)]/5",
-              status === "complete" && "border-[var(--success)]/20 bg-[var(--success)]/5",
-              status === "failed" && "border-[var(--error)]/30 bg-[var(--error)]/5",
+              status === "running" && "border-accent-primary/40 bg-accent-primary/5",
+              status === "complete" && "border-success/20 bg-success/5",
+              status === "failed" && "border-error/30 bg-error/5",
               status === "pending" && "border-white/5 bg-white/[0.02]",
-              isSafeguard && status !== "pending" && "border-[var(--safeguard)]/30"
+              isSafeguard && status !== "pending" && "border-safeguard/30"
             )}
             style={{ animationDelay: `${i * 60}ms` }}
           >
             <div
               className={cn(
                 "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
-                status === "running" && "bg-[var(--accent-primary)]/20 text-[var(--accent-primary)]",
-                status === "complete" && "bg-[var(--success)]/20 text-[var(--success)]",
-                status === "failed" && "bg-[var(--error)]/20 text-[var(--error)]",
-                status === "pending" && "bg-[var(--bg-muted)] text-[var(--text-muted)]",
-                isSafeguard && "bg-[var(--safeguard)]/20 text-[var(--safeguard)]"
+                status === "running" && "bg-accent-primary/20 text-accent-primary",
+                status === "complete" && "bg-success/20 text-success",
+                status === "failed" && "bg-error/20 text-error",
+                status === "pending" && "bg-bg-muted text-text-muted",
+                isSafeguard && "bg-safeguard/20 text-safeguard"
               )}
             >
               {status === "running" ? (
@@ -82,13 +92,13 @@ export function AgentPipeline({
               )}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="font-medium text-[var(--text-primary)]">
+              <p className="font-medium text-text-primary">
                 {AGENT_LABELS[agent]}
                 {isSafeguard && (
-                  <span className="ml-2 text-xs text-[var(--safeguard)]">Last bastion</span>
+                  <span className="ml-2 text-xs text-safeguard">Last bastion</span>
                 )}
               </p>
-              <p className="text-xs text-[var(--text-muted)]">
+              <p className="text-xs text-text-muted">
                 {status === "running" && "Working…"}
                 {status === "complete" && "Done"}
                 {status === "pending" && "Waiting"}

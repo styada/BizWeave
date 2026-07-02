@@ -126,5 +126,13 @@ export async function POST(
     });
   }
 
-  return NextResponse.json({ ok: true, decision: body.decision });
+  // For tool-backed guarded actions, execute the deferred tool now that it's
+  // approved. Legacy "publish_artifacts" is handled inline above.
+  let resumed: unknown = null;
+  if (approved && action.actionType !== "publish_artifacts") {
+    const { resumeApprovedAction } = await import("@/lib/guard/resume");
+    resumed = await resumeApprovedAction(action.id);
+  }
+
+  return NextResponse.json({ ok: true, decision: body.decision, resumed });
 }

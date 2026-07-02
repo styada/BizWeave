@@ -1,4 +1,5 @@
 import type {
+  AgentId,
   BusinessContext,
   IntakeOutput,
   MarketingOutput,
@@ -6,6 +7,11 @@ import type {
   SiteOutput,
   SafeguardVerdict,
   SupportOutput,
+  OutreachOutput,
+  AdsOutput,
+  FinanceOutput,
+  CompetitorResearchOutput,
+  OrchestratorOutput,
 } from "./types";
 
 export function fallbackIntake(ctx: BusinessContext): IntakeOutput {
@@ -171,6 +177,130 @@ export function fallbackSafeguard(approved = true): SafeguardVerdict {
     },
     differentiatorInsight:
       "Trust Index highlights release readiness before publish so owners can act on concrete risks.",
+  };
+}
+
+export function fallbackOutreach(ctx: BusinessContext): OutreachOutput {
+  return {
+    campaigns: [
+      {
+        name: "Welcome Campaign",
+        channel: "email",
+        subject: `Welcome to ${ctx.name}!`,
+        body: `Hi there,\n\nThanks for your interest in ${ctx.name}. We're thrilled to serve you.\n\nBest,\nThe ${ctx.name} Team`,
+        targetAudience: "New customers and prospects",
+        schedule: "weekly",
+      },
+    ],
+    templates: [
+      {
+        name: "Follow-up",
+        content: `Hi {{name}},\n\nJust checking in! Let us know if you have any questions.\n\n${ctx.name}`,
+      },
+    ],
+  };
+}
+
+export function fallbackAds(ctx: BusinessContext): AdsOutput {
+  return {
+    platforms: ["google", "meta"],
+    campaigns: [
+      {
+        name: `${ctx.name} - General Awareness`,
+        platform: "google",
+        budget: "$500/month",
+        targetAudience: `Local customers interested in ${ctx.type}`,
+        adCopy: `Discover ${ctx.name} — your trusted ${ctx.type}${ctx.location ? ` in ${ctx.location}` : ""}. Visit us today!`,
+        startDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().split("T")[0],
+      },
+    ],
+    budget: {
+      monthly: 1000,
+      allocation: { google: 500, meta: 300, linkedin: 200 },
+    },
+  };
+}
+
+export function fallbackFinance(ctx: BusinessContext): FinanceOutput {
+  return {
+    revenueStreams: [
+      {
+        name: `${ctx.type} sales`,
+        type: "product",
+        estimatedMonthly: ctx.inventory.length * 50,
+      },
+    ],
+    pricingTiers: [
+      {
+        name: "Standard",
+        price: ctx.inventory[0]?.price ?? 29.99,
+        features: ["Full product range", "Standard support"],
+      },
+    ],
+    metrics: {
+      suggestedPricePoints: [19.99, 39.99, 59.99],
+      breakEvenEstimate: "~3-6 months based on average transaction volume",
+      growthIndicators: ["Local market penetration", "Repeat customer rate", "Seasonal demand"],
+    },
+  };
+}
+
+export function fallbackCompetitorResearch(ctx: BusinessContext): CompetitorResearchOutput {
+  return {
+    competitors: [
+      {
+        name: "Local competitors",
+        website: "https://example.competitor.local",
+        strengths: ["Established presence", "Existing customer base"],
+        weaknesses: ["Limited online presence", "No digital marketing"],
+        estimatedTraffic: "Unknown (brick-and-mortar focused)",
+      },
+    ],
+    marketPositioning: {
+      differentiators: [`Personalized ${ctx.type} experience`, "Modern digital presence"],
+      gaps: ["Limited online ordering", "No loyalty program"],
+      opportunities: ["Build local SEO", "Social media engagement", "Email marketing"],
+    },
+    pricingComparison: [
+      {
+        competitor: "Local average",
+        priceRange: "$10-$100",
+        notes: "Based on general market data — verify locally",
+      },
+    ],
+  };
+}
+
+export function fallbackOrchestrator(ctx: BusinessContext): OrchestratorOutput {
+  return {
+    plan: [
+      {
+        phase: "Foundation",
+        agents: ["intake", "planner"] as AgentId[],
+        priority: 10,
+        estimatedDuration: "1 day",
+      },
+      {
+        phase: "Creation",
+        agents: ["builder", "marketing", "support"] as AgentId[],
+        priority: 8,
+        estimatedDuration: "1-2 days",
+      },
+      {
+        phase: "Review",
+        agents: ["safeguard"] as AgentId[],
+        priority: 6,
+        estimatedDuration: "1 day",
+      },
+      {
+        phase: "Growth",
+        agents: ["outreach", "ads", "finance", "competitor-research"] as AgentId[],
+        priority: 4,
+        estimatedDuration: "3-5 days",
+      },
+    ],
+    reasoning: `Standard orchestration plan for ${ctx.name} (${ctx.type}). Foundation first, then creation, review, and growth phases.`,
+    riskFlags: [],
   };
 }
 

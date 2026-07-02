@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useRef } from 'react'
 import { useForm } from 'react-hook-form'
-import type { z, ZodTypeAny } from 'zod'
+import type { z } from 'zod'
 
 import { Button } from '@/components/ui/button'
 import {
@@ -34,10 +34,12 @@ interface DynamicFormProps<T extends z.ZodRawShape = z.ZodRawShape> {
   columnInfo?: Record<string, { data_type: string; is_nullable: boolean }>
 }
 
-const getZodDef = (schema: ZodTypeAny): Record<string, any> =>
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getZodDef = (schema: any): Record<string, any> =>
   (schema as any)._def || (schema as any).def
 
-const unwrapZodType = (fieldSchema: ZodTypeAny): ZodTypeAny => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const unwrapZodType = (fieldSchema: any): any => {
   if (
     !fieldSchema ||
     typeof getZodDef(fieldSchema) !== 'object' ||
@@ -138,7 +140,8 @@ export function DynamicForm<T extends z.ZodRawShape = z.ZodRawShape>({
   )
 
   const form = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    resolver: zodResolver(schema as any),
     defaultValues: defaultValues as any,
   })
 
@@ -152,7 +155,8 @@ export function DynamicForm<T extends z.ZodRawShape = z.ZodRawShape>({
           if (typeof fieldDefFromSchema === 'undefined') {
             throw new Error(`Schema error in useEffect: schema.shape['${key}'] is undefined.`)
           }
-          const value = initialValues.hasOwnProperty(key) ? initialValues[key] : undefined
+          const k = key as keyof typeof initialValues
+          const value = initialValues.hasOwnProperty(key) ? initialValues[k] : undefined
           const baseFieldType = unwrapZodType(fieldDefFromSchema)
 
           // Support both old (typeName) and new (type) Zod formats
@@ -212,7 +216,8 @@ export function DynamicForm<T extends z.ZodRawShape = z.ZodRawShape>({
     }
   }, [initialValues, form, schema])
 
-  const renderField = (fieldName: string, fieldSchema: ZodTypeAny) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const renderField = (fieldName: string, fieldSchema: any) => {
     const baseType = unwrapZodType(fieldSchema)
     // Support both old (typeName) and new (type) Zod formats
     const getTypeName = (def: Record<string, any>) => def.typeName || def.type

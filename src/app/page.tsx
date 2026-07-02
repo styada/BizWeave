@@ -1,4 +1,5 @@
 import { MarketingNav } from "@/components/marketing/nav";
+import { Footer } from "@/components/marketing/footer";
 import { Hero } from "@/components/marketing/hero";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -186,9 +187,7 @@ export default function HomePage() {
         </section>
       </main>
 
-      <footer className="border-t border-white/[0.06] px-6 py-12 text-center text-sm text-[var(--text-muted)]">
-        <p>© {new Date().getFullYear()} Bizweave. Your business, woven online.</p>
-      </footer>
+      <Footer />
     </>
   );
 }

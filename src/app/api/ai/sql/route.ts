@@ -5,24 +5,27 @@ import createClient from 'openapi-fetch'
 import type { paths } from '@/lib/management-api-schema'
 import { listTablesSql } from '@/lib/pg-meta'
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-})
+function getOpenAIClient() {
+  const apiKey = process.env.OPENAI_API_KEY
+  if (!apiKey) {
+    throw new Error('OPENAI_API_KEY is not configured.')
+  }
+  return new OpenAI({ apiKey })
+}
 
-const client = createClient<paths>({
-  baseUrl: 'https://api.supabase.com',
-  headers: {
-    Authorization: `Bearer ${process.env.SUPABASE_MANAGEMENT_API_TOKEN}`,
-  },
-})
-
-// Function to get database schema
-async function getDbSchema(projectRef: string) {
+function getSupabaseClient() {
   const token = process.env.SUPABASE_MANAGEMENT_API_TOKEN
   if (!token) {
     throw new Error('Supabase Management API token is not configured.')
   }
+  return createClient<paths>({
+    baseUrl: 'https://api.supabase.com',
+    headers: { Authorization: `Bearer ${token}` },
+  })
+}
 
+// Function to get database schema
+async function getDbSchema(client: ReturnType<typeof getSupabaseClient>, projectRef: string) {
   const sql = listTablesSql()
 
   const { data, error } = await client.POST('/v1/projects/{ref}/database/query', {
@@ -78,13 +81,15 @@ export async function POST(request: Request) {
     }
 
     // 1. Get database schema
-    const schema = await getDbSchema(projectRef)
+    const client = getSupabaseClient()
+    const schema = await getDbSchema(client, projectRef)
     const formattedSchema = formatSchemaForPrompt(schema)
 
     // 2. Create a prompt for OpenAI
     const systemPrompt = `You are an expert SQL assistant. Given the following database schema, write a SQL query that answers the user's question. Return only the SQL query, do not include any explanations or markdown.\n\nSchema:\n${formattedSchema}`
 
     // 3. Call OpenAI to generate SQL using responses.create (plain text output)
+    const openai = getOpenAIClient()
     const response = await openai.responses.create({
       model: 'gpt-4.1',
       instructions: systemPrompt, // Use systemPrompt as instructions

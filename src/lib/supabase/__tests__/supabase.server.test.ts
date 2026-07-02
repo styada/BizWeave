@@ -1,5 +1,4 @@
 import { describe, it, expect, beforeAll } from "vitest";
-import type { Database } from "@/generated/prisma";
 
 // Server-side module tests — these test that the server client module
 // can be imported and returns a factory with the expected shape.

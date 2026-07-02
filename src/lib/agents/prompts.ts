@@ -185,3 +185,161 @@ No markdown. No prose outside JSON.
 
 If uncertain, lower reliability scores and include revisions.`;
 }
+
+export function outreachPrompt(ctx: BusinessContext, plan: string): string {
+  return `You are the Outreach Agent for Bizweave. Design automated outreach campaigns.
+
+Business: ${ctx.name} (${ctx.type})
+Plan: ${plan}
+
+${SAFETY_RULES}
+
+Return ONLY valid JSON:
+{
+  "campaigns": [
+    {
+      "name": "campaign name",
+      "channel": "email|sms|linkedin|twitter",
+      "subject": "subject line",
+      "body": "full message body",
+      "targetAudience": "who this targets",
+      "schedule": "now|weekly|monthly"
+    }
+  ],
+  "templates": [
+    {"name": "template name", "content": "reusable template content"}
+  ]
+}
+
+No markdown. No prose outside JSON.`;
+}
+
+export function adsPrompt(ctx: BusinessContext, plan: string): string {
+  return `You are the Ads Agent for Bizweave. Create a paid advertising strategy.
+
+Business: ${ctx.name} (${ctx.type})
+Plan: ${plan}
+
+${SAFETY_RULES}
+
+Return ONLY valid JSON:
+{
+  "platforms": ["google", "meta", "linkedin"],
+  "campaigns": [
+    {
+      "name": "",
+      "platform": "",
+      "budget": "$X/day or $X/month",
+      "targetAudience": "",
+      "adCopy": "full ad text",
+      "startDate": "YYYY-MM-DD"
+    }
+  ],
+  "budget": {
+    "monthly": 1000,
+    "allocation": {"google": 500, "meta": 300}
+  }
+}
+
+No markdown. No prose outside JSON.`;
+}
+
+export function financePrompt(ctx: BusinessContext, plan: string): string {
+  return `You are the Finance Agent for Bizweave. Analyze revenue streams and pricing.
+
+Business: ${ctx.name} (${ctx.type})
+Plan: ${plan}
+
+${SAFETY_RULES}
+
+Return ONLY valid JSON:
+{
+  "revenueStreams": [
+    {"name": "", "type": "product|service|subscription|other", "estimatedMonthly": 0}
+  ],
+  "pricingTiers": [
+    {"name": "", "price": 0, "features": ["feature1"]}
+  ],
+  "metrics": {
+    "suggestedPricePoints": [19.99, 49.99],
+    "breakEvenEstimate": "~3 months at projected volume",
+    "growthIndicators": ["seasonal trends", "repeat purchase rate"]
+  }
+}
+
+No markdown. No prose outside JSON.`;
+}
+
+export function competitorResearchPrompt(
+  ctx: BusinessContext,
+  intake: string
+): string {
+  return `You are the Competitor Research Agent for Bizweave. Analyze competitive landscape.
+
+Business: ${ctx.name} (${ctx.type})
+Intake: ${intake}
+
+${SAFETY_RULES}
+
+Return ONLY valid JSON:
+{
+  "competitors": [
+    {
+      "name": "",
+      "website": "https://...",
+      "strengths": ["strength1"],
+      "weaknesses": ["weakness1"],
+      "estimatedTraffic": "monthly visit estimate if known"
+    }
+  ],
+  "marketPositioning": {
+    "differentiators": ["what makes this business unique"],
+    "gaps": ["what competitors miss"],
+    "opportunities": ["areas to exploit"]
+  },
+  "pricingComparison": [
+    {"competitor": "", "priceRange": "$X-$Y", "notes": ""}
+  ]
+}
+
+No markdown. No prose outside JSON.`;
+}
+
+export function orchestratorPrompt(ctx: BusinessContext): string {
+  return `You are the Orchestrator Agent for Bizweave. Decide which agents to run and in what order.
+
+Business: ${ctx.name} (${ctx.type})
+Description: ${ctx.description ?? "Not provided"}
+Location: ${ctx.location ?? "Not specified"}
+Inventory count: ${ctx.inventory.length}
+
+Available agents:
+- intake: Business analysis and persona
+- planner: Website and go-to-market plan
+- builder: Website generation
+- marketing: Marketing strategy
+- support: Customer support automation
+- safeguard: Safety and quality review
+- outreach: Automated outreach campaigns
+- ads: Paid advertising
+- finance: Revenue and pricing analysis
+- competitor-research: Competitive intelligence
+
+${SAFETY_RULES}
+
+Return ONLY valid JSON:
+{
+  "plan": [
+    {
+      "phase": "phase name",
+      "agents": ["agent1", "agent2"],
+      "priority": 1-10,
+      "estimatedDuration": "X days"
+    }
+  ],
+  "reasoning": "explain your orchestration decisions",
+  "riskFlags": ["any identified risks"]
+}
+
+No markdown. No prose outside JSON.`;
+}

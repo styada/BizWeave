@@ -32,7 +32,7 @@ export function RunAgentsButton({
 
   return (
     <div>
-      <Button onClick={run} loading={loading} disabled={disabled || loading}>
+      <Button onClick={run} loading={loading} disabled={disabled}>
         <Play className="h-4 w-4" />
         {loading ? "Running agents…" : "Run agents"}
       </Button>

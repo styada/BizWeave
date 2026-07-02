@@ -1,9 +1,15 @@
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import { db } from "@/lib/db";
 import { applySessionCookie, hashPassword, signSessionToken } from "@/lib/auth";
 import { signUpSchema } from "@/lib/validations";
+import { rateLimit } from "@/lib/rate-limit";
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  // Apply rate limiting
+  const rateLimitResponse = rateLimit(request);
+  if (rateLimitResponse) return rateLimitResponse;
+
   try {
     const body = await request.json();
     const parsed = signUpSchema.safeParse(body);
@@ -15,14 +21,22 @@ export async function POST(request: Request) {
     }
 
     const { email, password, name } = parsed.data;
-    const existing = await db.user.findUnique({ where: { email } });
+    
+    // Check for existing user with case-insensitive email
+    const existing = await db.user.findUnique({ 
+      where: { email: email.toLowerCase() } 
+    });
     if (existing) {
       return NextResponse.json({ error: "Email already registered" }, { status: 409 });
     }
 
     const passwordHash = await hashPassword(password);
     const user = await db.user.create({
-      data: { email, passwordHash, name },
+      data: { 
+        email: email.toLowerCase(), 
+        passwordHash, 
+        name 
+      },
     });
 
     const token = await signSessionToken({
@@ -38,6 +52,10 @@ export async function POST(request: Request) {
     return applySessionCookie(response, token);
   } catch (error) {
     console.error("Signup error:", error);
-    return NextResponse.json({ error: "Signup failed" }, { status: 500 });
+    // Don't expose internal errors to client
+    return NextResponse.json(
+      { error: "Unable to create account. Please try again." }, 
+      { status: 500 }
+    );
   }
 }

@@ -35,8 +35,13 @@ export async function updateSession(request: NextRequest) {
 
   // IMPORTANT: If you remove getClaims() and you use server-side rendering
   // with the Supabase client, your users may be randomly logged out.
-  const { data } = await supabase.auth.getClaims()
-  const user = data?.claims
+  let user: Record<string, unknown> | null = null
+  try {
+    const { data } = await supabase.auth.getClaims()
+    user = data?.claims ?? null
+  } catch {
+    // Supabase unavailable (local dev without Docker). Skip auth guard.
+  }
 
   if (
     !user &&

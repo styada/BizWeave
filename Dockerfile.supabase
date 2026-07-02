@@ -1,0 +1,22 @@
+# Wrapper image that runs the Supabase CLI inside a container with the host's
+# Docker socket mounted. Used by docker-compose.yml's `supabase` service.
+#
+# The Supabase CLI is published as a Go binary and an npm wrapper. There is no
+# official Docker image, so we install the npm package (same one pinned in
+# package.json's devDependencies) and let it start the local stack via the
+# mounted /var/run/docker.sock.
+ARG NODE_IMAGE=node:22-bookworm-slim
+FROM ${NODE_IMAGE}
+
+WORKDIR /project
+
+# Install the Supabase CLI. Pin to the version declared in package.json so the
+# behavior matches what developers see when they run `npx supabase` locally.
+# Override at build time with --build-arg SUPABASE_CLI_VERSION=2.51.0
+ARG SUPABASE_CLI_VERSION=2.105.0
+RUN npm install -g "supabase@${SUPABASE_CLI_VERSION}"
+
+# `supabase start` blocks; once it returns the local stack is up. `tail -f
+# /dev/null` keeps the container alive so other compose services can depend on
+# its healthcheck.
+CMD ["sh", "-c", "supabase start && tail -f /dev/null"]

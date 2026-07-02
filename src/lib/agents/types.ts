@@ -4,15 +4,25 @@ export type AgentId =
   | "builder"
   | "marketing"
   | "support"
-  | "safeguard";
+  | "safeguard"
+  | "outreach"
+  | "ads"
+  | "finance"
+  | "competitor-research"
+  | "orchestrator";
 
 export const AGENT_PIPELINE: AgentId[] = [
+  "orchestrator",
   "intake",
   "planner",
   "builder",
   "marketing",
   "support",
   "safeguard",
+  "outreach",
+  "ads",
+  "finance",
+  "competitor-research",
 ];
 
 export const AGENT_LABELS: Record<AgentId, string> = {
@@ -22,6 +32,11 @@ export const AGENT_LABELS: Record<AgentId, string> = {
   marketing: "Marketing Agent",
   support: "Support Agent",
   safeguard: "Safeguard Agent",
+  outreach: "Outreach Agent",
+  ads: "Ads Agent",
+  finance: "Finance Agent",
+  "competitor-research": "Competitor Research Agent",
+  orchestrator: "Orchestrator Agent",
 };
 
 export type BusinessContext = {
@@ -113,4 +128,84 @@ export type SupportOutput = {
     response: string;
   }[];
   escalationRules: string[];
+};
+
+export type OutreachOutput = {
+  campaigns: {
+    name: string;
+    channel: "email" | "sms" | "linkedin" | "twitter";
+    subject: string;
+    body: string;
+    targetAudience: string;
+    schedule: "now" | "weekly" | "monthly";
+  }[];
+  templates: {
+    name: string;
+    content: string;
+  }[];
+};
+
+export type AdsOutput = {
+  platforms: string[];
+  campaigns: {
+    name: string;
+    platform: string;
+    budget: string;
+    targetAudience: string;
+    adCopy: string;
+    startDate: string;
+  }[];
+  budget: {
+    monthly: number;
+    allocation: Record<string, number>;
+  };
+};
+
+export type FinanceOutput = {
+  revenueStreams: {
+    name: string;
+    type: "product" | "service" | "subscription" | "other";
+    estimatedMonthly: number;
+  }[];
+  pricingTiers: {
+    name: string;
+    price: number;
+    features: string[];
+  }[];
+  metrics: {
+    suggestedPricePoints: number[];
+    breakEvenEstimate: string;
+    growthIndicators: string[];
+  };
+};
+
+export type CompetitorResearchOutput = {
+  competitors: {
+    name: string;
+    website: string;
+    strengths: string[];
+    weaknesses: string[];
+    estimatedTraffic?: string;
+  }[];
+  marketPositioning: {
+    differentiators: string[];
+    gaps: string[];
+    opportunities: string[];
+  };
+  pricingComparison: {
+    competitor: string;
+    priceRange: string;
+    notes: string;
+  }[];
+};
+
+export type OrchestratorOutput = {
+  plan: {
+    phase: string;
+    agents: AgentId[];
+    priority: number;
+    estimatedDuration: string;
+  }[];
+  reasoning: string;
+  riskFlags: string[];
 };

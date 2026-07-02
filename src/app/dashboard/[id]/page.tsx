@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { AgentPipeline } from "@/components/agents/agent-pipeline";
 import { SitePreview } from "@/components/site/site-preview";
+import { ActivityFeed } from "@/components/agents/activity-feed";
 import { RunAgentsButton } from "@/components/dashboard/run-agents-button";
 import { PendingApprovals } from "@/components/dashboard/pending-approvals";
 import { ScheduleControls } from "@/components/dashboard/schedule-controls";
+import { OperatorChat } from "@/components/agents/operator-chat";
 import { AGENT_PIPELINE } from "@/lib/agents/types";
-import { ArrowLeft, Eye } from "lucide-react";
+import { ArrowLeft, Eye, Globe } from "lucide-react";
 
 function parseJsonObject(raw: string) {
   const cleaned = raw.replace(/\n\n\[fallback=true\]$/, "");
@@ -133,12 +135,20 @@ export default async function BusinessDetailPage({
         </div>
         <div className="flex gap-3">
           {business.site && (
-            <Link href={`/dashboard/${id}/preview`}>
-              <Button variant="secondary">
-                <Eye className="h-4 w-4" />
-                Preview site
-              </Button>
-            </Link>
+            <>
+              <Link href={`/dashboard/${id}/preview`}>
+                <Button variant="secondary">
+                  <Eye className="h-4 w-4" />
+                  Preview site
+                </Button>
+              </Link>
+              <Link href={`/sites/${id}`} target="_blank">
+                <Button variant="secondary">
+                  <Globe className="h-4 w-4" />
+                  Live site
+                </Button>
+              </Link>
+            </>
           )}
           <RunAgentsButton businessId={id} disabled={isRunning} />
         </div>
@@ -284,30 +294,48 @@ export default async function BusinessDetailPage({
         </div>
       )}
 
-      {business.activityEvents.length > 0 && (
-        <div className="mt-8">
-          <h2 className="mb-4 text-lg font-semibold">Recent activity</h2>
-          <div className="space-y-2 rounded-xl border border-white/10 p-3">
-            {business.activityEvents.map((event) => (
-              <div
-                key={event.id}
-                className="flex flex-wrap items-center justify-between gap-2 border-b border-white/5 py-2 text-sm last:border-b-0"
-              >
-                <div>
-                  <p className="font-medium">{event.message}</p>
-                  <p className="text-xs text-[var(--text-muted)]">
-                    {event.eventType}
-                    {event.agent ? ` · ${event.agent}` : ""}
-                  </p>
-                </div>
-                <p className="text-xs text-[var(--text-secondary)]">
-                  {event.createdAt.toLocaleString()}
-                </p>
-              </div>
-            ))}
-          </div>
+      <div className="mt-8 grid gap-8 lg:grid-cols-2">
+        <div>
+          <h2 className="mb-4 text-lg font-semibold">Operator chat</h2>
+          <OperatorChat businessId={id} />
         </div>
-      )}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Channels & ops</CardTitle>
+          </CardHeader>
+          <div className="flex flex-wrap gap-3 px-6 pb-6 text-sm">
+            <Link href={`/dashboard/${id}/preview`} className="text-[var(--accent-primary)] hover:underline">
+              Site preview
+            </Link>
+            <a href="/live" className="text-[var(--accent-primary)] hover:underline" target="_blank" rel="noreferrer">
+              Public live feed
+            </a>
+          </div>
+        </Card>
+      </div>
+
+      <div className="mt-8">
+        <div className="mb-4 flex items-center justify-between">
+          <h2 className="text-lg font-semibold">Activity feed</h2>
+          <Link
+            href="/dashboard/activity"
+            className="font-mono text-[10px] uppercase tracking-wider text-[var(--accent-secondary)] hover:text-[var(--accent-primary)]"
+          >
+            View all →
+          </Link>
+        </div>
+        <ActivityFeed
+          events={business.activityEvents.map((e) => ({
+            id: e.id,
+            eventType: e.eventType,
+            agent: e.agent,
+            level: e.level,
+            message: e.message,
+            createdAt: e.createdAt.toISOString(),
+          }))}
+          businessId={id}
+        />
+      </div>
 
       {recentExecutions.length > 0 && (
         <div className="mt-8">

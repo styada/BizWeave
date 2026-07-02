@@ -8,6 +8,11 @@ import {
   fallbackMarketing,
   fallbackSupport,
   fallbackSafeguard,
+  fallbackOutreach,
+  fallbackAds,
+  fallbackFinance,
+  fallbackCompetitorResearch,
+  fallbackOrchestrator,
 } from "./fallback";
 import {
   intakeSchema,
@@ -17,6 +22,11 @@ import {
   safeguardSchema,
   siteSchema,
   supportSchema,
+  outreachSchema,
+  adsSchema,
+  financeSchema,
+  competitorResearchSchema,
+  orchestratorSchema,
 } from "./contracts";
 import {
   intakePrompt,
@@ -25,6 +35,11 @@ import {
   marketingPrompt,
   supportPrompt,
   safeguardPrompt,
+  outreachPrompt,
+  adsPrompt,
+  financePrompt,
+  competitorResearchPrompt,
+  orchestratorPrompt,
 } from "./prompts";
 import {
   AGENT_PIPELINE,
@@ -36,6 +51,11 @@ import {
   type SafeguardVerdict,
   type SiteOutput,
   type SupportOutput,
+  type OutreachOutput,
+  type AdsOutput,
+  type FinanceOutput,
+  type CompetitorResearchOutput,
+  type OrchestratorOutput,
 } from "./types";
 
 const AGENT_TIMEOUT_MS = 45_000;
@@ -184,7 +204,7 @@ export async function runAgentPipeline(
     data: {
       businessId,
       status: "running",
-      currentStep: "intake",
+      currentStep: "orchestrator",
       taskExecutionId: options?.taskExecutionId,
     },
   });
@@ -199,12 +219,17 @@ export async function runAgentPipeline(
   });
 
   const artifacts: {
+    orchestrator?: OrchestratorOutput;
     intake?: IntakeOutput;
     plan?: PlannerOutput;
     site?: SiteOutput;
     marketing?: MarketingOutput;
     support?: SupportOutput;
     safeguard?: SafeguardVerdict;
+    outreach?: OutreachOutput;
+    ads?: AdsOutput;
+    finance?: FinanceOutput;
+    competitorResearch?: CompetitorResearchOutput;
   } = {};
   let safeguardVerdict: SafeguardVerdict = fallbackSafeguard(true);
 
@@ -371,6 +396,91 @@ export async function runAgentPipeline(
             safeguardVerdict = result.value;
             output = JSON.stringify(safeguardVerdict);
             artifacts.safeguard = safeguardVerdict;
+            usedFallback = result.usedFallback;
+            break;
+          }
+          case "orchestrator": {
+            // TODO: Option E — full orchestrator that reorders pipeline based on output
+            prompt = orchestratorPrompt(ctx);
+            const fallback = fallbackOrchestrator(ctx);
+            const result = await runStructuredStep<OrchestratorOutput>({
+              agent,
+              prompt,
+              userId,
+              useLlm,
+              fallback,
+              schema: orchestratorSchema,
+            });
+            output = JSON.stringify(result.value);
+            artifacts.orchestrator = result.value;
+            usedFallback = result.usedFallback;
+            break;
+          }
+          case "outreach": {
+            // TODO: Execute real outreach campaigns (email, SMS, LinkedIn)
+            prompt = outreachPrompt(ctx, JSON.stringify(artifacts.plan));
+            const fallback = fallbackOutreach(ctx);
+            const result = await runStructuredStep({
+              agent,
+              prompt,
+              userId,
+              useLlm,
+              fallback,
+              schema: outreachSchema,
+            });
+            output = JSON.stringify(result.value);
+            artifacts.outreach = result.value;
+            usedFallback = result.usedFallback;
+            break;
+          }
+          case "ads": {
+            // TODO: Create actual ad campaigns on Google/Meta/LinkedIn via API
+            prompt = adsPrompt(ctx, JSON.stringify(artifacts.plan));
+            const fallback = fallbackAds(ctx);
+            const result = await runStructuredStep({
+              agent,
+              prompt,
+              userId,
+              useLlm,
+              fallback,
+              schema: adsSchema,
+            });
+            output = JSON.stringify(result.value);
+            artifacts.ads = result.value;
+            usedFallback = result.usedFallback;
+            break;
+          }
+          case "finance": {
+            // TODO: Connect to Stripe/Xero/QuickBooks for real revenue data
+            prompt = financePrompt(ctx, JSON.stringify(artifacts.plan));
+            const fallback = fallbackFinance(ctx);
+            const result = await runStructuredStep({
+              agent,
+              prompt,
+              userId,
+              useLlm,
+              fallback,
+              schema: financeSchema,
+            });
+            output = JSON.stringify(result.value);
+            artifacts.finance = result.value;
+            usedFallback = result.usedFallback;
+            break;
+          }
+          case "competitor-research": {
+            // TODO: Scrape competitor websites and social for real data
+            prompt = competitorResearchPrompt(ctx, JSON.stringify(artifacts.intake));
+            const fallback = fallbackCompetitorResearch(ctx);
+            const result = await runStructuredStep({
+              agent,
+              prompt,
+              userId,
+              useLlm,
+              fallback,
+              schema: competitorResearchSchema,
+            });
+            output = JSON.stringify(result.value);
+            artifacts.competitorResearch = result.value;
             usedFallback = result.usedFallback;
             break;
           }

@@ -1,10 +1,12 @@
 generator client {
-  provider = "prisma-client"
-  output   = "../src/generated/prisma"
+  provider        = "prisma-client"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["postgresqlExtensions"]
 }
 
 datasource db {
-  provider = "postgresql"
+  provider   = "postgresql"
+  extensions = [vector]
 }
 
 model User {
@@ -17,6 +19,7 @@ model User {
   updatedAt    DateTime   @updatedAt
   apiKeys      ApiKey[]
   businesses   Business[]
+  pushTokens   PushToken[]
 }
 
 model ApiKey {
@@ -47,14 +50,61 @@ model Business {
   status      String          @default("draft")
   createdAt   DateTime        @default(now())
   updatedAt   DateTime        @updatedAt
-  inventory   InventoryItem[]
-  agentRuns   AgentRun[]
-  site        GeneratedSite?
-  marketing   MarketingPlan?
+
+  // Phase 0: physical local-business attributes
+  addressLine1            String?
+  addressLine2            String?
+  city                    String?
+  region                  String?
+  postalCode              String?
+  country                 String?  @default("US")
+  lat                     Float?
+  lng                     Float?
+  hours                   Json?
+  serviceArea             String?
+  posSystem               String?
+  orderMgmtSystem         String?
+  websiteUrl              String?
+  googleBusinessProfileId String?
+  socialHandles           Json?
+  categories              Json?
+  workspaceId             String?
+  workspace               Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)
+
+  inventory        InventoryItem[]
+  agentRuns        AgentRun[]
+  site             GeneratedSite?
+  marketing        MarketingPlan?
   approvalPolicies ApprovalPolicy[]
   pendingActions   PendingAction[]
   scheduledTasks   ScheduledTask[]
   activityEvents   ActivityEvent[]
+
+  // Extended domain models
+  brandKit            BrandKit?
+  competitors         Competitor[]
+  deployments         Deployment[]
+  agentTasks          AgentTask[]
+  conversations       Conversation[]
+  memories            MemoryEntry[]
+  contacts            Contact[]
+  membershipPrograms  MembershipProgram[]
+  campaigns           Campaign[]
+  adCampaigns         AdCampaign[]
+  phoneAgents         PhoneAgent[]
+  callLogs            CallLog[]
+  subscription        Subscription?
+  usageEvents         UsageEvent[]
+  creditWallet        CreditWallet?
+  integrations        IntegrationConnection[]
+  skills              Skill[]
+  featureRequests     FeatureRequest[]
+  purchases           Purchase[]
+  procurementPolicies ProcurementPolicy[]
+  auditLogs           AuditLog[]
+  messagingBridges    MessagingBridge[]
+
+  @@index([workspaceId])
 }
 
 model InventoryItem {
@@ -212,4 +262,553 @@ model ActivityEvent {
   createdAt  DateTime  @default(now())
 
   @@index([businessId, createdAt])
+}
+
+// ─────────────────────────────────────────────────────────────
+// Extended models (Bizweave Local Operator — Appendix A)
+// ─────────────────────────────────────────────────────────────
+
+model Workspace {
+  id          String            @id @default(cuid())
+  name        String
+  ownerUserId String
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+  businesses  Business[]
+  members     WorkspaceMember[]
+}
+
+model WorkspaceMember {
+  id            String    @id @default(cuid())
+  workspaceId   String
+  workspace     Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  userId        String
+  role          String    @default("owner") // owner | admin | staff
+  businessScope Json? // null = all businesses; else string[] of businessIds
+  createdAt     DateTime  @default(now())
+
+  @@unique([workspaceId, userId])
+}
+
+model BrandKit {
+  id         String       @id @default(cuid())
+  businessId String       @unique
+  business   Business     @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  motto      String?
+  voice      String?
+  palette    Json? // {primary, secondary, accent, bg, text}
+  typography Json? // {display, body, mono}
+  logoUrl    String?
+  version    Int          @default(1)
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  assets     BrandAsset[]
+}
+
+model BrandAsset {
+  id         String   @id @default(cuid())
+  brandKitId String
+  brandKit   BrandKit @relation(fields: [brandKitId], references: [id], onDelete: Cascade)
+  kind       String // logo | image | font | color | doc
+  url        String?
+  value      String?
+  version    Int      @default(1)
+  createdAt  DateTime @default(now())
+
+  @@index([brandKitId, kind])
+}
+
+model MemoryEntry {
+  id         String                       @id @default(cuid())
+  businessId String
+  business   Business                     @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  kind       String // fact | preference | decision | doc | competitor | review | conversation | skill_note
+  content    String
+  salience   Float                        @default(0.5)
+  source     String?
+  ttl        DateTime?
+  embedding  Unsupported("vector(1536)")?
+  createdAt  DateTime                     @default(now())
+
+  @@index([businessId, kind, createdAt])
+}
+
+model Deployment {
+  id              String   @id @default(cuid())
+  businessId      String
+  business        Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  target          String // subdomain | vercel | custom
+  url             String?
+  subdomain       String?  @unique // {slug}.bizweave.site
+  domain          String?
+  provider        String? // vercel
+  providerId      String?
+  status          String   @default("live") // building | live | failed | offline
+  isTemplate      Boolean  @default(false)
+  backlinkEnabled Boolean  @default(true)
+  templateId      String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([businessId, status])
+}
+
+model AgentTask {
+  id             String    @id @default(cuid())
+  businessId     String
+  business       Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  conversationId String?
+  title          String
+  harness        String // claude-agent-sdk | opencode | deep-agents | inline
+  spec           Json
+  status         String    @default("queued") // queued | planning | running | needs_approval | done | failed | cancelled
+  sandboxId      String?
+  costUsd        Float     @default(0)
+  budgetUsd      Float     @default(5)
+  artifacts      Json?
+  approvalId     String?
+  error          String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  startedAt      DateTime?
+  completedAt    DateTime?
+
+  @@index([businessId, status, createdAt])
+}
+
+model Conversation {
+  id         String    @id @default(cuid())
+  businessId String
+  business   Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  channel    String    @default("web") // web | mobile | sms | whatsapp | telegram
+  title      String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  messages   Message[]
+
+  @@index([businessId, updatedAt])
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           String // user | assistant | system | tool
+  content        String
+  toolName       String?
+  taskId         String?
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId, createdAt])
+}
+
+model Competitor {
+  id          String                       @id @default(cuid())
+  businessId  String
+  business    Business                     @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  name        String
+  placeId     String?
+  address     String?
+  lat         Float?
+  lng         Float?
+  rating      Float?
+  reviewCount Int?
+  priceLevel  Int?
+  website     String?
+  phone       String?
+  categories  Json?
+  notes       String?
+  embedding   Unsupported("vector(1536)")?
+  lastSeenAt  DateTime                     @default(now())
+  createdAt   DateTime                     @default(now())
+
+  @@unique([businessId, placeId])
+  @@index([businessId, rating])
+}
+
+model Contact {
+  id             String         @id @default(cuid())
+  businessId     String
+  business       Business       @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  name           String?
+  email          String?
+  phone          String?
+  tags           Json?
+  consentEmail   Boolean        @default(false)
+  consentSms     Boolean        @default(false)
+  unsubscribedAt DateTime?
+  source         String?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  memberships    Membership[]
+  sends          CampaignSend[]
+
+  @@unique([businessId, email])
+  @@index([businessId, createdAt])
+}
+
+model MembershipProgram {
+  id          String       @id @default(cuid())
+  businessId  String
+  business    Business     @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  name        String
+  perks       Json?
+  status      String       @default("active")
+  createdAt   DateTime     @default(now())
+  memberships Membership[]
+}
+
+model Membership {
+  id        String            @id @default(cuid())
+  programId String
+  program   MembershipProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
+  contactId String
+  contact   Contact           @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  tier      String?
+  points    Int               @default(0)
+  joinedAt  DateTime          @default(now())
+
+  @@unique([programId, contactId])
+}
+
+model Campaign {
+  id          String         @id @default(cuid())
+  businessId  String
+  business    Business       @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  channel     String // email | sms | whatsapp | social
+  name        String
+  subject     String?
+  body        String
+  status      String         @default("draft") // draft | scheduled | sending | sent | failed
+  scheduledAt DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  sends       CampaignSend[]
+
+  @@index([businessId, status])
+}
+
+model CampaignSend {
+  id         String    @id @default(cuid())
+  campaignId String
+  campaign   Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  contactId  String
+  contact    Contact   @relation(fields: [contactId], references: [id], onDelete: Cascade)
+  status     String    @default("queued") // queued | sent | delivered | opened | clicked | bounced | failed
+  providerId String?
+  sentAt     DateTime?
+
+  @@unique([campaignId, contactId])
+  @@index([campaignId, status])
+}
+
+model AdCampaign {
+  id             String         @id @default(cuid())
+  businessId     String
+  business       Business       @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  platform       String // meta | google
+  name           String
+  objective      String?
+  status         String         @default("draft") // draft | pending_approval | active | paused | ended
+  dailyBudgetUsd Float?
+  totalSpentUsd  Float          @default(0)
+  externalId     String?
+  startDate      DateTime?
+  endDate        DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  creatives      AdCreative[]
+  spend          AdSpendEvent[]
+
+  @@index([businessId, status])
+}
+
+model AdCreative {
+  id           String     @id @default(cuid())
+  adCampaignId String
+  adCampaign   AdCampaign @relation(fields: [adCampaignId], references: [id], onDelete: Cascade)
+  headline     String?
+  body         String?
+  imageUrl     String?
+  cta          String?
+  externalId   String?
+  createdAt    DateTime   @default(now())
+}
+
+model AdSpendEvent {
+  id           String     @id @default(cuid())
+  adCampaignId String
+  adCampaign   AdCampaign @relation(fields: [adCampaignId], references: [id], onDelete: Cascade)
+  amountUsd    Float
+  impressions  Int?
+  clicks       Int?
+  conversions  Int?
+  occurredAt   DateTime   @default(now())
+
+  @@index([adCampaignId, occurredAt])
+}
+
+model PhoneAgent {
+  id          String    @id @default(cuid())
+  businessId  String
+  business    Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  provider    String    @default("vapi")
+  providerId  String?
+  phoneNumber String?
+  greeting    String?
+  knowledge   Json?
+  status      String    @default("draft") // draft | live | paused
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  callLogs    CallLog[]
+}
+
+model CallLog {
+  id           String      @id @default(cuid())
+  businessId   String
+  business     Business    @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  phoneAgentId String?
+  phoneAgent   PhoneAgent? @relation(fields: [phoneAgentId], references: [id], onDelete: SetNull)
+  direction    String // inbound | outbound
+  fromNumber   String?
+  toNumber     String?
+  durationSec  Int?
+  transcript   String?
+  recordingUrl String?
+  outcome      String?
+  occurredAt   DateTime    @default(now())
+
+  @@index([businessId, occurredAt])
+}
+
+model Subscription {
+  id                   String    @id @default(cuid())
+  businessId           String    @unique
+  business             Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  tier                 String    @default("free") // free | starter400 | growth600 | operator1500
+  status               String    @default("active") // active | past_due | canceled | paused
+  entitlements         Json
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  currentPeriodEnd     DateTime?
+  discountUsd          Float     @default(0)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  invoices             Invoice[]
+}
+
+model Invoice {
+  id              String       @id @default(cuid())
+  subscriptionId  String
+  subscription    Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  stripeInvoiceId String?
+  amountUsd       Float
+  status          String       @default("open") // open | paid | void | uncollectible
+  periodStart     DateTime?
+  periodEnd       DateTime?
+  createdAt       DateTime     @default(now())
+}
+
+model UsageEvent {
+  id          String   @id @default(cuid())
+  businessId  String
+  business    Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  kind        String // llm_tokens | sandbox_sec | email | sms | voice_min | ad_spend | task
+  quantity    Float
+  unitCostUsd Float    @default(0)
+  costUsd     Float    @default(0)
+  meta        Json?
+  occurredAt  DateTime @default(now())
+
+  @@index([businessId, kind, occurredAt])
+}
+
+model CreditWallet {
+  id                   String         @id @default(cuid())
+  businessId           String         @unique
+  business             Business       @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  balanceUsd           Float          @default(0)
+  autoRecharge         Boolean        @default(false)
+  rechargeThresholdUsd Float          @default(10)
+  rechargeAmountUsd    Float          @default(50)
+  monthlyCeilingUsd    Float          @default(500)
+  updatedAt            DateTime       @updatedAt
+  ledger               CreditLedger[]
+}
+
+model CreditLedger {
+  id              String       @id @default(cuid())
+  walletId        String
+  wallet          CreditWallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+  deltaUsd        Float // + top-up, - usage
+  reason          String
+  balanceAfterUsd Float
+  createdAt       DateTime     @default(now())
+
+  @@index([walletId, createdAt])
+}
+
+model ProcurementPolicy {
+  id                String   @id @default(cuid())
+  businessId        String
+  business          Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  vendor            String // allow-listed vendor slug or "*"
+  perPurchaseCapUsd Float    @default(50)
+  monthlyCapUsd     Float    @default(200)
+  requiresApproval  Boolean  @default(true)
+  enabled           Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@unique([businessId, vendor])
+}
+
+model Purchase {
+  id          String    @id @default(cuid())
+  businessId  String
+  business    Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  vendor      String
+  description String
+  amountUsd   Float
+  status      String    @default("pending") // pending | approved | completed | failed | refunded
+  method      String? // stripe_issuing_spt | one_time_card | oauth
+  mandateId   String? // AP2 mandate reference
+  receiptUrl  String?
+  approvalId  String?
+  createdAt   DateTime  @default(now())
+  completedAt DateTime?
+
+  @@index([businessId, status, createdAt])
+}
+
+model IntegrationConnection {
+  id                   String    @id @default(cuid())
+  businessId           String
+  business             Business  @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  provider             String // square | quickbooks | google_calendar | meta | yelp | ...
+  kind                 String // pos | accounting | calendar | ads | reviews | messaging | api_key
+  encryptedCredentials String // AES-256-GCM envelope (per-tenant key)
+  scopes               Json?
+  status               String    @default("connected") // connected | expired | error | revoked
+  expiresAt            DateTime?
+  lastCheckedAt        DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@unique([businessId, provider])
+  @@index([businessId, status])
+}
+
+model Skill {
+  id          String                       @id @default(cuid())
+  businessId  String?
+  business    Business?                    @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  definition  Json // steps/tools/params, agentskills.io-compatible
+  scope       String                       @default("business") // business | global
+  rewardScore Float                        @default(0)
+  runCount    Int                          @default(0)
+  version     Int                          @default(1)
+  embedding   Unsupported("vector(1536)")?
+  createdAt   DateTime                     @default(now())
+  updatedAt   DateTime                     @updatedAt
+  evaluations Evaluation[]
+
+  @@index([businessId, scope])
+}
+
+model Evaluation {
+  id        String   @id @default(cuid())
+  skillId   String
+  skill     Skill    @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  taskId    String?
+  reward    Float
+  kpiDeltas Json?
+  notes     String?
+  createdAt DateTime @default(now())
+
+  @@index([skillId, createdAt])
+}
+
+model SkillLibrary {
+  id           String           @id @default(cuid())
+  name         String           @unique
+  description  String?
+  definition   Json
+  category     String?
+  avgReward    Float            @default(0)
+  installCount Int              @default(0)
+  version      Int              @default(1)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+  promotions   SkillPromotion[]
+}
+
+model SkillPromotion {
+  id               String       @id @default(cuid())
+  skillLibraryId   String
+  skillLibrary     SkillLibrary @relation(fields: [skillLibraryId], references: [id], onDelete: Cascade)
+  sourceSkillId    String?
+  sourceBusinessId String?
+  status           String       @default("proposed") // proposed | approved | rejected
+  piiScrubbed      Boolean      @default(false)
+  createdAt        DateTime     @default(now())
+}
+
+model FeatureRequest {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  source     String   @default("owner") // owner | agent_dream
+  title      String
+  detail     String?
+  status     String   @default("triage") // triage | planned | building | done | declined
+  taskId     String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([businessId, status])
+}
+
+model AuditLog {
+  id         String    @id @default(cuid())
+  businessId String?
+  business   Business? @relation(fields: [businessId], references: [id], onDelete: SetNull)
+  actorType  String // user | agent | system
+  actorId    String?
+  action     String
+  target     String?
+  riskLevel  String?
+  modelInfo  Json? // {model, version}
+  before     Json?
+  after      Json?
+  mandateId  String?
+  createdAt  DateTime  @default(now())
+
+  @@index([businessId, createdAt])
+}
+
+model PushToken {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token      String   @unique // Expo push token
+  platform   String? // ios | android
+  createdAt  DateTime @default(now())
+  lastUsedAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model MessagingBridge {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  provider   String // whatsapp | telegram | sms
+  externalId String // WhatsApp number | Telegram chat id
+  createdAt  DateTime @default(now())
+
+  @@unique([provider, externalId])
+  @@index([businessId])
 }
