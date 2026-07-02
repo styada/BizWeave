@@ -10,12 +10,14 @@ export type ResolvedLlm = {
 
 /**
  * Resolve an LLM credential for a user: prefer their BYOK key, else fall back
- * to the platform-managed key (Appendix D.3). Returns null if neither exists —
- * callers then use the deterministic template fallback (demo mode).
+ * to the platform-managed key. Returns null if neither exists or if the
+ * resolved key is empty — callers then use the deterministic template
+ * fallback (demo mode). An empty key is treated as no key, otherwise we'd
+ * make fetch() calls with `Authorization: Bearer ` and hang on the timeout.
  */
 export async function resolveLlm(userId: string): Promise<ResolvedLlm | null> {
   const byok = await getPreferredProvider(userId);
-  if (byok) return { ...byok, managed: false };
+  if (byok?.apiKey) return { ...byok, managed: false };
 
   const openai = optionalEnv("OPENAI_API_KEY");
   if (openai) return { provider: "openai", apiKey: openai, managed: true };

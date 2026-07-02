@@ -5,6 +5,24 @@ const DEFAULT_MODELS: Record<LLMOptions["provider"], string> = {
   anthropic: "claude-3-5-haiku-20241022",
 };
 
+// 30s default — long enough for a slow model, short enough that a hung
+// fetch (e.g. bad key, blocked egress) doesn't tie up the chat handler.
+const DEFAULT_TIMEOUT_MS = 30_000;
+
+async function fetchWithTimeout(
+  url: string,
+  init: RequestInit,
+  timeoutMs = DEFAULT_TIMEOUT_MS
+): Promise<Response> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    return await fetch(url, { ...init, signal: controller.signal });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 export async function complete(
   messages: LLMMessage[],
   options: LLMOptions
@@ -21,7 +39,7 @@ async function completeOpenAI(
   messages: LLMMessage[],
   options: LLMOptions & { model: string }
 ): Promise<LLMResponse> {
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+  const res = await fetchWithTimeout("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${options.apiKey}`,
@@ -64,7 +82,7 @@ async function completeAnthropic(
       content: m.content,
     }));
 
-  const res = await fetch("https://api.anthropic.com/v1/messages", {
+  const res = await fetchWithTimeout("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {
       "x-api-key": options.apiKey,
