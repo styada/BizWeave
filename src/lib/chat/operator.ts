@@ -49,29 +49,63 @@ export function classifyIntent(text: string): OperatorIntent {
 /**
  * Publish the latest generated site for a business. Flips GeneratedSite.status
  * from "draft" to "published" so the public /sites/[id] route will serve it.
- * Returns a structured result so the operator can tell the owner what happened.
+ *
+ * Routed through guardAction so that ApprovalPolicy.publish_artifacts gates
+ * the side effect (Phase C). If approval is required and not yet granted,
+ * a PendingAction is created and we return `needs_approval` — nothing flips.
  */
 export async function publishSite(
   businessId: string,
   userId: string
-): Promise<{ ok: boolean; message: string; url?: string }> {
-  const site = await db.generatedSite.findUnique({ where: { businessId } });
-  if (!site) {
-    return { ok: false, message: "No site to publish yet. Ask me to build it first." };
-  }
-  await db.generatedSite.update({
-    where: { businessId },
-    data: { status: "published" },
-  });
-  await db.activityEvent.create({
-    data: {
-      businessId,
-      eventType: "site.published",
-      level: "info",
-      message: "Site published by owner",
-      payload: JSON.stringify({ userId }),
+): Promise<{ ok: boolean; message: string; url?: string; pendingActionId?: string }> {
+  const { guardAction } = await import("@/lib/guard/guard");
+
+  const result = await guardAction({
+    businessId,
+    userId,
+    actionType: "publish_artifacts",
+    riskLevel: "low",
+    payload: { kind: "site_publish" },
+    execute: async () => {
+      const site = await db.generatedSite.findUnique({ where: { businessId } });
+      if (!site) {
+        return { kind: "no_site" } as const;
+      }
+      await db.generatedSite.update({
+        where: { businessId },
+        data: { status: "published" },
+      });
+      await db.activityEvent.create({
+        data: {
+          businessId,
+          eventType: "site.published",
+          level: "info",
+          message: "Site published by owner",
+          payload: JSON.stringify({ userId }),
+        },
+      });
+      return { kind: "published" } as const;
     },
   });
+
+  if (result.status === "needs_approval") {
+    return {
+      ok: false,
+      message: "Site publish needs your approval. Check the approval queue.",
+      pendingActionId: result.pendingActionId,
+    };
+  }
+  if (result.status === "blocked") {
+    return { ok: false, message: `Site publish blocked: ${result.reason}` };
+  }
+  if (result.status === "dry_run") {
+    return { ok: true, message: "Dry run: would publish site." };
+  }
+  // executed
+  const out = result.result as { kind: "no_site" | "published" } | undefined;
+  if (out?.kind === "no_site") {
+    return { ok: false, message: "No site to publish yet. Ask me to build it first." };
+  }
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
   return {
     ok: true,

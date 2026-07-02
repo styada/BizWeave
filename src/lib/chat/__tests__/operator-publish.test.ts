@@ -105,4 +105,39 @@ describe.skipIf(!hasDb)("publishSite end-to-end", () => {
     expect(result.message).toMatch(/build it first/i);
     await db.business.delete({ where: { id: other.id } });
   });
+
+  it("blocks publish when ApprovalPolicy requires approval (Phase C gate)", async () => {
+    // Create an ApprovalPolicy that requires approval for publish_artifacts.
+    await db.approvalPolicy.create({
+      data: {
+        businessId,
+        actionType: "publish_artifacts",
+        enabled: true,
+        requiresApproval: true,
+        minRiskLevel: "low", // gate even low-risk publishes
+      },
+    });
+    // Reset the site to draft so the test starts from a known state.
+    await db.generatedSite.update({
+      where: { businessId },
+      data: { status: "draft" },
+    });
+    const result = await publishSite(businessId, userId);
+    expect(result.ok).toBe(false);
+    expect(result.message).toMatch(/approval/i);
+    expect(result.pendingActionId).toBeDefined();
+    // Site must NOT have flipped to published.
+    const after = await db.generatedSite.findUnique({ where: { businessId } });
+    expect(after?.status).toBe("draft");
+    // A PendingAction must exist.
+    const pending = await db.pendingAction.findFirst({
+      where: { businessId, actionType: "publish_artifacts" },
+    });
+    expect(pending).not.toBeNull();
+    // Clean up.
+    await db.pendingAction.deleteMany({ where: { businessId } });
+    await db.approvalPolicy.deleteMany({
+      where: { businessId, actionType: "publish_artifacts" },
+    });
+  });
 });
