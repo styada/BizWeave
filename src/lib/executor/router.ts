@@ -38,6 +38,32 @@ export async function runTask(params: {
   const budgetUsd = spec.budgetUsd ?? 5;
   const harness = chooseHarness(spec);
 
+  // Idempotency: if a recent task with the same (businessId, title, conversationId)
+  // is still running or queued, return it instead of creating a duplicate. This
+  // prevents double-sends on retries, double-posts on social, etc. Tasks older
+  // than 5 min or in terminal state are not deduplicated.
+  const idempotencyKey = `${businessId}:${title}:${params.conversationId ?? ""}`;
+  const recent = await db.agentTask.findFirst({
+    where: {
+      businessId,
+      title,
+      conversationId: params.conversationId ?? null,
+      status: { in: ["queued", "planning", "running", "needs_approval"] },
+      createdAt: { gte: new Date(Date.now() - 5 * 60_000) },
+    },
+    orderBy: { createdAt: "desc" },
+  });
+  if (recent) {
+    return {
+      taskId: recent.id,
+      result: {
+        ok: true,
+        summary: `Reusing in-flight task (idempotency hit on ${idempotencyKey}).`,
+        costUsd: 0,
+      },
+    };
+  }
+
   const task = await db.agentTask.create({
     data: {
       businessId,
