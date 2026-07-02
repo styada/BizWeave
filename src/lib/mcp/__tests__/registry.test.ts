@@ -26,11 +26,12 @@ describe("MCP registry", () => {
       name: "test.read",
       description: "read only",
       sideEffect: false,
+      riskLevel: "low",
       inputSchema: z.object({}),
       run: async () => ({ items: [1, 2] }),
     });
 
-    const result = await reg.invoke("test.read", {}, { businessId: "b1", userId: "u1" });
+    const result = await reg.invoke("test.read", {}, { businessId: "b1", userId: "u1", dryRun: false });
     expect(result.status).toBe("ok");
     expect(guardMock).not.toHaveBeenCalled();
   });
@@ -48,7 +49,7 @@ describe("MCP registry", () => {
       run: async () => ({ sent: true }),
     });
 
-    const result = await reg.invoke("test.write", { x: 1 }, { businessId: "b1", userId: "u1" });
+    const result = await reg.invoke("test.write", { x: 1 }, { businessId: "b1", userId: "u1", dryRun: false });
     expect(guardMock).toHaveBeenCalled();
     expect(result.status).toBe("ok");
   });

@@ -3,6 +3,8 @@ import type { McpTool } from "@/lib/mcp/types";
 import { db } from "@/lib/db";
 import { sendEmail } from "@/lib/integrations/email-send";
 import { sendSms } from "@/lib/integrations/sms-send";
+import { twitterIntegration } from "@/lib/integrations/twitter";
+import { linkedinIntegration } from "@/lib/integrations/linkedin";
 import { enforceCanSpam, checkTcpa } from "@/lib/compliance";
 import { appUrl } from "@/lib/env";
 
@@ -72,15 +74,30 @@ async function smsSend(input: z.infer<typeof smsInput>, businessId: string) {
   return sendSms({ to: input.to, body: input.body, businessId });
 }
 
-async function socialPost(input: z.infer<typeof socialInput>) {
-  // Social posting is stubbed to dry-run until per-business OAuth tokens exist
-  // (Phase 7/22). Returns a deterministic preview so the pipeline can proceed.
-  return {
-    ok: true,
-    dryRun: true,
-    channel: input.channel,
-    preview: input.content.slice(0, 280),
-  };
+async function socialPost(input: z.infer<typeof socialInput>, businessId: string) {
+  // Phase H: load the per-business OAuth token (encrypted) for the requested
+  // channel and dispatch to the real integration client. If no token is
+  // configured, return a dry-run preview so the chat flow can proceed.
+  const integration =
+    input.channel === "twitter" ? twitterIntegration : linkedinIntegration;
+  if (!integration) {
+    return { ok: false, error: `No integration for channel ${input.channel}` };
+  }
+  const conn = await db.integrationConnection.findFirst({
+    where: { businessId, channel: input.channel },
+  });
+  if (!conn?.accessToken) {
+    return {
+      ok: true,
+      dryRun: true,
+      channel: input.channel,
+      preview: input.content.slice(0, 280),
+    };
+  }
+  return integration.post({
+    content: input.content,
+    credentials: { accessToken: conn.accessToken },
+  });
 }
 
 export const commsTools: McpTool[] = [
