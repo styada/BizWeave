@@ -154,7 +154,15 @@ export default async function BusinessDetailPage({
         </div>
       </div>
 
+      {/* Phase G: chat-first layout — the operator chat is the primary
+          surface. Approvals, schedule, pipeline, and activity are reachable
+          via the chat or the secondary panels below. */}
       <div className="mt-6">
+        <h2 className="mb-3 text-lg font-semibold">Talk to your operator</h2>
+        <OperatorChat businessId={id} />
+      </div>
+
+      <div className="mt-8">
         <PendingApprovals
           businessId={id}
           actions={business.pendingActions.map((action) => ({
@@ -294,11 +302,7 @@ export default async function BusinessDetailPage({
         </div>
       )}
 
-      <div className="mt-8 grid gap-8 lg:grid-cols-2">
-        <div>
-          <h2 className="mb-4 text-lg font-semibold">Operator chat</h2>
-          <OperatorChat businessId={id} />
-        </div>
+      <div className="mt-8 grid gap-8 lg:grid-cols-1">
         <Card>
           <CardHeader>
             <CardTitle className="text-base">Channels & ops</CardTitle>
