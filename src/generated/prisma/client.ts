@@ -106,3 +106,183 @@ export type TaskExecution = Prisma.TaskExecutionModel
  * 
  */
 export type ActivityEvent = Prisma.ActivityEventModel
+/**
+ * Model Workspace
+ * 
+ */
+export type Workspace = Prisma.WorkspaceModel
+/**
+ * Model WorkspaceMember
+ * 
+ */
+export type WorkspaceMember = Prisma.WorkspaceMemberModel
+/**
+ * Model BrandKit
+ * 
+ */
+export type BrandKit = Prisma.BrandKitModel
+/**
+ * Model BrandAsset
+ * 
+ */
+export type BrandAsset = Prisma.BrandAssetModel
+/**
+ * Model MemoryEntry
+ * 
+ */
+export type MemoryEntry = Prisma.MemoryEntryModel
+/**
+ * Model Deployment
+ * 
+ */
+export type Deployment = Prisma.DeploymentModel
+/**
+ * Model AgentTask
+ * 
+ */
+export type AgentTask = Prisma.AgentTaskModel
+/**
+ * Model Conversation
+ * 
+ */
+export type Conversation = Prisma.ConversationModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel
+/**
+ * Model Competitor
+ * 
+ */
+export type Competitor = Prisma.CompetitorModel
+/**
+ * Model Contact
+ * 
+ */
+export type Contact = Prisma.ContactModel
+/**
+ * Model MembershipProgram
+ * 
+ */
+export type MembershipProgram = Prisma.MembershipProgramModel
+/**
+ * Model Membership
+ * 
+ */
+export type Membership = Prisma.MembershipModel
+/**
+ * Model Campaign
+ * 
+ */
+export type Campaign = Prisma.CampaignModel
+/**
+ * Model CampaignSend
+ * 
+ */
+export type CampaignSend = Prisma.CampaignSendModel
+/**
+ * Model AdCampaign
+ * 
+ */
+export type AdCampaign = Prisma.AdCampaignModel
+/**
+ * Model AdCreative
+ * 
+ */
+export type AdCreative = Prisma.AdCreativeModel
+/**
+ * Model AdSpendEvent
+ * 
+ */
+export type AdSpendEvent = Prisma.AdSpendEventModel
+/**
+ * Model PhoneAgent
+ * 
+ */
+export type PhoneAgent = Prisma.PhoneAgentModel
+/**
+ * Model CallLog
+ * 
+ */
+export type CallLog = Prisma.CallLogModel
+/**
+ * Model Subscription
+ * 
+ */
+export type Subscription = Prisma.SubscriptionModel
+/**
+ * Model Invoice
+ * 
+ */
+export type Invoice = Prisma.InvoiceModel
+/**
+ * Model UsageEvent
+ * 
+ */
+export type UsageEvent = Prisma.UsageEventModel
+/**
+ * Model CreditWallet
+ * 
+ */
+export type CreditWallet = Prisma.CreditWalletModel
+/**
+ * Model CreditLedger
+ * 
+ */
+export type CreditLedger = Prisma.CreditLedgerModel
+/**
+ * Model ProcurementPolicy
+ * 
+ */
+export type ProcurementPolicy = Prisma.ProcurementPolicyModel
+/**
+ * Model Purchase
+ * 
+ */
+export type Purchase = Prisma.PurchaseModel
+/**
+ * Model IntegrationConnection
+ * 
+ */
+export type IntegrationConnection = Prisma.IntegrationConnectionModel
+/**
+ * Model Skill
+ * 
+ */
+export type Skill = Prisma.SkillModel
+/**
+ * Model Evaluation
+ * 
+ */
+export type Evaluation = Prisma.EvaluationModel
+/**
+ * Model SkillLibrary
+ * 
+ */
+export type SkillLibrary = Prisma.SkillLibraryModel
+/**
+ * Model SkillPromotion
+ * 
+ */
+export type SkillPromotion = Prisma.SkillPromotionModel
+/**
+ * Model FeatureRequest
+ * 
+ */
+export type FeatureRequest = Prisma.FeatureRequestModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model PushToken
+ * 
+ */
+export type PushToken = Prisma.PushTokenModel
+/**
+ * Model MessagingBridge
+ * 
+ */
+export type MessagingBridge = Prisma.MessagingBridgeModel

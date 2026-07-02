@@ -131,3 +131,42 @@ export function resolveChatUrl(
   }
   return provider.baseUrl;
 }
+
+/**
+ * Build the `/v1/models` URL for a provider. This is what we hit to
+ * enumerate available models. For built-ins we derive it from baseUrl
+ * (so the registry stays the single source of truth for endpoints).
+ * For custom providers we normalize the user-supplied base.
+ */
+export function resolveModelsUrl(
+  provider: ProviderDef,
+  customBaseUrl?: string
+): string {
+  if (provider.customBaseUrl) {
+    if (!customBaseUrl) {
+      throw new Error(
+        `Provider ${provider.id} requires a base URL to list models`
+      );
+    }
+    let base = customBaseUrl.replace(/\/+$/, "");
+    base = base.replace(/\/v1\/chat\/completions\/?$/, "/v1/models");
+    base = base.replace(/\/chat\/completions\/?$/, "/v1/models");
+    if (!base.endsWith("/v1/models")) {
+      base = base.replace(/\/v1\/?$/, "") + "/v1/models";
+    }
+    return base;
+  }
+  // Built-ins: derive from baseUrl.
+  // - OpenAI-compatible: baseUrl ends with /chat/completions → drop 2 segments → /v1/models
+  // - Anthropic: baseUrl ends with /v1/messages → drop 1 segment → /v1/models
+  const u = new URL(provider.baseUrl);
+  const segments = u.pathname.split("/").filter(Boolean);
+  if (provider.kind === "openai") {
+    segments.pop(); // "completions"
+    segments.pop(); // "chat"
+  } else {
+    segments.pop(); // "messages"
+  }
+  u.pathname = "/" + segments.join("/") + "/models";
+  return u.toString();
+}

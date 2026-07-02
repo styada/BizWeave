@@ -61,13 +61,20 @@ export async function POST(request: Request) {
       );
     }
 
-    // Probe the key before persisting (skip for custom providers without
-    // a default model — we can't test the chat completions call without one).
-    const isValid = await testConnection(
-      provider,
-      apiKey,
-      model || (getProvider(provider)?.defaultModel ?? undefined)
-    );
+    // Probe the key before persisting. Failures here are non-fatal — we
+    // still save the key but mark it invalid so the user can fix and retry.
+    let isValid = false;
+    let verifyError: string | undefined;
+    try {
+      isValid = await testConnection(
+        provider,
+        apiKey,
+        model || (getProvider(provider)?.defaultModel ?? undefined)
+      );
+    } catch (err) {
+      verifyError = err instanceof Error ? err.message : String(err);
+      isValid = false;
+    }
 
     await db.apiKey.upsert({
       where: { userId_provider: { userId: session.id, provider } },
@@ -89,10 +96,13 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json({ ok: true, isValid });
+    return NextResponse.json({ ok: true, isValid, verifyError });
   } catch (error) {
     console.error("API key error:", error);
-    return NextResponse.json({ error: "Failed to save API key" }, { status: 500 });
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : "Failed to save API key" },
+      { status: 500 }
+    );
   }
 }
 

@@ -161,3 +161,121 @@ export async function testConnection(
     return false;
   }
 }
+
+export type ListedModel = {
+  id: string;
+  /** OpenAI returns "owned_by"; Anthropic returns no owner. */
+  ownedBy?: string;
+  /** Some providers tag the model with a kind. */
+  kind?: string;
+};
+
+/**
+ * List the models available on a provider. We hit the provider's own
+ * /v1/models endpoint (or equivalent) and return just the ids. Never
+ * throws — returns an empty array on any failure so the UI can fall
+ * back to a curated list.
+ *
+ * The custom provider (customBaseUrl=true) requires `baseUrl`.
+ */
+export async function listModels(
+  provider: string,
+  apiKey: string,
+  baseUrl?: string
+): Promise<ListedModel[]> {
+  if (!apiKey) return [];
+  let def: ProviderDef;
+  try {
+    def = resolveProvider({ provider, apiKey, baseUrl });
+  } catch {
+    return [];
+  }
+  if (def.customBaseUrl && !baseUrl) return [];
+
+  // Lazy-import to keep the provider module as the source of truth.
+  const { resolveModelsUrl } = await import("./providers");
+  const url = resolveModelsUrl(def, baseUrl);
+
+  try {
+    const res = await fetchWithTimeout(
+      url,
+      {
+        method: "GET",
+        headers: authHeaders(def, apiKey),
+      },
+      // Shorter timeout — this is a UI helper, not a chat call.
+      10_000
+    );
+    if (!res.ok) return [];
+    const data = (await res.json()) as unknown;
+    return parseModelsResponse(def.kind, data);
+  } catch {
+    return [];
+  }
+}
+
+function authHeaders(def: ProviderDef, apiKey: string): Record<string, string> {
+  if (def.kind === "anthropic") {
+    return {
+      "x-api-key": apiKey,
+      "anthropic-version": "2023-06-01",
+      "Content-Type": "application/json",
+    };
+  }
+  return {
+    Authorization: `Bearer ${apiKey}`,
+    "Content-Type": "application/json",
+  };
+}
+
+function parseModelsResponse(
+  kind: ProviderDef["kind"],
+  data: unknown
+): ListedModel[] {
+  // OpenAI: { data: [{ id, owned_by, ... }, ...] }
+  // Anthropic: { data: [{ id, display_name, type, ... }, ...] }
+  if (
+    data &&
+    typeof data === "object" &&
+    "data" in data &&
+    Array.isArray((data as { data: unknown }).data)
+  ) {
+    return (data as { data: unknown[] }).data
+      .map((m): ListedModel | null => {
+        if (!m || typeof m !== "object") return null;
+        const obj = m as Record<string, unknown>;
+        const id = obj.id;
+        if (typeof id !== "string" || !id) return null;
+        if (kind === "openai") {
+          return {
+            id,
+            ownedBy: typeof obj.owned_by === "string" ? obj.owned_by : undefined,
+          };
+        }
+        return {
+          id,
+          ownedBy: typeof obj.display_name === "string" ? obj.display_name : undefined,
+          kind: typeof obj.type === "string" ? obj.type : undefined,
+        };
+      })
+      .filter((m): m is ListedModel => m !== null);
+  }
+  // Ollama-style: { models: [{ name, ... }, ...] }
+  if (
+    data &&
+    typeof data === "object" &&
+    "models" in data &&
+    Array.isArray((data as { models: unknown }).models)
+  ) {
+    return (data as { models: unknown[] }).models
+      .map((m): ListedModel | null => {
+        if (!m || typeof m !== "object") return null;
+        const obj = m as Record<string, unknown>;
+        const name = obj.name ?? obj.id;
+        if (typeof name !== "string" || !name) return null;
+        return { id: name, ownedBy: typeof obj.details?.family === "string" ? obj.details.family : undefined };
+      })
+      .filter((m): m is ListedModel => m !== null);
+  }
+  return [];
+}

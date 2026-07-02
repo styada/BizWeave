@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import Link from "next/link";
-import { ArrowLeft, Check, X, ExternalLink } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  ChevronDown,
+  ExternalLink,
+  Loader2,
+  RefreshCw,
+  X,
+} from "lucide-react";
 
 type KeyRecord = {
   provider: string;
@@ -21,22 +29,45 @@ type ProviderDef = {
   label: string;
   blurb: string;
   kind: "openai" | "anthropic";
+  /** Curated list — used as a fallback when live fetch fails. */
   models: string[];
   defaultModel: string;
   docs: string;
   customBaseUrl?: boolean;
 };
 
+type ListedModel = {
+  id: string;
+  ownedBy?: string;
+  kind?: string;
+};
+
 export default function ApiKeysPage() {
   const [keys, setKeys] = useState<KeyRecord[]>([]);
   const [providers, setProviders] = useState<ProviderDef[]>([]);
+
   const [provider, setProvider] = useState<string>("");
   const [apiKey, setApiKey] = useState("");
   const [model, setModel] = useState<string>("");
   const [baseUrl, setBaseUrl] = useState<string>("");
+
+  // Live-fetched models for the form. Empty array means "fetch failed or
+  // hasn't happened yet" — the UI falls back to the curated list.
+  const [liveModels, setLiveModels] = useState<ListedModel[]>([]);
+  const [liveModelsStatus, setLiveModelsStatus] = useState<
+    "idle" | "loading" | "ok" | "error"
+  >("idle");
+  const [liveModelsMessage, setLiveModelsMessage] = useState<string>("");
+
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+  const [messageTone, setMessageTone] = useState<"ok" | "error">("ok");
 
+  // Refs for debounced fetching.
+  const fetchSeq = useRef(0);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // ----- Loaders -----
   async function loadKeys() {
     const res = await fetch("/api/keys");
     const data = await res.json();
@@ -45,37 +76,99 @@ export default function ApiKeysPage() {
 
   useEffect(() => {
     void (async () => {
-      // Fetch the provider registry once on mount.
       const r = await fetch("/api/keys/providers");
       const d = await r.json();
       if (r.ok && Array.isArray(d.providers)) {
         setProviders(d.providers);
-        // Default to OpenAI if present, else first in the list.
-        const first = d.providers.find((p: ProviderDef) => p.id === "openai") ?? d.providers[0];
+        const first =
+          d.providers.find((p: ProviderDef) => p.id === "openai") ??
+          d.providers[0];
         if (first) {
           setProvider(first.id);
           setModel(first.defaultModel);
         }
       }
-      // And the saved keys.
       const kr = await fetch("/api/keys");
       const kd = await kr.json();
       if (kr.ok) setKeys(kd.keys);
     })();
   }, []);
 
-  // When the user switches providers, update model + baseUrl defaults.
-  const selectedProvider = useMemo(
-    () => providers.find((p) => p.id === provider),
-    [providers, provider]
+  const selectedProvider = providers.find((p) => p.id === provider);
+
+  // ----- Model fetching -----
+  /**
+   * Hit the provider's /v1/models endpoint. Returns just the ids.
+   * Falls back gracefully — never throws.
+   */
+  const fetchLiveModels = useCallback(
+    async (prov: string, key: string, url?: string) => {
+      if (!prov || !key) {
+        setLiveModels([]);
+        setLiveModelsStatus("idle");
+        setLiveModelsMessage("");
+        return;
+      }
+      const seq = ++fetchSeq.current;
+      setLiveModelsStatus("loading");
+      setLiveModelsMessage("Fetching live model list…");
+      try {
+        const params = new URLSearchParams({ provider: prov, apiKey: key });
+        if (url) params.set("baseUrl", url);
+        const res = await fetch(`/api/keys/models?${params.toString()}`);
+        if (seq !== fetchSeq.current) return; // a newer fetch started
+        if (!res.ok) {
+          setLiveModels([]);
+          setLiveModelsStatus("error");
+          setLiveModelsMessage("Couldn't fetch models — using curated list.");
+          return;
+        }
+        const data = (await res.json()) as { models: ListedModel[] };
+        if (seq !== fetchSeq.current) return;
+        if (!data.models || data.models.length === 0) {
+          setLiveModels([]);
+          setLiveModelsStatus("error");
+          setLiveModelsMessage("No models returned — using curated list.");
+          return;
+        }
+        setLiveModels(data.models);
+        setLiveModelsStatus("ok");
+        setLiveModelsMessage(`${data.models.length} models available`);
+      } catch {
+        if (seq !== fetchSeq.current) return;
+        setLiveModels([]);
+        setLiveModelsStatus("error");
+        setLiveModelsMessage("Network error — using curated list.");
+      }
+    },
+    []
   );
 
+  // Auto-fetch when provider, key, or baseUrl change. Debounced 600ms.
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (!provider || !apiKey) {
+      setLiveModels([]);
+      setLiveModelsStatus("idle");
+      setLiveModelsMessage("");
+      return;
+    }
+    debounceRef.current = setTimeout(() => {
+      void fetchLiveModels(provider, apiKey, baseUrl || undefined);
+    }, 600);
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, [provider, apiKey, baseUrl, fetchLiveModels]);
+
+  // ----- Provider selection -----
   function pickProvider(p: ProviderDef) {
     setProvider(p.id);
     setModel(p.defaultModel);
     setBaseUrl("");
   }
 
+  // ----- Save / delete -----
   async function saveKey(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -84,26 +177,50 @@ export default function ApiKeysPage() {
     if (model) body.model = model;
     if (baseUrl) body.baseUrl = baseUrl;
 
-    const res = await fetch("/api/keys", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
-    const data = await res.json();
-    setLoading(false);
-    if (!res.ok) {
-      setMessage(data.error ?? "Failed to save");
-      return;
+    try {
+      const res = await fetch("/api/keys", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (!res.ok) {
+        setMessageTone("error");
+        setMessage(data.error ?? `Save failed (${res.status})`);
+        return;
+      }
+      setMessageTone(data.isValid ? "ok" : "error");
+      if (data.isValid) {
+        setMessage("Key saved and verified ✓");
+      } else if (data.verifyError) {
+        setMessage(`Saved, but key didn't verify: ${data.verifyError}`);
+      } else {
+        setMessage("Saved, but key didn't verify. Check it and try again.");
+      }
+      setApiKey("");
+      void loadKeys();
+    } catch (err) {
+      setLoading(false);
+      setMessageTone("error");
+      setMessage(
+        err instanceof Error
+          ? `Network error: ${err.message}`
+          : "Network error"
+      );
     }
-    setMessage(data.isValid ? "Key saved and verified ✓" : "Key saved but verification failed");
-    setApiKey("");
-    loadKeys();
   }
 
   async function removeKey(p: string) {
     await fetch(`/api/keys?provider=${p}`, { method: "DELETE" });
-    loadKeys();
+    void loadKeys();
   }
+
+  // ----- Display helpers -----
+  /** Build the model dropdown options: live list, then curated as a fallback. */
+  const modelOptions: string[] = liveModels.length
+    ? liveModels.map((m) => m.id)
+    : (selectedProvider?.models ?? []);
 
   function modelLabel(k: KeyRecord): string {
     if (k.model) return k.model;
@@ -128,9 +245,7 @@ export default function ApiKeysPage() {
       {/* Saved keys */}
       <div className="mt-8 space-y-3">
         {keys.length === 0 ? (
-          <p className="text-sm text-[var(--text-muted)]">
-            No keys yet. Add one below.
-          </p>
+          <p className="text-sm text-[var(--text-muted)]">No keys yet. Add one below.</p>
         ) : null}
         {keys.map((k) => {
           const def = providers.find((p) => p.id === k.provider);
@@ -194,44 +309,92 @@ export default function ApiKeysPage() {
                   type="password"
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
-                  placeholder={selectedProvider.id === "openai" ? "sk-..." : selectedProvider.id === "anthropic" ? "sk-ant-..." : "paste your key…"}
+                  placeholder={
+                    selectedProvider.id === "openai"
+                      ? "sk-..."
+                      : selectedProvider.id === "anthropic"
+                      ? "sk-ant-..."
+                      : "paste your key…"
+                  }
                   className="mt-1.5 font-mono"
                   required
                 />
-                <a
-                  href={selectedProvider.docs}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-1 inline-flex items-center gap-1 text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
-                >
-                  Get a key
-                  <ExternalLink className="h-3 w-3" />
-                </a>
+                {selectedProvider.docs ? (
+                  <a
+                    href={selectedProvider.docs}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-1 inline-flex items-center gap-1 text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
+                  >
+                    Get a key
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                ) : null}
               </div>
 
               <div>
-                <Label htmlFor="model">Model</Label>
-                <div className="mt-1.5 flex gap-2">
+                <div className="flex items-baseline justify-between">
+                  <Label htmlFor="model">Model</Label>
+                  <div className="flex items-center gap-2 text-xs text-[var(--text-muted)]">
+                    {liveModelsStatus === "loading" ? (
+                      <>
+                        <Loader2 className="h-3 w-3 animate-spin" />
+                        <span>Fetching…</span>
+                      </>
+                    ) : liveModelsStatus === "ok" ? (
+                      <span className="text-[var(--success)]">
+                        ✓ {liveModelsMessage}
+                      </span>
+                    ) : liveModelsStatus === "error" ? (
+                      <span>{liveModelsMessage}</span>
+                    ) : null}
+                    {apiKey ? (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          void fetchLiveModels(
+                            provider,
+                            apiKey,
+                            baseUrl || undefined
+                          )
+                        }
+                        className="inline-flex items-center gap-1 rounded border border-white/10 px-2 py-0.5 hover:border-white/20"
+                        aria-label="Refresh model list"
+                      >
+                        <RefreshCw className="h-3 w-3" />
+                        Refresh
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
+                <div className="relative mt-1.5">
                   <select
                     id="model"
                     value={model}
                     onChange={(e) => setModel(e.target.value)}
-                    className="flex h-10 flex-1 rounded-md border border-white/10 bg-[var(--bg-elev)] px-3 text-sm"
+                    className="w-full appearance-none rounded-md border border-white/10 bg-[var(--bg-elev)] px-3 py-2 pr-9 text-sm"
                   >
-                    {selectedProvider.models.map((m) => (
+                    {!model ? (
+                      <option value="">— select a model —</option>
+                    ) : null}
+                    {modelOptions.map((m) => (
                       <option key={m} value={m}>
                         {m}
                       </option>
                     ))}
+                    {model && !modelOptions.includes(model) ? (
+                      <option value={model}>{model} (custom)</option>
+                    ) : null}
                   </select>
-                  <Input
-                    type="text"
-                    value={model}
-                    onChange={(e) => setModel(e.target.value)}
-                    placeholder="or type a custom model"
-                    className="flex-1 font-mono"
-                  />
+                  <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--text-muted)]" />
                 </div>
+                <Input
+                  type="text"
+                  value={model}
+                  onChange={(e) => setModel(e.target.value)}
+                  placeholder="or type a custom model id"
+                  className="mt-2 font-mono"
+                />
               </div>
 
               {selectedProvider.customBaseUrl ? (
@@ -252,7 +415,15 @@ export default function ApiKeysPage() {
           ) : null}
 
           {message ? (
-            <p className="text-sm text-[var(--accent-secondary)]">{message}</p>
+            <p
+              className={
+                messageTone === "ok"
+                  ? "text-sm text-[var(--success)]"
+                  : "text-sm text-[var(--error)]"
+              }
+            >
+              {message}
+            </p>
           ) : null}
           <Button type="submit" loading={loading}>
             Save & test connection

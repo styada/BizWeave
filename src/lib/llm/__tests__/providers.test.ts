@@ -1,5 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { PROVIDERS, getProvider, resolveChatUrl } from "../providers";
+import {
+  PROVIDERS,
+  getProvider,
+  resolveChatUrl,
+  resolveModelsUrl,
+} from "../providers";
 
 describe("LLM provider registry", () => {
   it("includes OpenAI, Anthropic, OpenCode Go, OpenCode Zen, and a custom option", () => {
@@ -71,5 +76,54 @@ describe("LLM provider registry", () => {
       expect(p?.kind).toBe("openai");
       expect(p?.baseUrl).toMatch(/\/chat\/completions$/);
     }
+  });
+});
+
+describe("resolveModelsUrl", () => {
+  it("derives the OpenAI /v1/models from the chat-completions baseUrl", () => {
+    const def = getProvider("openai")!;
+    expect(resolveModelsUrl(def)).toBe("https://api.openai.com/v1/models");
+  });
+
+  it("derives the Anthropic /v1/models from the messages baseUrl", () => {
+    const def = getProvider("anthropic")!;
+    expect(resolveModelsUrl(def)).toBe(
+      "https://api.anthropic.com/v1/models"
+    );
+  });
+
+  it("derives OpenCode Go + Zen models URLs from their OpenAI-compatible baseUrls", () => {
+    expect(resolveModelsUrl(getProvider("opencode-go")!)).toBe(
+      "https://go.opencode.ai/v1/models"
+    );
+    expect(resolveModelsUrl(getProvider("opencode-zen")!)).toBe(
+      "https://zen.opencode.ai/v1/models"
+    );
+  });
+
+  it("normalizes a bare custom base URL to /v1/models", () => {
+    const def = getProvider("custom-openai")!;
+    expect(resolveModelsUrl(def, "https://my-host.example.com")).toBe(
+      "https://my-host.example.com/v1/models"
+    );
+  });
+
+  it("normalizes a custom base URL pointing at chat/completions", () => {
+    const def = getProvider("custom-openai")!;
+    expect(
+      resolveModelsUrl(def, "https://my-host.example.com/v1/chat/completions")
+    ).toBe("https://my-host.example.com/v1/models");
+  });
+
+  it("normalizes a custom base URL with trailing slashes", () => {
+    const def = getProvider("custom-openai")!;
+    expect(
+      resolveModelsUrl(def, "https://my-host.example.com/v1/chat/completions/")
+    ).toBe("https://my-host.example.com/v1/models");
+  });
+
+  it("throws when a custom provider is queried without a baseUrl", () => {
+    const def = getProvider("custom-openai")!;
+    expect(() => resolveModelsUrl(def)).toThrow(/base URL/);
   });
 });
