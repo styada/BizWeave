@@ -1,19 +1,19 @@
-import { describe, it, expect, beforeAll } from "vitest";
+import { describe, it, expect, vi } from "vitest";
+
+vi.mock("@supabase/ssr", () => ({
+  createServerClient: vi.fn(() => ({
+    auth: {
+      getUser: vi.fn(async () => ({ data: { user: null } })),
+    },
+  })),
+}));
 
 describe("Supabase middleware module", () => {
-  let updateSession: typeof import("@/lib/supabase/middleware").updateSession;
+  it("exports updateSession function", async () => {
+    process.env.NEXT_PUBLIC_SUPABASE_URL = "https://test.supabase.co";
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY = "test-anon-key";
 
-  beforeAll(async () => {
-    try {
-      const mod = await import("@/lib/supabase/middleware");
-      updateSession = mod.updateSession;
-    } catch {
-      // Module may fail to import if env vars are missing
-    }
-  });
-
-  it("exports updateSession function", () => {
-    expect(updateSession).toBeDefined();
+    const { updateSession } = await import("@/lib/supabase/middleware");
     expect(typeof updateSession).toBe("function");
   });
 });

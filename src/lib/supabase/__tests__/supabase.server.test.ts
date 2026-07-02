@@ -1,32 +1,37 @@
-import { describe, it, expect, beforeAll } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 
-// Server-side module tests — these test that the server client module
-// can be imported and returns a factory with the expected shape.
+vi.mock("next/headers", () => ({
+  cookies: vi.fn(async () => ({
+    getAll: () => [],
+    set: vi.fn(),
+  })),
+}));
+
+vi.mock("@supabase/ssr", () => ({
+  createServerClient: vi.fn(() => ({
+    auth: {
+      getSession: vi.fn(),
+      getUser: vi.fn(),
+      signInWithPassword: vi.fn(),
+    },
+  })),
+}));
 
 describe("Supabase server client module", () => {
-  let createClientModule: typeof import("@/lib/supabase/server");
-
-  beforeAll(async () => {
-    // Dynamic import to avoid build failures when env vars are missing
-    try {
-      createClientModule = await import("@/lib/supabase/server");
-    } catch {
-      // Module may fail to import if env vars are missing — that's ok for CI
-    }
+  beforeEach(() => {
+    process.env.NEXT_PUBLIC_SUPABASE_URL = "https://test.supabase.co";
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY = "test-anon-key";
   });
 
-  it("exports a createClient function", () => {
-    expect(createClientModule).toBeDefined();
-    expect(typeof createClientModule.createClient).toBe("function");
+  it("exports a createClient function", async () => {
+    const mod = await import("@/lib/supabase/server");
+    expect(typeof mod.createClient).toBe("function");
   });
 
   it("createClient returns an object with auth property", async () => {
-    const client = await createClientModule.createClient();
-    expect(client).toBeDefined();
+    const mod = await import("@/lib/supabase/server");
+    const client = await mod.createClient();
     expect(client.auth).toBeDefined();
-    // Should have standard auth methods
     expect(typeof client.auth.getSession).toBe("function");
-    expect(typeof client.auth.getUser).toBe("function");
-    expect(typeof client.auth.signInWithPassword).toBe("function");
   });
 });

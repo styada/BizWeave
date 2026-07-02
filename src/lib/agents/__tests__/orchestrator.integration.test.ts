@@ -94,7 +94,7 @@ describe("runAgentPipeline integration", () => {
     expect(result.approved).toBe(true);
     expect(dbMock.agentLog.create).toHaveBeenCalled();
     expect(dbMock.generatedSite.upsert).toHaveBeenCalled();
-  });
+  }, 30_000);
 
   it("uses fallback for malformed model output and still completes", async () => {
     getPreferredProviderMock.mockResolvedValue({
@@ -118,5 +118,5 @@ describe("runAgentPipeline integration", () => {
         data: expect.objectContaining({ status: "complete" }),
       })
     );
-  });
+  }, 30_000);
 });

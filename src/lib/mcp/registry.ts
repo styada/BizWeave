@@ -8,7 +8,7 @@ import { db } from "@/lib/db";
  * harness (chat, pipeline, deep executor) invokes through `invoke()` so that
  * validation + guardrails are applied uniformly.
  */
-class McpRegistry {
+export class McpRegistry {
   private tools = new Map<string, McpTool>();
 
   register(tool: McpTool): void {
