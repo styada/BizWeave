@@ -109,6 +109,133 @@ function tryParseJson(raw: string): unknown {
   }
 }
 
+export const outreachSchema = z.object({
+  campaigns: z
+    .array(
+      z.object({
+        name: z.string().min(2),
+        channel: z.enum(["email", "sms", "linkedin", "twitter"]),
+        subject: z.string().min(2),
+        body: z.string().min(10),
+        targetAudience: z.string().min(2),
+        schedule: z.enum(["now", "weekly", "monthly"]),
+      })
+    )
+    .min(1),
+  templates: z
+    .array(
+      z.object({
+        name: z.string().min(2),
+        content: z.string().min(10),
+      })
+    )
+    .min(1),
+});
+
+export const adsSchema = z.object({
+  platforms: z.array(z.string().min(2)).min(1),
+  campaigns: z
+    .array(
+      z.object({
+        name: z.string().min(2),
+        platform: z.string().min(2),
+        budget: z.string().min(1),
+        targetAudience: z.string().min(2),
+        adCopy: z.string().min(10),
+        startDate: z.string().min(4),
+      })
+    )
+    .min(1),
+  budget: z.object({
+    monthly: z.number().positive(),
+    allocation: z.record(z.string(), z.number()),
+  }),
+});
+
+export const financeSchema = z.object({
+  revenueStreams: z
+    .array(
+      z.object({
+        name: z.string().min(2),
+        type: z.enum(["product", "service", "subscription", "other"]),
+        estimatedMonthly: z.number().min(0),
+      })
+    )
+    .min(1),
+  pricingTiers: z
+    .array(
+      z.object({
+        name: z.string().min(2),
+        price: z.number().min(0),
+        features: z.array(z.string()).min(1),
+      })
+    )
+    .min(1),
+  metrics: z.object({
+    suggestedPricePoints: z.array(z.number().positive()).min(1),
+    breakEvenEstimate: z.string().min(2),
+    growthIndicators: z.array(z.string().min(2)).min(1),
+  }),
+});
+
+export const competitorResearchSchema = z.object({
+  competitors: z
+    .array(
+      z.object({
+        name: z.string().min(2),
+        website: z.string().url().or(z.string().min(4)),
+        strengths: z.array(z.string().min(2)).min(1),
+        weaknesses: z.array(z.string().min(2)).min(1),
+        estimatedTraffic: z.string().optional(),
+      })
+    )
+    .min(1),
+  marketPositioning: z.object({
+    differentiators: z.array(z.string().min(2)).min(1),
+    gaps: z.array(z.string().min(2)).min(1),
+    opportunities: z.array(z.string().min(2)).min(1),
+  }),
+  pricingComparison: z
+    .array(
+      z.object({
+        competitor: z.string().min(2),
+        priceRange: z.string().min(1),
+        notes: z.string().min(2),
+      })
+    )
+    .min(1),
+});
+
+export const orchestratorSchema = z.object({
+  plan: z
+    .array(
+      z.object({
+        phase: z.string().min(2),
+        agents: z
+          .enum([
+            "intake",
+            "planner",
+            "builder",
+            "marketing",
+            "support",
+            "safeguard",
+            "outreach",
+            "ads",
+            "finance",
+            "competitor-research",
+            "orchestrator",
+          ])
+          .array()
+          .min(1),
+        priority: z.number().int().min(1).max(10),
+        estimatedDuration: z.string().min(1),
+      })
+    )
+    .min(1),
+  reasoning: z.string().min(10),
+  riskFlags: z.array(z.string()).default([]),
+});
+
 export function parseWithSchema<T>(
   raw: string,
   schema: z.ZodType<T>,

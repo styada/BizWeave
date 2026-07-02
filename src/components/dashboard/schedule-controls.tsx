@@ -88,7 +88,7 @@ export function ScheduleControls({
           </div>
           <Button
             size="sm"
-            variant={task.enabled ? "secondary" : "primary"}
+            variant={task.enabled ? "secondary" : "default"}
             disabled={isPending}
             onClick={() => updateTask(task.id, !task.enabled)}
           >

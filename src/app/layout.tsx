@@ -1,5 +1,19 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { DM_Sans, Instrument_Serif } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["400", "500", "600", "700"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: ["400"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -23,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
+    <html lang="en" className={cn("h-full", "font-sans", dmSans.variable, instrumentSerif.variable)}>
       <body className="min-h-full antialiased">{children}</body>
     </html>
   );

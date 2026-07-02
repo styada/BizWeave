@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Bizweave",
+    "slug": "bizweave",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "scheme": "bizweave",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0a0a0f"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "site.bizweave.app"
+    },
+    "android": {
+      "package": "site.bizweave.app"
+    },
+    "plugins": ["expo-notifications", "expo-secure-store"],
+    "extra": {
+      "apiBaseUrl": "https://app.bizweave.site"
+    }
+  }
+}

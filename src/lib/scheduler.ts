@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { runAgentPipeline } from "@/lib/agents/orchestrator";
+import { runPipeline } from "@/lib/pipeline";
 
 type Cadence =
   | "manual"
@@ -220,7 +220,7 @@ async function processExecution(exec: {
   });
 
   try {
-    const run = await runAgentPipeline(
+    const run = await runPipeline(
       exec.scheduledTask.business.id,
       exec.scheduledTask.business.userId,
       { taskExecutionId: exec.id }

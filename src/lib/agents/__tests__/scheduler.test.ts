@@ -14,9 +14,9 @@ vi.mock("@/lib/db", () => ({
   db: dbMock,
 }));
 
-const runAgentPipelineMock = vi.fn();
-vi.mock("@/lib/agents/orchestrator", () => ({
-  runAgentPipeline: runAgentPipelineMock,
+const runPipelineMock = vi.fn();
+vi.mock("@/lib/pipeline", () => ({
+  runPipeline: runPipelineMock,
 }));
 
 function queuedExecution(overrides?: {
@@ -47,7 +47,7 @@ describe("scheduler retry and dead-letter behavior", () => {
 
   it("schedules retry when attempts remain", async () => {
     dbMock.taskExecution.findMany.mockResolvedValue([queuedExecution({ retryCount: 0, maxAttempts: 3 })]);
-    runAgentPipelineMock.mockRejectedValue(new Error("transient failure"));
+    runPipelineMock.mockRejectedValue(new Error("transient failure"));
 
     const { processQueuedExecutions } = await import("@/lib/scheduler");
     const result = await processQueuedExecutions(5);
@@ -69,7 +69,7 @@ describe("scheduler retry and dead-letter behavior", () => {
 
   it("moves execution to dead letter when max attempts reached", async () => {
     dbMock.taskExecution.findMany.mockResolvedValue([queuedExecution({ retryCount: 2, maxAttempts: 3 })]);
-    runAgentPipelineMock.mockRejectedValue(new Error("persistent failure"));
+    runPipelineMock.mockRejectedValue(new Error("persistent failure"));
 
     const { processQueuedExecutions } = await import("@/lib/scheduler");
     const result = await processQueuedExecutions(5);
@@ -91,7 +91,7 @@ describe("scheduler retry and dead-letter behavior", () => {
 
   it("marks execution completed when pipeline succeeds", async () => {
     dbMock.taskExecution.findMany.mockResolvedValue([queuedExecution()]);
-    runAgentPipelineMock.mockResolvedValue({ runId: "run_1" });
+    runPipelineMock.mockResolvedValue({ runId: "run_1" });
 
     const { processQueuedExecutions } = await import("@/lib/scheduler");
     const result = await processQueuedExecutions(5);

@@ -1,55 +1,61 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
+import { COOKIE_NAME } from "@/lib/auth";
+import { wildcardRootDomain } from "@/lib/env";
 
-const COOKIE_NAME = "bizweave_session";
+/**
+ * Auth guard middleware.
+ *
+ * Protected route prefixes require a session (either the Bizweave JWT cookie
+ * or a Supabase auth cookie). Everything else (marketing, auth pages, public
+ * generated sites, auth API routes) is public. Deep authz (ownership checks,
+ * JWT verification, DB lookups) happens in `getSession()` server-side — this
+ * layer just keeps unauthenticated users out of the app shell.
+ */
 
-const protectedPaths = ["/dashboard", "/onboarding"];
+const PROTECTED_PREFIXES = ["/dashboard", "/onboarding", "/protected"];
 
-export async function middleware(request: NextRequest) {
-  if (process.env.NODE_ENV !== "production") {
-    return NextResponse.next();
+function hasSessionCookie(request: NextRequest): boolean {
+  if (request.cookies.get(COOKIE_NAME)?.value) return true;
+  // Supabase SSR sets cookies prefixed with `sb-` (…-auth-token).
+  for (const cookie of request.cookies.getAll()) {
+    if (cookie.name.startsWith("sb-") && cookie.name.includes("auth-token")) {
+      return true;
+    }
   }
+  return false;
+}
 
+export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const host = request.headers.get("host") ?? "";
+  const root = wildcardRootDomain();
 
-  const isProtected = protectedPaths.some(
-    (p) => pathname === p || pathname.startsWith(`${p}/`)
-  );
-  const isAuthPage = pathname === "/login" || pathname === "/signup";
-
-  if (!isProtected && !isAuthPage) {
-    return NextResponse.next();
-  }
-
-  const token = request.cookies.get(COOKIE_NAME)?.value;
-  let isAuthenticated = false;
-
-  if (token && process.env.AUTH_SECRET) {
-    try {
-      const { jwtVerify } = await import("jose");
-      await jwtVerify(token, new TextEncoder().encode(process.env.AUTH_SECRET));
-      isAuthenticated = true;
-    } catch {
-      isAuthenticated = false;
+  // Wildcard subdomain → /site/[slug] (instant-live hosting, Phase 23).
+  if (host.endsWith(`.${root}`) && host !== root && !host.startsWith("app.")) {
+    const slug = host.replace(`.${root}`, "");
+    if (slug && !slug.includes(".")) {
+      const url = request.nextUrl.clone();
+      url.pathname = `/site/${slug}`;
+      return NextResponse.rewrite(url);
     }
   }
 
-  if (isProtected && !isAuthenticated) {
+  const isProtected = PROTECTED_PREFIXES.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
+  );
+
+  if (isProtected && !hasSessionCookie(request)) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     url.searchParams.set("redirect", pathname);
     return NextResponse.redirect(url);
   }
 
-  if (isAuthPage && isAuthenticated) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
-    return NextResponse.redirect(url);
-  }
-
-  return NextResponse.next();
+  return NextResponse.next({ request });
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/onboarding/:path*", "/login", "/signup"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 };

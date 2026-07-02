@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 
 export function PageLoader({ message = "Weaving your workspace…" }: { message?: string }) {
   return (
-    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[var(--bg-base)]">
+    <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-bg-base">
       <div className="relative h-16 w-16">
         {[0, 1, 2].map((i) => (
           <motion.div
             key={i}
-            className="absolute inset-0 rounded-full border-2 border-[var(--accent-primary)]/30"
+            className="absolute inset-0 rounded-full border-2 border-accent-primary/30"
             style={{ borderTopColor: "var(--accent-primary)" }}
             animate={{ rotate: 360 }}
             transition={{
@@ -22,7 +22,7 @@ export function PageLoader({ message = "Weaving your workspace…" }: { message?
         ))}
       </div>
       <motion.p
-        className="mt-6 text-sm text-[var(--text-secondary)]"
+        className="mt-6 text-sm text-text-secondary"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
