@@ -17,18 +17,53 @@ Bring Your Own Keys (BYOK) for OpenAI and Anthropic — your API keys are encryp
 - **Demo mode**: Works without API keys using intelligent templates
 - **Design system**: See [DESIGN.md](./DESIGN.md)
 
-## Quick start
+## Quick start (30 seconds, no Docker)
+
+The fastest path. Works with Homebrew Postgres only.
+
+**Prerequisites (one-time per machine):**
 
 ```bash
-# Start local stack (frontend + backend + Postgres)
+brew install postgresql@17 pgvector
+brew services start postgresql@17
+createuser -s postgres 2>/dev/null || true
+psql postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';"
+```
+
+**Boot the app:**
+
+```bash
+make local-setup   # creates bizweave DB + pushes Prisma schema + writes .env
+make dev           # starts Next.js in <1s
+```
+
+Open [http://localhost:3000](http://localhost:3000). Sign up, create a business, chat with the operator.
+
+`make local-setup` is idempotent and:
+
+- Verifies Postgres is reachable on `localhost:5432`
+- Creates the `bizweave` database if missing
+- Writes `.env` from `.env.development` if missing
+- Pushes the Prisma schema (creates all 49 tables, including `pgvector` extension)
+
+No Docker, no Supabase CLI, no network calls. Demo mode is the default — add OpenAI/Anthropic keys in `/dashboard/settings/keys` when you want real LLM calls.
+
+### When you need Supabase features (auth flows, storage, admin)
+
+Some features (OAuth, file storage, the admin tooling) require a running Supabase stack. This is a **separate, optional step** that takes 1-3 minutes:
+
+```bash
+make supabase-ensure    # starts Supabase via Docker
+make local-dev-full     # local-setup + supabase-ensure + npm run dev
+```
+
+For the full Docker stack (frontend + backend + Postgres + Supabase):
+
+```bash
 make docker-up
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-If Docker image pulls are flaky in your network, use the no-Docker local path below.
-
-If Docker Hub is timing out specifically for `node:22-bookworm-slim`, you can use a mirror image for the frontend build:
+If Docker image pulls are flaky, use a mirror:
 
 ```bash
 FRONTEND_NODE_IMAGE=public.ecr.aws/docker/library/node:22-bookworm-slim \
@@ -36,25 +71,21 @@ POSTGRES_IMAGE=public.ecr.aws/docker/library/postgres:16-alpine \
 docker compose up --build
 ```
 
-### Local dev without Docker
+### Optional backend setup (Python service)
 
 ```bash
-npm install
-cp .env.example .env
-
-# One-command local setup (Homebrew PostgreSQL + role/db bootstrap + Prisma push)
-make local-setup
-
-# Run the Next.js app
-make dev
+make backend-sync
+export BACKEND_DATABASE_URL="postgresql+psycopg://user:pass@host:5432/backend_db"
+make backend-migrate
 ```
 
-`make local-setup` does all of the following:
+Backend Alembic commands are intentionally guarded and require backend-only opt-in + URL.
+See [docs/orm-ownership-boundaries.md](./docs/orm-ownership-boundaries.md).
 
-- Starts `postgresql@16` via Homebrew services
-- Ensures role `postgres` exists with password `postgres`
-- Ensures database `bizweave` exists and is owned by `postgres`
-- Pushes Prisma schema to `DATABASE_URL`
+1. **Sign up** at `/signup`
+2. **Onboard** a business at `/onboarding`
+3. **Add API keys** (optional) at `/dashboard/settings/keys`
+4. **Run agents** from the business dashboard
 
 Optional backend setup (for the Python service):
 
