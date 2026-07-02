@@ -1,22 +1,20 @@
 /**
- * Phase T.2: Build-site workflow.
+ * Phase T.2: Build-site workflow with REAL activities.
  *
- * Wraps the existing 6-step Bizweave pipeline in a Temporal workflow. Each
- * step is a Temporal activity that calls the corresponding function in
+ * Wraps the Bizweave pipeline in a Temporal workflow. Each step is a
+ * Temporal activity that calls the corresponding function in
  * src/lib/agents/orchestrator.ts. The workflow adds:
  *   - Durable retry on each step (3 attempts, exponential backoff)
  *   - Per-step timeout (5 min default)
- *   - Heartbeat for long-running activities
  *   - Workflow history visible in Temporal Web
  *
- * This is the "Phase T.2" entry point. The existing runAgentPipeline()
- * path is unchanged and remains the default; this workflow is opt-in via
- * the FEATURE_TEMPORAL flag in src/lib/agents/pipeline/index.ts.
+ * This workflow is opt-in via the FEATURE_TEMPORAL flag in
+ * src/lib/pipeline/index.ts. The existing runAgentPipeline() path is
+ * unchanged and remains the default.
  */
 import { proxyActivities, ApplicationFailure } from "@temporalio/workflow";
-import type * as activities from "../activities/buildSite";
+import type * as activities from "../activities/pipeline";
 
-// Retry policy: 3 attempts, exponential backoff starting at 1s, capped at 1m.
 const { intake, plan, build, marketing, support, safeguard, publish } =
   proxyActivities<typeof activities>({
     startToCloseTimeout: "5 minutes",
@@ -41,51 +39,38 @@ export type BuildSiteResult = {
   reliabilityIndex?: number;
 };
 
-/**
- * The 6-step build-site workflow. Mirrors runAgentPipeline() but durable.
- *
- * Order: intake -> plan -> build -> marketing -> support -> safeguard -> (publish?)
- * Steps 1-5 run in sequence. Step 6 (safeguard) decides whether to publish.
- */
 export async function buildSiteWorkflow(
   input: BuildSiteInput
 ): Promise<BuildSiteResult> {
-  const ctx = { ...input };
-
-  // Steps 1-5: each is a Temporal activity, individually retried on failure.
-  const intakeResult = await intake(ctx);
+  // Each step is a Temporal activity. Failures retry up to 3 times.
+  const intakeResult = await intake(input);
   if (!intakeResult.ok) {
     throw ApplicationFailure.nonRetryable("intake_failed", "INTAKE_FAILED", {
       reason: intakeResult.reason,
     });
   }
 
-  await plan(ctx);
-  await build(ctx);
-  await marketing(ctx);
-  await support(ctx);
+  await plan(input);
+  await build(input);
+  await marketing(input);
+  await support(input);
 
-  // Safeguard: decides publish vs review.
-  const safeguardResult = await safeguard(ctx);
+  const sg = await safeguard(input);
 
-  if (safeguardResult.approved && !safeguardResult.needsApproval) {
-    // Auto-publish for high-confidence runs.
-    await publish(ctx);
+  if (sg.approved && !sg.needsApproval) {
+    await publish(input);
     return {
       status: "live",
-      runId: safeguardResult.runId,
+      runId: `wf-${Date.now()}`,
       approved: true,
-      reliabilityIndex: safeguardResult.reliabilityIndex,
+      reliabilityIndex: sg.reliabilityIndex,
     };
   }
 
-  // Awaiting owner approval. In a future commit, this is a Signal the
-  // workflow waits for; for now we exit with the awaiting state and the
-  // owner resumes via the chat "publish my site" intent.
   return {
     status: "needs_approval",
-    runId: safeguardResult.runId,
-    approved: safeguardResult.approved,
-    reliabilityIndex: safeguardResult.reliabilityIndex,
+    runId: `wf-${Date.now()}`,
+    approved: sg.approved,
+    reliabilityIndex: sg.reliabilityIndex,
   };
 }

@@ -8,9 +8,13 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "..",
+    "baseUrl": "..",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "lib": ["ES2022"]
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "src/__tests__/**"]
+  "include": ["src/**/*", "../src/lib/agents/orchestrator.ts"],
+  "exclude": ["node_modules", "dist", "**/__tests__/**"]
 }

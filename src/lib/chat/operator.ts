@@ -152,15 +152,26 @@ export async function handleOperatorMessage(params: {
 
   // 3. Dispatch.
   if (intent === "build_website") {
-    const out = await runTask({
-      businessId,
-      userId,
-      title: "Build website",
-      spec: { goal: `Build/refresh the marketing website. ${text}` },
-      conversationId: convId,
-    });
-    taskId = out.taskId;
-    reply = out.result.summary;
+    // Phase T.2: when FEATURE_TEMPORAL is on, route the build through a
+    // Temporal workflow (durable, retryable, observable). When off, use
+    // the existing inline harness (fast path, no Temporal server needed).
+    const { flags } = await import("@/lib/env");
+    if (flags.temporal) {
+      const { startBuildSiteWorkflow } = await import("@/lib/temporal/client");
+      const handle = await startBuildSiteWorkflow({ businessId, userId });
+      taskId = handle.taskId;
+      reply = `Build started in Temporal (workflowId: ${handle.workflowId}). You'll see progress in the activity feed.`;
+    } else {
+      const out = await runTask({
+        businessId,
+        userId,
+        title: "Build website",
+        spec: { goal: `Build/refresh the marketing website. ${text}` },
+        conversationId: convId,
+      });
+      taskId = out.taskId;
+      reply = out.result.summary;
+    }
   } else if (intent === "generic_task") {
     const matched = await matchSkill({ businessId, goal: text, userId });
     if (matched) {
