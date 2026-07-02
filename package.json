@@ -11,7 +11,7 @@
     "test:watch": "vitest",
     "test:supabase": "vitest run src/lib/supabase/__tests__/",
     "test:supabase:db": "bash scripts/run-pgtap-tests.sh",
-    "test:unit": "vitest run src/lib/agents/__tests__/contracts.test.ts src/lib/guard src/lib/usage src/lib/mcp src/lib/chat src/lib/compliance src/lib/security src/lib/sites src/lib/billing src/lib/executor src/lib/llm src/lib/env src/lib/temporal",
+    "test:unit": "vitest run src/lib/agents/__tests__/contracts.test.ts src/lib/guard src/lib/usage src/lib/mcp src/lib/chat src/lib/compliance src/lib/security src/lib/sites src/lib/billing src/lib/executor src/lib/llm src/lib/env src/lib/temporal src/lib/supabase/__tests__/providers.test.ts src/lib/supabase/__tests__/provision.test.ts",
     "test:integration": "vitest run src/lib/agents/__tests__/orchestrator.integration.test.ts src/lib/agents/__tests__/scheduler.test.ts src/app/api",
     "test:scheduler": "vitest run src/lib/agents/__tests__/scheduler.test.ts",
     "test:e2e": "playwright test",

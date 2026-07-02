@@ -1,16 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import { OAuthButtons } from "@/components/oauth-buttons";
 import { Loader2, Eye, EyeOff } from "lucide-react";
 
 export default function SignupPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const oauthError = searchParams.get("error");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -70,6 +73,22 @@ export default function SignupPage() {
                 {error}
               </div>
             )}
+            {oauthError && !error && (
+              <div className="rounded-lg bg-error/10 px-4 py-2.5 text-sm text-error">
+                Sign-in failed: {oauthError}. Please try again.
+              </div>
+            )}
+
+            <OAuthButtons redirect="/onboarding" />
+
+            <div className="relative my-2">
+              <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                <div className="w-full border-t border-white/10" />
+              </div>
+              <div className="relative flex justify-center text-[10px] uppercase tracking-wider">
+                <span className="bg-bg-surface px-2 text-text-muted">or sign up with email</span>
+              </div>
+            </div>
 
             <div className="space-y-2">
               <Label htmlFor="name">Name</Label>
