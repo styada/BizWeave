@@ -12,6 +12,7 @@ import { refreshCompetitors } from "@/lib/competitors/refresh";
 
 export type OperatorIntent =
   | "build_website"
+  | "publish_site"
   | "run_ads"
   | "create_receptionist"
   | "outreach"
@@ -29,7 +30,8 @@ export type OperatorReply = {
 
 /** Fast heuristic intent classifier (LLM refine optional in future). */
 export function classifyIntent(text: string): OperatorIntent {
-  const t = text.toLowerCase();
+  const t = text.toLowerCase().trim();
+  if (/\b(publish|ship|launch|go live|take it live)\b/.test(t)) return "publish_site";
   if (/(build|make|create|redo|update).*(web ?site|landing|page|site)/.test(t))
     return "build_website";
   if (/\b(ad|ads|advertis|campaign|boost|promote)\b/.test(t)) return "run_ads";
@@ -39,9 +41,43 @@ export function classifyIntent(text: string): OperatorIntent {
     return "outreach";
   if (/(competitor|competition|nearby|market research|who else)/.test(t))
     return "competitor_intel";
-  if (/^(what|who|when|where|why|how|is|are|do|does|can|should|tell me)/.test(t.trim()))
+  if (/^(what|who|when|where|why|how|is|are|do|does|can|should|tell me)/.test(t))
     return "question";
   return "generic_task";
+}
+
+/**
+ * Publish the latest generated site for a business. Flips GeneratedSite.status
+ * from "draft" to "published" so the public /sites/[id] route will serve it.
+ * Returns a structured result so the operator can tell the owner what happened.
+ */
+export async function publishSite(
+  businessId: string,
+  userId: string
+): Promise<{ ok: boolean; message: string; url?: string }> {
+  const site = await db.generatedSite.findUnique({ where: { businessId } });
+  if (!site) {
+    return { ok: false, message: "No site to publish yet. Ask me to build it first." };
+  }
+  await db.generatedSite.update({
+    where: { businessId },
+    data: { status: "published" },
+  });
+  await db.activityEvent.create({
+    data: {
+      businessId,
+      eventType: "site.published",
+      level: "info",
+      message: "Site published by owner",
+      payload: JSON.stringify({ userId }),
+    },
+  });
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  return {
+    ok: true,
+    message: "Site is live.",
+    url: `${appUrl}/sites/${businessId}`,
+  };
 }
 
 export async function handleOperatorMessage(params: {
@@ -105,6 +141,11 @@ export async function handleOperatorMessage(params: {
     });
     taskId = out.taskId;
     reply = matched ? `${reply}\n\n${out.result.summary}` : out.result.summary;
+  } else if (intent === "publish_site") {
+    const out = await publishSite(businessId, userId);
+    reply = out.ok
+      ? `${out.message} ${out.url}`
+      : out.message;
   } else if (intent === "run_ads") {
     const out = await planAdCampaign({ businessId, userId, brief: text });
     reply = out.ok
@@ -121,7 +162,6 @@ export async function handleOperatorMessage(params: {
   } else if (intent === "competitor_intel") {
     const out = await refreshCompetitors(businessId, userId);
     reply = out.ok ? `Found ${out.found} nearby competitors. See your dashboard.` : "Competitor refresh failed.";
-  } else if (intent === "outreach") {
   } else if (intent === "outreach") {
     const fr = await db.featureRequest.create({
       data: {
