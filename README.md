@@ -82,10 +82,33 @@ make backend-migrate
 Backend Alembic commands are intentionally guarded and require backend-only opt-in + URL.
 See [docs/orm-ownership-boundaries.md](./docs/orm-ownership-boundaries.md).
 
-1. **Sign up** at `/signup`
+1. **Sign up** at `/signup` (email/password or Google/Apple/GitHub)
 2. **Onboard** a business at `/onboarding`
 3. **Add API keys** (optional) at `/dashboard/settings/keys`
 4. **Run agents** from the business dashboard
+
+## OAuth setup (Google, Apple, GitHub)
+
+The login + signup pages expose "Continue with Google/Apple/GitHub" buttons. To enable them in production:
+
+1. Create a Supabase project (or use the existing one)
+2. In the Supabase dashboard: **Authentication → Providers**, enable Google, Apple, and GitHub. Follow the per-provider setup (OAuth client ID/secret, Service ID for Apple, GitHub OAuth app).
+3. Add the callback URL to the Supabase project's allow-list:
+   - `https://your-domain.com/api/auth/oauth/callback` (production)
+   - `http://localhost:3000/api/auth/oauth/callback` (local dev)
+4. Ensure these env vars are set in `.env.local` and in your deploy environment:
+   - `NEXT_PUBLIC_SUPABASE_URL` (e.g. `https://xxx.supabase.co`)
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` (the `sb_publishable_...` anon key)
+5. For local dev, the `.env.development` file already has placeholder values; replace with real ones to test the flow.
+
+The OAuth flow:
+- User clicks "Continue with Google" on `/login`
+- Browser redirects to `/api/auth/oauth/start?provider=google`
+- Server calls Supabase `signInWithOAuth`, gets the provider's consent URL
+- User consents, provider redirects to `/api/auth/oauth/callback?code=...`
+- Server exchanges the code for a Supabase session, reads the user, provisions a Bizweave `User` row (or links an existing one by email), mints a Bizweave JWT cookie, and redirects to the original destination.
+
+The middleware (`src/middleware.ts`) is unchanged — it just reads the JWT cookie. So OAuth users land on the dashboard with the same session as email/password users.
 
 Optional backend setup (for the Python service):
 
