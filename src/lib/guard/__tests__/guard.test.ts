@@ -57,7 +57,9 @@ describe("guardAction", () => {
     });
 
     expect(result.status).toBe("blocked");
-    expect(result.reason).toBe("BUSINESS_FROZEN");
+    if (result.status === "blocked") {
+      expect(result.reason).toBe("BUSINESS_FROZEN");
+    }
   });
 
   it("returns needs_approval for medium-risk actions without policy", async () => {

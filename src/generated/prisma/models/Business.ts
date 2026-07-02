@@ -20,8 +20,20 @@ export type BusinessModel = runtime.Types.Result.DefaultSelection<Prisma.$Busine
 
 export type AggregateBusiness = {
   _count: BusinessCountAggregateOutputType | null
+  _avg: BusinessAvgAggregateOutputType | null
+  _sum: BusinessSumAggregateOutputType | null
   _min: BusinessMinAggregateOutputType | null
   _max: BusinessMaxAggregateOutputType | null
+}
+
+export type BusinessAvgAggregateOutputType = {
+  lat: number | null
+  lng: number | null
+}
+
+export type BusinessSumAggregateOutputType = {
+  lat: number | null
+  lng: number | null
 }
 
 export type BusinessMinAggregateOutputType = {
@@ -37,6 +49,20 @@ export type BusinessMinAggregateOutputType = {
   status: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  addressLine1: string | null
+  addressLine2: string | null
+  city: string | null
+  region: string | null
+  postalCode: string | null
+  country: string | null
+  lat: number | null
+  lng: number | null
+  serviceArea: string | null
+  posSystem: string | null
+  orderMgmtSystem: string | null
+  websiteUrl: string | null
+  googleBusinessProfileId: string | null
+  workspaceId: string | null
 }
 
 export type BusinessMaxAggregateOutputType = {
@@ -52,6 +78,20 @@ export type BusinessMaxAggregateOutputType = {
   status: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  addressLine1: string | null
+  addressLine2: string | null
+  city: string | null
+  region: string | null
+  postalCode: string | null
+  country: string | null
+  lat: number | null
+  lng: number | null
+  serviceArea: string | null
+  posSystem: string | null
+  orderMgmtSystem: string | null
+  websiteUrl: string | null
+  googleBusinessProfileId: string | null
+  workspaceId: string | null
 }
 
 export type BusinessCountAggregateOutputType = {
@@ -67,9 +107,36 @@ export type BusinessCountAggregateOutputType = {
   status: number
   createdAt: number
   updatedAt: number
+  addressLine1: number
+  addressLine2: number
+  city: number
+  region: number
+  postalCode: number
+  country: number
+  lat: number
+  lng: number
+  hours: number
+  serviceArea: number
+  posSystem: number
+  orderMgmtSystem: number
+  websiteUrl: number
+  googleBusinessProfileId: number
+  socialHandles: number
+  categories: number
+  workspaceId: number
   _all: number
 }
 
+
+export type BusinessAvgAggregateInputType = {
+  lat?: true
+  lng?: true
+}
+
+export type BusinessSumAggregateInputType = {
+  lat?: true
+  lng?: true
+}
 
 export type BusinessMinAggregateInputType = {
   id?: true
@@ -84,6 +151,20 @@ export type BusinessMinAggregateInputType = {
   status?: true
   createdAt?: true
   updatedAt?: true
+  addressLine1?: true
+  addressLine2?: true
+  city?: true
+  region?: true
+  postalCode?: true
+  country?: true
+  lat?: true
+  lng?: true
+  serviceArea?: true
+  posSystem?: true
+  orderMgmtSystem?: true
+  websiteUrl?: true
+  googleBusinessProfileId?: true
+  workspaceId?: true
 }
 
 export type BusinessMaxAggregateInputType = {
@@ -99,6 +180,20 @@ export type BusinessMaxAggregateInputType = {
   status?: true
   createdAt?: true
   updatedAt?: true
+  addressLine1?: true
+  addressLine2?: true
+  city?: true
+  region?: true
+  postalCode?: true
+  country?: true
+  lat?: true
+  lng?: true
+  serviceArea?: true
+  posSystem?: true
+  orderMgmtSystem?: true
+  websiteUrl?: true
+  googleBusinessProfileId?: true
+  workspaceId?: true
 }
 
 export type BusinessCountAggregateInputType = {
@@ -114,6 +209,23 @@ export type BusinessCountAggregateInputType = {
   status?: true
   createdAt?: true
   updatedAt?: true
+  addressLine1?: true
+  addressLine2?: true
+  city?: true
+  region?: true
+  postalCode?: true
+  country?: true
+  lat?: true
+  lng?: true
+  hours?: true
+  serviceArea?: true
+  posSystem?: true
+  orderMgmtSystem?: true
+  websiteUrl?: true
+  googleBusinessProfileId?: true
+  socialHandles?: true
+  categories?: true
+  workspaceId?: true
   _all?: true
 }
 
@@ -155,6 +267,18 @@ export type BusinessAggregateArgs<ExtArgs extends runtime.Types.Extensions.Inter
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: BusinessAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: BusinessSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: BusinessMinAggregateInputType
@@ -185,6 +309,8 @@ export type BusinessGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   _count?: BusinessCountAggregateInputType | true
+  _avg?: BusinessAvgAggregateInputType
+  _sum?: BusinessSumAggregateInputType
   _min?: BusinessMinAggregateInputType
   _max?: BusinessMaxAggregateInputType
 }
@@ -202,7 +328,26 @@ export type BusinessGroupByOutputType = {
   status: string
   createdAt: Date
   updatedAt: Date
+  addressLine1: string | null
+  addressLine2: string | null
+  city: string | null
+  region: string | null
+  postalCode: string | null
+  country: string | null
+  lat: number | null
+  lng: number | null
+  hours: runtime.JsonValue | null
+  serviceArea: string | null
+  posSystem: string | null
+  orderMgmtSystem: string | null
+  websiteUrl: string | null
+  googleBusinessProfileId: string | null
+  socialHandles: runtime.JsonValue | null
+  categories: runtime.JsonValue | null
+  workspaceId: string | null
   _count: BusinessCountAggregateOutputType | null
+  _avg: BusinessAvgAggregateOutputType | null
+  _sum: BusinessSumAggregateOutputType | null
   _min: BusinessMinAggregateOutputType | null
   _max: BusinessMaxAggregateOutputType | null
 }
@@ -238,7 +383,25 @@ export type BusinessWhereInput = {
   status?: Prisma.StringFilter<"Business"> | string
   createdAt?: Prisma.DateTimeFilter<"Business"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Business"> | Date | string
+  addressLine1?: Prisma.StringNullableFilter<"Business"> | string | null
+  addressLine2?: Prisma.StringNullableFilter<"Business"> | string | null
+  city?: Prisma.StringNullableFilter<"Business"> | string | null
+  region?: Prisma.StringNullableFilter<"Business"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"Business"> | string | null
+  country?: Prisma.StringNullableFilter<"Business"> | string | null
+  lat?: Prisma.FloatNullableFilter<"Business"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Business"> | number | null
+  hours?: Prisma.JsonNullableFilter<"Business">
+  serviceArea?: Prisma.StringNullableFilter<"Business"> | string | null
+  posSystem?: Prisma.StringNullableFilter<"Business"> | string | null
+  orderMgmtSystem?: Prisma.StringNullableFilter<"Business"> | string | null
+  websiteUrl?: Prisma.StringNullableFilter<"Business"> | string | null
+  googleBusinessProfileId?: Prisma.StringNullableFilter<"Business"> | string | null
+  socialHandles?: Prisma.JsonNullableFilter<"Business">
+  categories?: Prisma.JsonNullableFilter<"Business">
+  workspaceId?: Prisma.StringNullableFilter<"Business"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  workspace?: Prisma.XOR<Prisma.WorkspaceNullableScalarRelationFilter, Prisma.WorkspaceWhereInput> | null
   inventory?: Prisma.InventoryItemListRelationFilter
   agentRuns?: Prisma.AgentRunListRelationFilter
   site?: Prisma.XOR<Prisma.GeneratedSiteNullableScalarRelationFilter, Prisma.GeneratedSiteWhereInput> | null
@@ -247,6 +410,28 @@ export type BusinessWhereInput = {
   pendingActions?: Prisma.PendingActionListRelationFilter
   scheduledTasks?: Prisma.ScheduledTaskListRelationFilter
   activityEvents?: Prisma.ActivityEventListRelationFilter
+  brandKit?: Prisma.XOR<Prisma.BrandKitNullableScalarRelationFilter, Prisma.BrandKitWhereInput> | null
+  competitors?: Prisma.CompetitorListRelationFilter
+  deployments?: Prisma.DeploymentListRelationFilter
+  agentTasks?: Prisma.AgentTaskListRelationFilter
+  conversations?: Prisma.ConversationListRelationFilter
+  memories?: Prisma.MemoryEntryListRelationFilter
+  contacts?: Prisma.ContactListRelationFilter
+  membershipPrograms?: Prisma.MembershipProgramListRelationFilter
+  campaigns?: Prisma.CampaignListRelationFilter
+  adCampaigns?: Prisma.AdCampaignListRelationFilter
+  phoneAgents?: Prisma.PhoneAgentListRelationFilter
+  callLogs?: Prisma.CallLogListRelationFilter
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
+  usageEvents?: Prisma.UsageEventListRelationFilter
+  creditWallet?: Prisma.XOR<Prisma.CreditWalletNullableScalarRelationFilter, Prisma.CreditWalletWhereInput> | null
+  integrations?: Prisma.IntegrationConnectionListRelationFilter
+  skills?: Prisma.SkillListRelationFilter
+  featureRequests?: Prisma.FeatureRequestListRelationFilter
+  purchases?: Prisma.PurchaseListRelationFilter
+  procurementPolicies?: Prisma.ProcurementPolicyListRelationFilter
+  auditLogs?: Prisma.AuditLogListRelationFilter
+  messagingBridges?: Prisma.MessagingBridgeListRelationFilter
 }
 
 export type BusinessOrderByWithRelationInput = {
@@ -262,7 +447,25 @@ export type BusinessOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrderInput | Prisma.SortOrder
+  addressLine2?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  region?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  country?: Prisma.SortOrderInput | Prisma.SortOrder
+  lat?: Prisma.SortOrderInput | Prisma.SortOrder
+  lng?: Prisma.SortOrderInput | Prisma.SortOrder
+  hours?: Prisma.SortOrderInput | Prisma.SortOrder
+  serviceArea?: Prisma.SortOrderInput | Prisma.SortOrder
+  posSystem?: Prisma.SortOrderInput | Prisma.SortOrder
+  orderMgmtSystem?: Prisma.SortOrderInput | Prisma.SortOrder
+  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleBusinessProfileId?: Prisma.SortOrderInput | Prisma.SortOrder
+  socialHandles?: Prisma.SortOrderInput | Prisma.SortOrder
+  categories?: Prisma.SortOrderInput | Prisma.SortOrder
+  workspaceId?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  workspace?: Prisma.WorkspaceOrderByWithRelationInput
   inventory?: Prisma.InventoryItemOrderByRelationAggregateInput
   agentRuns?: Prisma.AgentRunOrderByRelationAggregateInput
   site?: Prisma.GeneratedSiteOrderByWithRelationInput
@@ -271,6 +474,28 @@ export type BusinessOrderByWithRelationInput = {
   pendingActions?: Prisma.PendingActionOrderByRelationAggregateInput
   scheduledTasks?: Prisma.ScheduledTaskOrderByRelationAggregateInput
   activityEvents?: Prisma.ActivityEventOrderByRelationAggregateInput
+  brandKit?: Prisma.BrandKitOrderByWithRelationInput
+  competitors?: Prisma.CompetitorOrderByRelationAggregateInput
+  deployments?: Prisma.DeploymentOrderByRelationAggregateInput
+  agentTasks?: Prisma.AgentTaskOrderByRelationAggregateInput
+  conversations?: Prisma.ConversationOrderByRelationAggregateInput
+  memories?: Prisma.MemoryEntryOrderByRelationAggregateInput
+  contacts?: Prisma.ContactOrderByRelationAggregateInput
+  membershipPrograms?: Prisma.MembershipProgramOrderByRelationAggregateInput
+  campaigns?: Prisma.CampaignOrderByRelationAggregateInput
+  adCampaigns?: Prisma.AdCampaignOrderByRelationAggregateInput
+  phoneAgents?: Prisma.PhoneAgentOrderByRelationAggregateInput
+  callLogs?: Prisma.CallLogOrderByRelationAggregateInput
+  subscription?: Prisma.SubscriptionOrderByWithRelationInput
+  usageEvents?: Prisma.UsageEventOrderByRelationAggregateInput
+  creditWallet?: Prisma.CreditWalletOrderByWithRelationInput
+  integrations?: Prisma.IntegrationConnectionOrderByRelationAggregateInput
+  skills?: Prisma.SkillOrderByRelationAggregateInput
+  featureRequests?: Prisma.FeatureRequestOrderByRelationAggregateInput
+  purchases?: Prisma.PurchaseOrderByRelationAggregateInput
+  procurementPolicies?: Prisma.ProcurementPolicyOrderByRelationAggregateInput
+  auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
+  messagingBridges?: Prisma.MessagingBridgeOrderByRelationAggregateInput
 }
 
 export type BusinessWhereUniqueInput = Prisma.AtLeast<{
@@ -289,7 +514,25 @@ export type BusinessWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.StringFilter<"Business"> | string
   createdAt?: Prisma.DateTimeFilter<"Business"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Business"> | Date | string
+  addressLine1?: Prisma.StringNullableFilter<"Business"> | string | null
+  addressLine2?: Prisma.StringNullableFilter<"Business"> | string | null
+  city?: Prisma.StringNullableFilter<"Business"> | string | null
+  region?: Prisma.StringNullableFilter<"Business"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"Business"> | string | null
+  country?: Prisma.StringNullableFilter<"Business"> | string | null
+  lat?: Prisma.FloatNullableFilter<"Business"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Business"> | number | null
+  hours?: Prisma.JsonNullableFilter<"Business">
+  serviceArea?: Prisma.StringNullableFilter<"Business"> | string | null
+  posSystem?: Prisma.StringNullableFilter<"Business"> | string | null
+  orderMgmtSystem?: Prisma.StringNullableFilter<"Business"> | string | null
+  websiteUrl?: Prisma.StringNullableFilter<"Business"> | string | null
+  googleBusinessProfileId?: Prisma.StringNullableFilter<"Business"> | string | null
+  socialHandles?: Prisma.JsonNullableFilter<"Business">
+  categories?: Prisma.JsonNullableFilter<"Business">
+  workspaceId?: Prisma.StringNullableFilter<"Business"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  workspace?: Prisma.XOR<Prisma.WorkspaceNullableScalarRelationFilter, Prisma.WorkspaceWhereInput> | null
   inventory?: Prisma.InventoryItemListRelationFilter
   agentRuns?: Prisma.AgentRunListRelationFilter
   site?: Prisma.XOR<Prisma.GeneratedSiteNullableScalarRelationFilter, Prisma.GeneratedSiteWhereInput> | null
@@ -298,6 +541,28 @@ export type BusinessWhereUniqueInput = Prisma.AtLeast<{
   pendingActions?: Prisma.PendingActionListRelationFilter
   scheduledTasks?: Prisma.ScheduledTaskListRelationFilter
   activityEvents?: Prisma.ActivityEventListRelationFilter
+  brandKit?: Prisma.XOR<Prisma.BrandKitNullableScalarRelationFilter, Prisma.BrandKitWhereInput> | null
+  competitors?: Prisma.CompetitorListRelationFilter
+  deployments?: Prisma.DeploymentListRelationFilter
+  agentTasks?: Prisma.AgentTaskListRelationFilter
+  conversations?: Prisma.ConversationListRelationFilter
+  memories?: Prisma.MemoryEntryListRelationFilter
+  contacts?: Prisma.ContactListRelationFilter
+  membershipPrograms?: Prisma.MembershipProgramListRelationFilter
+  campaigns?: Prisma.CampaignListRelationFilter
+  adCampaigns?: Prisma.AdCampaignListRelationFilter
+  phoneAgents?: Prisma.PhoneAgentListRelationFilter
+  callLogs?: Prisma.CallLogListRelationFilter
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
+  usageEvents?: Prisma.UsageEventListRelationFilter
+  creditWallet?: Prisma.XOR<Prisma.CreditWalletNullableScalarRelationFilter, Prisma.CreditWalletWhereInput> | null
+  integrations?: Prisma.IntegrationConnectionListRelationFilter
+  skills?: Prisma.SkillListRelationFilter
+  featureRequests?: Prisma.FeatureRequestListRelationFilter
+  purchases?: Prisma.PurchaseListRelationFilter
+  procurementPolicies?: Prisma.ProcurementPolicyListRelationFilter
+  auditLogs?: Prisma.AuditLogListRelationFilter
+  messagingBridges?: Prisma.MessagingBridgeListRelationFilter
 }, "id">
 
 export type BusinessOrderByWithAggregationInput = {
@@ -313,9 +578,28 @@ export type BusinessOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrderInput | Prisma.SortOrder
+  addressLine2?: Prisma.SortOrderInput | Prisma.SortOrder
+  city?: Prisma.SortOrderInput | Prisma.SortOrder
+  region?: Prisma.SortOrderInput | Prisma.SortOrder
+  postalCode?: Prisma.SortOrderInput | Prisma.SortOrder
+  country?: Prisma.SortOrderInput | Prisma.SortOrder
+  lat?: Prisma.SortOrderInput | Prisma.SortOrder
+  lng?: Prisma.SortOrderInput | Prisma.SortOrder
+  hours?: Prisma.SortOrderInput | Prisma.SortOrder
+  serviceArea?: Prisma.SortOrderInput | Prisma.SortOrder
+  posSystem?: Prisma.SortOrderInput | Prisma.SortOrder
+  orderMgmtSystem?: Prisma.SortOrderInput | Prisma.SortOrder
+  websiteUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  googleBusinessProfileId?: Prisma.SortOrderInput | Prisma.SortOrder
+  socialHandles?: Prisma.SortOrderInput | Prisma.SortOrder
+  categories?: Prisma.SortOrderInput | Prisma.SortOrder
+  workspaceId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.BusinessCountOrderByAggregateInput
+  _avg?: Prisma.BusinessAvgOrderByAggregateInput
   _max?: Prisma.BusinessMaxOrderByAggregateInput
   _min?: Prisma.BusinessMinOrderByAggregateInput
+  _sum?: Prisma.BusinessSumOrderByAggregateInput
 }
 
 export type BusinessScalarWhereWithAggregatesInput = {
@@ -334,6 +618,23 @@ export type BusinessScalarWhereWithAggregatesInput = {
   status?: Prisma.StringWithAggregatesFilter<"Business"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Business"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Business"> | Date | string
+  addressLine1?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  addressLine2?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  city?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  region?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  postalCode?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  country?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  lat?: Prisma.FloatNullableWithAggregatesFilter<"Business"> | number | null
+  lng?: Prisma.FloatNullableWithAggregatesFilter<"Business"> | number | null
+  hours?: Prisma.JsonNullableWithAggregatesFilter<"Business">
+  serviceArea?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  posSystem?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  orderMgmtSystem?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  websiteUrl?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  googleBusinessProfileId?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
+  socialHandles?: Prisma.JsonNullableWithAggregatesFilter<"Business">
+  categories?: Prisma.JsonNullableWithAggregatesFilter<"Business">
+  workspaceId?: Prisma.StringNullableWithAggregatesFilter<"Business"> | string | null
 }
 
 export type BusinessCreateInput = {
@@ -348,7 +649,24 @@ export type BusinessCreateInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
   inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
@@ -357,6 +675,28 @@ export type BusinessCreateInput = {
   pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateInput = {
@@ -372,6 +712,23 @@ export type BusinessUncheckedCreateInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
   inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
@@ -380,6 +737,28 @@ export type BusinessUncheckedCreateInput = {
   pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUpdateInput = {
@@ -394,7 +773,24 @@ export type BusinessUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
   inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
@@ -403,6 +799,28 @@ export type BusinessUpdateInput = {
   pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateInput = {
@@ -418,6 +836,23 @@ export type BusinessUncheckedUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
@@ -426,6 +861,28 @@ export type BusinessUncheckedUpdateInput = {
   pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateManyInput = {
@@ -441,6 +898,23 @@ export type BusinessCreateManyInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
 }
 
 export type BusinessUpdateManyMutationInput = {
@@ -455,6 +929,22 @@ export type BusinessUpdateManyMutationInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type BusinessUncheckedUpdateManyInput = {
@@ -470,6 +960,23 @@ export type BusinessUncheckedUpdateManyInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type BusinessListRelationFilter = {
@@ -495,6 +1002,28 @@ export type BusinessCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrder
+  addressLine2?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  region?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
+  hours?: Prisma.SortOrder
+  serviceArea?: Prisma.SortOrder
+  posSystem?: Prisma.SortOrder
+  orderMgmtSystem?: Prisma.SortOrder
+  websiteUrl?: Prisma.SortOrder
+  googleBusinessProfileId?: Prisma.SortOrder
+  socialHandles?: Prisma.SortOrder
+  categories?: Prisma.SortOrder
+  workspaceId?: Prisma.SortOrder
+}
+
+export type BusinessAvgOrderByAggregateInput = {
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
 }
 
 export type BusinessMaxOrderByAggregateInput = {
@@ -510,6 +1039,20 @@ export type BusinessMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrder
+  addressLine2?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  region?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
+  serviceArea?: Prisma.SortOrder
+  posSystem?: Prisma.SortOrder
+  orderMgmtSystem?: Prisma.SortOrder
+  websiteUrl?: Prisma.SortOrder
+  googleBusinessProfileId?: Prisma.SortOrder
+  workspaceId?: Prisma.SortOrder
 }
 
 export type BusinessMinOrderByAggregateInput = {
@@ -525,11 +1068,35 @@ export type BusinessMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  addressLine1?: Prisma.SortOrder
+  addressLine2?: Prisma.SortOrder
+  city?: Prisma.SortOrder
+  region?: Prisma.SortOrder
+  postalCode?: Prisma.SortOrder
+  country?: Prisma.SortOrder
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
+  serviceArea?: Prisma.SortOrder
+  posSystem?: Prisma.SortOrder
+  orderMgmtSystem?: Prisma.SortOrder
+  websiteUrl?: Prisma.SortOrder
+  googleBusinessProfileId?: Prisma.SortOrder
+  workspaceId?: Prisma.SortOrder
+}
+
+export type BusinessSumOrderByAggregateInput = {
+  lat?: Prisma.SortOrder
+  lng?: Prisma.SortOrder
 }
 
 export type BusinessScalarRelationFilter = {
   is?: Prisma.BusinessWhereInput
   isNot?: Prisma.BusinessWhereInput
+}
+
+export type BusinessNullableScalarRelationFilter = {
+  is?: Prisma.BusinessWhereInput | null
+  isNot?: Prisma.BusinessWhereInput | null
 }
 
 export type BusinessCreateNestedManyWithoutUserInput = {
@@ -572,6 +1139,14 @@ export type BusinessUncheckedUpdateManyWithoutUserNestedInput = {
   update?: Prisma.BusinessUpdateWithWhereUniqueWithoutUserInput | Prisma.BusinessUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.BusinessUpdateManyWithWhereWithoutUserInput | Prisma.BusinessUpdateManyWithWhereWithoutUserInput[]
   deleteMany?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
+}
+
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type BusinessCreateNestedOneWithoutInventoryInput = {
@@ -686,6 +1261,360 @@ export type BusinessUpdateOneRequiredWithoutActivityEventsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutActivityEventsInput, Prisma.BusinessUpdateWithoutActivityEventsInput>, Prisma.BusinessUncheckedUpdateWithoutActivityEventsInput>
 }
 
+export type BusinessCreateNestedManyWithoutWorkspaceInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutWorkspaceInput, Prisma.BusinessUncheckedCreateWithoutWorkspaceInput> | Prisma.BusinessCreateWithoutWorkspaceInput[] | Prisma.BusinessUncheckedCreateWithoutWorkspaceInput[]
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutWorkspaceInput | Prisma.BusinessCreateOrConnectWithoutWorkspaceInput[]
+  createMany?: Prisma.BusinessCreateManyWorkspaceInputEnvelope
+  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+}
+
+export type BusinessUncheckedCreateNestedManyWithoutWorkspaceInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutWorkspaceInput, Prisma.BusinessUncheckedCreateWithoutWorkspaceInput> | Prisma.BusinessCreateWithoutWorkspaceInput[] | Prisma.BusinessUncheckedCreateWithoutWorkspaceInput[]
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutWorkspaceInput | Prisma.BusinessCreateOrConnectWithoutWorkspaceInput[]
+  createMany?: Prisma.BusinessCreateManyWorkspaceInputEnvelope
+  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+}
+
+export type BusinessUpdateManyWithoutWorkspaceNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutWorkspaceInput, Prisma.BusinessUncheckedCreateWithoutWorkspaceInput> | Prisma.BusinessCreateWithoutWorkspaceInput[] | Prisma.BusinessUncheckedCreateWithoutWorkspaceInput[]
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutWorkspaceInput | Prisma.BusinessCreateOrConnectWithoutWorkspaceInput[]
+  upsert?: Prisma.BusinessUpsertWithWhereUniqueWithoutWorkspaceInput | Prisma.BusinessUpsertWithWhereUniqueWithoutWorkspaceInput[]
+  createMany?: Prisma.BusinessCreateManyWorkspaceInputEnvelope
+  set?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  disconnect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  delete?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  update?: Prisma.BusinessUpdateWithWhereUniqueWithoutWorkspaceInput | Prisma.BusinessUpdateWithWhereUniqueWithoutWorkspaceInput[]
+  updateMany?: Prisma.BusinessUpdateManyWithWhereWithoutWorkspaceInput | Prisma.BusinessUpdateManyWithWhereWithoutWorkspaceInput[]
+  deleteMany?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
+}
+
+export type BusinessUncheckedUpdateManyWithoutWorkspaceNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutWorkspaceInput, Prisma.BusinessUncheckedCreateWithoutWorkspaceInput> | Prisma.BusinessCreateWithoutWorkspaceInput[] | Prisma.BusinessUncheckedCreateWithoutWorkspaceInput[]
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutWorkspaceInput | Prisma.BusinessCreateOrConnectWithoutWorkspaceInput[]
+  upsert?: Prisma.BusinessUpsertWithWhereUniqueWithoutWorkspaceInput | Prisma.BusinessUpsertWithWhereUniqueWithoutWorkspaceInput[]
+  createMany?: Prisma.BusinessCreateManyWorkspaceInputEnvelope
+  set?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  disconnect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  delete?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  connect?: Prisma.BusinessWhereUniqueInput | Prisma.BusinessWhereUniqueInput[]
+  update?: Prisma.BusinessUpdateWithWhereUniqueWithoutWorkspaceInput | Prisma.BusinessUpdateWithWhereUniqueWithoutWorkspaceInput[]
+  updateMany?: Prisma.BusinessUpdateManyWithWhereWithoutWorkspaceInput | Prisma.BusinessUpdateManyWithWhereWithoutWorkspaceInput[]
+  deleteMany?: Prisma.BusinessScalarWhereInput | Prisma.BusinessScalarWhereInput[]
+}
+
+export type BusinessCreateNestedOneWithoutBrandKitInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutBrandKitInput, Prisma.BusinessUncheckedCreateWithoutBrandKitInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutBrandKitInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutBrandKitNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutBrandKitInput, Prisma.BusinessUncheckedCreateWithoutBrandKitInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutBrandKitInput
+  upsert?: Prisma.BusinessUpsertWithoutBrandKitInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutBrandKitInput, Prisma.BusinessUpdateWithoutBrandKitInput>, Prisma.BusinessUncheckedUpdateWithoutBrandKitInput>
+}
+
+export type BusinessCreateNestedOneWithoutMemoriesInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutMemoriesInput, Prisma.BusinessUncheckedCreateWithoutMemoriesInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutMemoriesInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutMemoriesNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutMemoriesInput, Prisma.BusinessUncheckedCreateWithoutMemoriesInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutMemoriesInput
+  upsert?: Prisma.BusinessUpsertWithoutMemoriesInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutMemoriesInput, Prisma.BusinessUpdateWithoutMemoriesInput>, Prisma.BusinessUncheckedUpdateWithoutMemoriesInput>
+}
+
+export type BusinessCreateNestedOneWithoutDeploymentsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutDeploymentsInput, Prisma.BusinessUncheckedCreateWithoutDeploymentsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutDeploymentsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutDeploymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutDeploymentsInput, Prisma.BusinessUncheckedCreateWithoutDeploymentsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutDeploymentsInput
+  upsert?: Prisma.BusinessUpsertWithoutDeploymentsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutDeploymentsInput, Prisma.BusinessUpdateWithoutDeploymentsInput>, Prisma.BusinessUncheckedUpdateWithoutDeploymentsInput>
+}
+
+export type BusinessCreateNestedOneWithoutAgentTasksInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutAgentTasksInput, Prisma.BusinessUncheckedCreateWithoutAgentTasksInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutAgentTasksInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutAgentTasksNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutAgentTasksInput, Prisma.BusinessUncheckedCreateWithoutAgentTasksInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutAgentTasksInput
+  upsert?: Prisma.BusinessUpsertWithoutAgentTasksInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutAgentTasksInput, Prisma.BusinessUpdateWithoutAgentTasksInput>, Prisma.BusinessUncheckedUpdateWithoutAgentTasksInput>
+}
+
+export type BusinessCreateNestedOneWithoutConversationsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutConversationsInput, Prisma.BusinessUncheckedCreateWithoutConversationsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutConversationsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutConversationsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutConversationsInput, Prisma.BusinessUncheckedCreateWithoutConversationsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutConversationsInput
+  upsert?: Prisma.BusinessUpsertWithoutConversationsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutConversationsInput, Prisma.BusinessUpdateWithoutConversationsInput>, Prisma.BusinessUncheckedUpdateWithoutConversationsInput>
+}
+
+export type BusinessCreateNestedOneWithoutCompetitorsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutCompetitorsInput, Prisma.BusinessUncheckedCreateWithoutCompetitorsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutCompetitorsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutCompetitorsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutCompetitorsInput, Prisma.BusinessUncheckedCreateWithoutCompetitorsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutCompetitorsInput
+  upsert?: Prisma.BusinessUpsertWithoutCompetitorsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutCompetitorsInput, Prisma.BusinessUpdateWithoutCompetitorsInput>, Prisma.BusinessUncheckedUpdateWithoutCompetitorsInput>
+}
+
+export type BusinessCreateNestedOneWithoutContactsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutContactsInput, Prisma.BusinessUncheckedCreateWithoutContactsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutContactsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutContactsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutContactsInput, Prisma.BusinessUncheckedCreateWithoutContactsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutContactsInput
+  upsert?: Prisma.BusinessUpsertWithoutContactsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutContactsInput, Prisma.BusinessUpdateWithoutContactsInput>, Prisma.BusinessUncheckedUpdateWithoutContactsInput>
+}
+
+export type BusinessCreateNestedOneWithoutMembershipProgramsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutMembershipProgramsInput, Prisma.BusinessUncheckedCreateWithoutMembershipProgramsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutMembershipProgramsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutMembershipProgramsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutMembershipProgramsInput, Prisma.BusinessUncheckedCreateWithoutMembershipProgramsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutMembershipProgramsInput
+  upsert?: Prisma.BusinessUpsertWithoutMembershipProgramsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutMembershipProgramsInput, Prisma.BusinessUpdateWithoutMembershipProgramsInput>, Prisma.BusinessUncheckedUpdateWithoutMembershipProgramsInput>
+}
+
+export type BusinessCreateNestedOneWithoutCampaignsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutCampaignsInput, Prisma.BusinessUncheckedCreateWithoutCampaignsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutCampaignsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutCampaignsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutCampaignsInput, Prisma.BusinessUncheckedCreateWithoutCampaignsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutCampaignsInput
+  upsert?: Prisma.BusinessUpsertWithoutCampaignsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutCampaignsInput, Prisma.BusinessUpdateWithoutCampaignsInput>, Prisma.BusinessUncheckedUpdateWithoutCampaignsInput>
+}
+
+export type BusinessCreateNestedOneWithoutAdCampaignsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutAdCampaignsInput, Prisma.BusinessUncheckedCreateWithoutAdCampaignsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutAdCampaignsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutAdCampaignsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutAdCampaignsInput, Prisma.BusinessUncheckedCreateWithoutAdCampaignsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutAdCampaignsInput
+  upsert?: Prisma.BusinessUpsertWithoutAdCampaignsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutAdCampaignsInput, Prisma.BusinessUpdateWithoutAdCampaignsInput>, Prisma.BusinessUncheckedUpdateWithoutAdCampaignsInput>
+}
+
+export type BusinessCreateNestedOneWithoutPhoneAgentsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutPhoneAgentsInput, Prisma.BusinessUncheckedCreateWithoutPhoneAgentsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutPhoneAgentsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutPhoneAgentsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutPhoneAgentsInput, Prisma.BusinessUncheckedCreateWithoutPhoneAgentsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutPhoneAgentsInput
+  upsert?: Prisma.BusinessUpsertWithoutPhoneAgentsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutPhoneAgentsInput, Prisma.BusinessUpdateWithoutPhoneAgentsInput>, Prisma.BusinessUncheckedUpdateWithoutPhoneAgentsInput>
+}
+
+export type BusinessCreateNestedOneWithoutCallLogsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutCallLogsInput, Prisma.BusinessUncheckedCreateWithoutCallLogsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutCallLogsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutCallLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutCallLogsInput, Prisma.BusinessUncheckedCreateWithoutCallLogsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutCallLogsInput
+  upsert?: Prisma.BusinessUpsertWithoutCallLogsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutCallLogsInput, Prisma.BusinessUpdateWithoutCallLogsInput>, Prisma.BusinessUncheckedUpdateWithoutCallLogsInput>
+}
+
+export type BusinessCreateNestedOneWithoutSubscriptionInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutSubscriptionInput, Prisma.BusinessUncheckedCreateWithoutSubscriptionInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutSubscriptionInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutSubscriptionNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutSubscriptionInput, Prisma.BusinessUncheckedCreateWithoutSubscriptionInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutSubscriptionInput
+  upsert?: Prisma.BusinessUpsertWithoutSubscriptionInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutSubscriptionInput, Prisma.BusinessUpdateWithoutSubscriptionInput>, Prisma.BusinessUncheckedUpdateWithoutSubscriptionInput>
+}
+
+export type BusinessCreateNestedOneWithoutUsageEventsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutUsageEventsInput, Prisma.BusinessUncheckedCreateWithoutUsageEventsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutUsageEventsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutUsageEventsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutUsageEventsInput, Prisma.BusinessUncheckedCreateWithoutUsageEventsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutUsageEventsInput
+  upsert?: Prisma.BusinessUpsertWithoutUsageEventsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutUsageEventsInput, Prisma.BusinessUpdateWithoutUsageEventsInput>, Prisma.BusinessUncheckedUpdateWithoutUsageEventsInput>
+}
+
+export type BusinessCreateNestedOneWithoutCreditWalletInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutCreditWalletInput, Prisma.BusinessUncheckedCreateWithoutCreditWalletInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutCreditWalletInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutCreditWalletNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutCreditWalletInput, Prisma.BusinessUncheckedCreateWithoutCreditWalletInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutCreditWalletInput
+  upsert?: Prisma.BusinessUpsertWithoutCreditWalletInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutCreditWalletInput, Prisma.BusinessUpdateWithoutCreditWalletInput>, Prisma.BusinessUncheckedUpdateWithoutCreditWalletInput>
+}
+
+export type BusinessCreateNestedOneWithoutProcurementPoliciesInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutProcurementPoliciesInput, Prisma.BusinessUncheckedCreateWithoutProcurementPoliciesInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutProcurementPoliciesInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutProcurementPoliciesNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutProcurementPoliciesInput, Prisma.BusinessUncheckedCreateWithoutProcurementPoliciesInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutProcurementPoliciesInput
+  upsert?: Prisma.BusinessUpsertWithoutProcurementPoliciesInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutProcurementPoliciesInput, Prisma.BusinessUpdateWithoutProcurementPoliciesInput>, Prisma.BusinessUncheckedUpdateWithoutProcurementPoliciesInput>
+}
+
+export type BusinessCreateNestedOneWithoutPurchasesInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutPurchasesInput, Prisma.BusinessUncheckedCreateWithoutPurchasesInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutPurchasesInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutPurchasesNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutPurchasesInput, Prisma.BusinessUncheckedCreateWithoutPurchasesInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutPurchasesInput
+  upsert?: Prisma.BusinessUpsertWithoutPurchasesInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutPurchasesInput, Prisma.BusinessUpdateWithoutPurchasesInput>, Prisma.BusinessUncheckedUpdateWithoutPurchasesInput>
+}
+
+export type BusinessCreateNestedOneWithoutIntegrationsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutIntegrationsInput, Prisma.BusinessUncheckedCreateWithoutIntegrationsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutIntegrationsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutIntegrationsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutIntegrationsInput, Prisma.BusinessUncheckedCreateWithoutIntegrationsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutIntegrationsInput
+  upsert?: Prisma.BusinessUpsertWithoutIntegrationsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutIntegrationsInput, Prisma.BusinessUpdateWithoutIntegrationsInput>, Prisma.BusinessUncheckedUpdateWithoutIntegrationsInput>
+}
+
+export type BusinessCreateNestedOneWithoutSkillsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutSkillsInput, Prisma.BusinessUncheckedCreateWithoutSkillsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutSkillsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneWithoutSkillsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutSkillsInput, Prisma.BusinessUncheckedCreateWithoutSkillsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutSkillsInput
+  upsert?: Prisma.BusinessUpsertWithoutSkillsInput
+  disconnect?: Prisma.BusinessWhereInput | boolean
+  delete?: Prisma.BusinessWhereInput | boolean
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutSkillsInput, Prisma.BusinessUpdateWithoutSkillsInput>, Prisma.BusinessUncheckedUpdateWithoutSkillsInput>
+}
+
+export type BusinessCreateNestedOneWithoutFeatureRequestsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutFeatureRequestsInput, Prisma.BusinessUncheckedCreateWithoutFeatureRequestsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutFeatureRequestsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutFeatureRequestsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutFeatureRequestsInput, Prisma.BusinessUncheckedCreateWithoutFeatureRequestsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutFeatureRequestsInput
+  upsert?: Prisma.BusinessUpsertWithoutFeatureRequestsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutFeatureRequestsInput, Prisma.BusinessUpdateWithoutFeatureRequestsInput>, Prisma.BusinessUncheckedUpdateWithoutFeatureRequestsInput>
+}
+
+export type BusinessCreateNestedOneWithoutAuditLogsInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutAuditLogsInput, Prisma.BusinessUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutAuditLogsInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneWithoutAuditLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutAuditLogsInput, Prisma.BusinessUncheckedCreateWithoutAuditLogsInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutAuditLogsInput
+  upsert?: Prisma.BusinessUpsertWithoutAuditLogsInput
+  disconnect?: Prisma.BusinessWhereInput | boolean
+  delete?: Prisma.BusinessWhereInput | boolean
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutAuditLogsInput, Prisma.BusinessUpdateWithoutAuditLogsInput>, Prisma.BusinessUncheckedUpdateWithoutAuditLogsInput>
+}
+
+export type BusinessCreateNestedOneWithoutMessagingBridgesInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutMessagingBridgesInput, Prisma.BusinessUncheckedCreateWithoutMessagingBridgesInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutMessagingBridgesInput
+  connect?: Prisma.BusinessWhereUniqueInput
+}
+
+export type BusinessUpdateOneRequiredWithoutMessagingBridgesNestedInput = {
+  create?: Prisma.XOR<Prisma.BusinessCreateWithoutMessagingBridgesInput, Prisma.BusinessUncheckedCreateWithoutMessagingBridgesInput>
+  connectOrCreate?: Prisma.BusinessCreateOrConnectWithoutMessagingBridgesInput
+  upsert?: Prisma.BusinessUpsertWithoutMessagingBridgesInput
+  connect?: Prisma.BusinessWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BusinessUpdateToOneWithWhereWithoutMessagingBridgesInput, Prisma.BusinessUpdateWithoutMessagingBridgesInput>, Prisma.BusinessUncheckedUpdateWithoutMessagingBridgesInput>
+}
+
 export type BusinessCreateWithoutUserInput = {
   id?: string
   name: string
@@ -698,6 +1627,23 @@ export type BusinessCreateWithoutUserInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
   inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
@@ -706,6 +1652,28 @@ export type BusinessCreateWithoutUserInput = {
   pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutUserInput = {
@@ -720,6 +1688,23 @@ export type BusinessUncheckedCreateWithoutUserInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
   inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
@@ -728,6 +1713,28 @@ export type BusinessUncheckedCreateWithoutUserInput = {
   pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutUserInput = {
@@ -772,6 +1779,23 @@ export type BusinessScalarWhereInput = {
   status?: Prisma.StringFilter<"Business"> | string
   createdAt?: Prisma.DateTimeFilter<"Business"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Business"> | Date | string
+  addressLine1?: Prisma.StringNullableFilter<"Business"> | string | null
+  addressLine2?: Prisma.StringNullableFilter<"Business"> | string | null
+  city?: Prisma.StringNullableFilter<"Business"> | string | null
+  region?: Prisma.StringNullableFilter<"Business"> | string | null
+  postalCode?: Prisma.StringNullableFilter<"Business"> | string | null
+  country?: Prisma.StringNullableFilter<"Business"> | string | null
+  lat?: Prisma.FloatNullableFilter<"Business"> | number | null
+  lng?: Prisma.FloatNullableFilter<"Business"> | number | null
+  hours?: Prisma.JsonNullableFilter<"Business">
+  serviceArea?: Prisma.StringNullableFilter<"Business"> | string | null
+  posSystem?: Prisma.StringNullableFilter<"Business"> | string | null
+  orderMgmtSystem?: Prisma.StringNullableFilter<"Business"> | string | null
+  websiteUrl?: Prisma.StringNullableFilter<"Business"> | string | null
+  googleBusinessProfileId?: Prisma.StringNullableFilter<"Business"> | string | null
+  socialHandles?: Prisma.JsonNullableFilter<"Business">
+  categories?: Prisma.JsonNullableFilter<"Business">
+  workspaceId?: Prisma.StringNullableFilter<"Business"> | string | null
 }
 
 export type BusinessCreateWithoutInventoryInput = {
@@ -786,7 +1810,24 @@ export type BusinessCreateWithoutInventoryInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
   agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
   marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
@@ -794,6 +1835,28 @@ export type BusinessCreateWithoutInventoryInput = {
   pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutInventoryInput = {
@@ -809,6 +1872,23 @@ export type BusinessUncheckedCreateWithoutInventoryInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
   agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
   marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
@@ -816,6 +1896,28 @@ export type BusinessUncheckedCreateWithoutInventoryInput = {
   pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutInventoryInput = {
@@ -846,7 +1948,24 @@ export type BusinessUpdateWithoutInventoryInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
   agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
   marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
@@ -854,6 +1973,28 @@ export type BusinessUpdateWithoutInventoryInput = {
   pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutInventoryInput = {
@@ -869,6 +2010,23 @@ export type BusinessUncheckedUpdateWithoutInventoryInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
   marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
@@ -876,6 +2034,28 @@ export type BusinessUncheckedUpdateWithoutInventoryInput = {
   pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutAgentRunsInput = {
@@ -890,7 +2070,24 @@ export type BusinessCreateWithoutAgentRunsInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
   inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
   marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
@@ -898,6 +2095,28 @@ export type BusinessCreateWithoutAgentRunsInput = {
   pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutAgentRunsInput = {
@@ -913,6 +2132,23 @@ export type BusinessUncheckedCreateWithoutAgentRunsInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
   inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
   marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
@@ -920,6 +2156,28 @@ export type BusinessUncheckedCreateWithoutAgentRunsInput = {
   pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutAgentRunsInput = {
@@ -950,7 +2208,24 @@ export type BusinessUpdateWithoutAgentRunsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
   inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
   marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
@@ -958,6 +2233,28 @@ export type BusinessUpdateWithoutAgentRunsInput = {
   pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutAgentRunsInput = {
@@ -973,6 +2270,23 @@ export type BusinessUncheckedUpdateWithoutAgentRunsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
   marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
@@ -980,6 +2294,28 @@ export type BusinessUncheckedUpdateWithoutAgentRunsInput = {
   pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutSiteInput = {
@@ -994,7 +2330,24 @@ export type BusinessCreateWithoutSiteInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
   inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
   marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
@@ -1002,6 +2355,28 @@ export type BusinessCreateWithoutSiteInput = {
   pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutSiteInput = {
@@ -1017,6 +2392,23 @@ export type BusinessUncheckedCreateWithoutSiteInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
   inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
   marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
@@ -1024,6 +2416,28 @@ export type BusinessUncheckedCreateWithoutSiteInput = {
   pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutSiteInput = {
@@ -1054,7 +2468,24 @@ export type BusinessUpdateWithoutSiteInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
   inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
   marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
@@ -1062,6 +2493,28 @@ export type BusinessUpdateWithoutSiteInput = {
   pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutSiteInput = {
@@ -1077,6 +2530,23 @@ export type BusinessUncheckedUpdateWithoutSiteInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
   marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
@@ -1084,6 +2554,28 @@ export type BusinessUncheckedUpdateWithoutSiteInput = {
   pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutMarketingInput = {
@@ -1098,7 +2590,24 @@ export type BusinessCreateWithoutMarketingInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
   inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
@@ -1106,6 +2615,28 @@ export type BusinessCreateWithoutMarketingInput = {
   pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutMarketingInput = {
@@ -1121,6 +2652,23 @@ export type BusinessUncheckedCreateWithoutMarketingInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
   inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
@@ -1128,6 +2676,28 @@ export type BusinessUncheckedCreateWithoutMarketingInput = {
   pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutMarketingInput = {
@@ -1158,7 +2728,24 @@ export type BusinessUpdateWithoutMarketingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
   inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
@@ -1166,6 +2753,28 @@ export type BusinessUpdateWithoutMarketingInput = {
   pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutMarketingInput = {
@@ -1181,6 +2790,23 @@ export type BusinessUncheckedUpdateWithoutMarketingInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
@@ -1188,6 +2814,28 @@ export type BusinessUncheckedUpdateWithoutMarketingInput = {
   pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutApprovalPoliciesInput = {
@@ -1202,7 +2850,24 @@ export type BusinessCreateWithoutApprovalPoliciesInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
   inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
@@ -1210,6 +2875,28 @@ export type BusinessCreateWithoutApprovalPoliciesInput = {
   pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutApprovalPoliciesInput = {
@@ -1225,6 +2912,23 @@ export type BusinessUncheckedCreateWithoutApprovalPoliciesInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
   inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
@@ -1232,6 +2936,28 @@ export type BusinessUncheckedCreateWithoutApprovalPoliciesInput = {
   pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutApprovalPoliciesInput = {
@@ -1262,7 +2988,24 @@ export type BusinessUpdateWithoutApprovalPoliciesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
   inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
@@ -1270,6 +3013,28 @@ export type BusinessUpdateWithoutApprovalPoliciesInput = {
   pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutApprovalPoliciesInput = {
@@ -1285,6 +3050,23 @@ export type BusinessUncheckedUpdateWithoutApprovalPoliciesInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
@@ -1292,6 +3074,28 @@ export type BusinessUncheckedUpdateWithoutApprovalPoliciesInput = {
   pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutPendingActionsInput = {
@@ -1306,7 +3110,24 @@ export type BusinessCreateWithoutPendingActionsInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
   inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
@@ -1314,6 +3135,28 @@ export type BusinessCreateWithoutPendingActionsInput = {
   approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutPendingActionsInput = {
@@ -1329,6 +3172,23 @@ export type BusinessUncheckedCreateWithoutPendingActionsInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
   inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
@@ -1336,6 +3196,28 @@ export type BusinessUncheckedCreateWithoutPendingActionsInput = {
   approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutPendingActionsInput = {
@@ -1366,7 +3248,24 @@ export type BusinessUpdateWithoutPendingActionsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
   inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
@@ -1374,6 +3273,28 @@ export type BusinessUpdateWithoutPendingActionsInput = {
   approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutPendingActionsInput = {
@@ -1389,6 +3310,23 @@ export type BusinessUncheckedUpdateWithoutPendingActionsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
@@ -1396,6 +3334,28 @@ export type BusinessUncheckedUpdateWithoutPendingActionsInput = {
   approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutScheduledTasksInput = {
@@ -1410,7 +3370,24 @@ export type BusinessCreateWithoutScheduledTasksInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
   inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
@@ -1418,6 +3395,28 @@ export type BusinessCreateWithoutScheduledTasksInput = {
   approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
   pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutScheduledTasksInput = {
@@ -1433,6 +3432,23 @@ export type BusinessUncheckedCreateWithoutScheduledTasksInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
   inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
@@ -1440,6 +3456,28 @@ export type BusinessUncheckedCreateWithoutScheduledTasksInput = {
   approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
   pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
   activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutScheduledTasksInput = {
@@ -1470,7 +3508,24 @@ export type BusinessUpdateWithoutScheduledTasksInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
   inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
@@ -1478,6 +3533,28 @@ export type BusinessUpdateWithoutScheduledTasksInput = {
   approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
   pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutScheduledTasksInput = {
@@ -1493,6 +3570,23 @@ export type BusinessUncheckedUpdateWithoutScheduledTasksInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
@@ -1500,6 +3594,28 @@ export type BusinessUncheckedUpdateWithoutScheduledTasksInput = {
   approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
   pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateWithoutActivityEventsInput = {
@@ -1514,7 +3630,24 @@ export type BusinessCreateWithoutActivityEventsInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
   inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
@@ -1522,6 +3655,28 @@ export type BusinessCreateWithoutActivityEventsInput = {
   approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
   pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessUncheckedCreateWithoutActivityEventsInput = {
@@ -1537,6 +3692,23 @@ export type BusinessUncheckedCreateWithoutActivityEventsInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
   inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
   agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
   site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
@@ -1544,6 +3716,28 @@ export type BusinessUncheckedCreateWithoutActivityEventsInput = {
   approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
   pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
 }
 
 export type BusinessCreateOrConnectWithoutActivityEventsInput = {
@@ -1574,7 +3768,24 @@ export type BusinessUpdateWithoutActivityEventsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
   inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
@@ -1582,6 +3793,28 @@ export type BusinessUpdateWithoutActivityEventsInput = {
   approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
   pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutActivityEventsInput = {
@@ -1597,6 +3830,23 @@ export type BusinessUncheckedUpdateWithoutActivityEventsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
@@ -1604,6 +3854,5896 @@ export type BusinessUncheckedUpdateWithoutActivityEventsInput = {
   approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
   pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutWorkspaceInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutWorkspaceInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutWorkspaceInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutWorkspaceInput, Prisma.BusinessUncheckedCreateWithoutWorkspaceInput>
+}
+
+export type BusinessCreateManyWorkspaceInputEnvelope = {
+  data: Prisma.BusinessCreateManyWorkspaceInput | Prisma.BusinessCreateManyWorkspaceInput[]
+  skipDuplicates?: boolean
+}
+
+export type BusinessUpsertWithWhereUniqueWithoutWorkspaceInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutWorkspaceInput, Prisma.BusinessUncheckedUpdateWithoutWorkspaceInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutWorkspaceInput, Prisma.BusinessUncheckedCreateWithoutWorkspaceInput>
+}
+
+export type BusinessUpdateWithWhereUniqueWithoutWorkspaceInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutWorkspaceInput, Prisma.BusinessUncheckedUpdateWithoutWorkspaceInput>
+}
+
+export type BusinessUpdateManyWithWhereWithoutWorkspaceInput = {
+  where: Prisma.BusinessScalarWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateManyMutationInput, Prisma.BusinessUncheckedUpdateManyWithoutWorkspaceInput>
+}
+
+export type BusinessCreateWithoutBrandKitInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutBrandKitInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutBrandKitInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutBrandKitInput, Prisma.BusinessUncheckedCreateWithoutBrandKitInput>
+}
+
+export type BusinessUpsertWithoutBrandKitInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutBrandKitInput, Prisma.BusinessUncheckedUpdateWithoutBrandKitInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutBrandKitInput, Prisma.BusinessUncheckedCreateWithoutBrandKitInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutBrandKitInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutBrandKitInput, Prisma.BusinessUncheckedUpdateWithoutBrandKitInput>
+}
+
+export type BusinessUpdateWithoutBrandKitInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutBrandKitInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutMemoriesInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutMemoriesInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutMemoriesInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutMemoriesInput, Prisma.BusinessUncheckedCreateWithoutMemoriesInput>
+}
+
+export type BusinessUpsertWithoutMemoriesInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutMemoriesInput, Prisma.BusinessUncheckedUpdateWithoutMemoriesInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutMemoriesInput, Prisma.BusinessUncheckedCreateWithoutMemoriesInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutMemoriesInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutMemoriesInput, Prisma.BusinessUncheckedUpdateWithoutMemoriesInput>
+}
+
+export type BusinessUpdateWithoutMemoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutMemoriesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutDeploymentsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutDeploymentsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutDeploymentsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutDeploymentsInput, Prisma.BusinessUncheckedCreateWithoutDeploymentsInput>
+}
+
+export type BusinessUpsertWithoutDeploymentsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutDeploymentsInput, Prisma.BusinessUncheckedUpdateWithoutDeploymentsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutDeploymentsInput, Prisma.BusinessUncheckedCreateWithoutDeploymentsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutDeploymentsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutDeploymentsInput, Prisma.BusinessUncheckedUpdateWithoutDeploymentsInput>
+}
+
+export type BusinessUpdateWithoutDeploymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutDeploymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutAgentTasksInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutAgentTasksInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutAgentTasksInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutAgentTasksInput, Prisma.BusinessUncheckedCreateWithoutAgentTasksInput>
+}
+
+export type BusinessUpsertWithoutAgentTasksInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutAgentTasksInput, Prisma.BusinessUncheckedUpdateWithoutAgentTasksInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutAgentTasksInput, Prisma.BusinessUncheckedCreateWithoutAgentTasksInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutAgentTasksInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutAgentTasksInput, Prisma.BusinessUncheckedUpdateWithoutAgentTasksInput>
+}
+
+export type BusinessUpdateWithoutAgentTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutAgentTasksInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutConversationsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutConversationsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutConversationsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutConversationsInput, Prisma.BusinessUncheckedCreateWithoutConversationsInput>
+}
+
+export type BusinessUpsertWithoutConversationsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutConversationsInput, Prisma.BusinessUncheckedUpdateWithoutConversationsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutConversationsInput, Prisma.BusinessUncheckedCreateWithoutConversationsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutConversationsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutConversationsInput, Prisma.BusinessUncheckedUpdateWithoutConversationsInput>
+}
+
+export type BusinessUpdateWithoutConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutConversationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutCompetitorsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutCompetitorsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutCompetitorsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutCompetitorsInput, Prisma.BusinessUncheckedCreateWithoutCompetitorsInput>
+}
+
+export type BusinessUpsertWithoutCompetitorsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutCompetitorsInput, Prisma.BusinessUncheckedUpdateWithoutCompetitorsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutCompetitorsInput, Prisma.BusinessUncheckedCreateWithoutCompetitorsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutCompetitorsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutCompetitorsInput, Prisma.BusinessUncheckedUpdateWithoutCompetitorsInput>
+}
+
+export type BusinessUpdateWithoutCompetitorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutCompetitorsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutContactsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutContactsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutContactsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutContactsInput, Prisma.BusinessUncheckedCreateWithoutContactsInput>
+}
+
+export type BusinessUpsertWithoutContactsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutContactsInput, Prisma.BusinessUncheckedUpdateWithoutContactsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutContactsInput, Prisma.BusinessUncheckedCreateWithoutContactsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutContactsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutContactsInput, Prisma.BusinessUncheckedUpdateWithoutContactsInput>
+}
+
+export type BusinessUpdateWithoutContactsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutContactsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutMembershipProgramsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutMembershipProgramsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutMembershipProgramsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutMembershipProgramsInput, Prisma.BusinessUncheckedCreateWithoutMembershipProgramsInput>
+}
+
+export type BusinessUpsertWithoutMembershipProgramsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutMembershipProgramsInput, Prisma.BusinessUncheckedUpdateWithoutMembershipProgramsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutMembershipProgramsInput, Prisma.BusinessUncheckedCreateWithoutMembershipProgramsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutMembershipProgramsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutMembershipProgramsInput, Prisma.BusinessUncheckedUpdateWithoutMembershipProgramsInput>
+}
+
+export type BusinessUpdateWithoutMembershipProgramsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutMembershipProgramsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutCampaignsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutCampaignsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutCampaignsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutCampaignsInput, Prisma.BusinessUncheckedCreateWithoutCampaignsInput>
+}
+
+export type BusinessUpsertWithoutCampaignsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutCampaignsInput, Prisma.BusinessUncheckedUpdateWithoutCampaignsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutCampaignsInput, Prisma.BusinessUncheckedCreateWithoutCampaignsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutCampaignsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutCampaignsInput, Prisma.BusinessUncheckedUpdateWithoutCampaignsInput>
+}
+
+export type BusinessUpdateWithoutCampaignsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutCampaignsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutAdCampaignsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutAdCampaignsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutAdCampaignsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutAdCampaignsInput, Prisma.BusinessUncheckedCreateWithoutAdCampaignsInput>
+}
+
+export type BusinessUpsertWithoutAdCampaignsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutAdCampaignsInput, Prisma.BusinessUncheckedUpdateWithoutAdCampaignsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutAdCampaignsInput, Prisma.BusinessUncheckedCreateWithoutAdCampaignsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutAdCampaignsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutAdCampaignsInput, Prisma.BusinessUncheckedUpdateWithoutAdCampaignsInput>
+}
+
+export type BusinessUpdateWithoutAdCampaignsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutAdCampaignsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutPhoneAgentsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutPhoneAgentsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutPhoneAgentsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutPhoneAgentsInput, Prisma.BusinessUncheckedCreateWithoutPhoneAgentsInput>
+}
+
+export type BusinessUpsertWithoutPhoneAgentsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutPhoneAgentsInput, Prisma.BusinessUncheckedUpdateWithoutPhoneAgentsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutPhoneAgentsInput, Prisma.BusinessUncheckedCreateWithoutPhoneAgentsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutPhoneAgentsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutPhoneAgentsInput, Prisma.BusinessUncheckedUpdateWithoutPhoneAgentsInput>
+}
+
+export type BusinessUpdateWithoutPhoneAgentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutPhoneAgentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutCallLogsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutCallLogsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutCallLogsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutCallLogsInput, Prisma.BusinessUncheckedCreateWithoutCallLogsInput>
+}
+
+export type BusinessUpsertWithoutCallLogsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutCallLogsInput, Prisma.BusinessUncheckedUpdateWithoutCallLogsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutCallLogsInput, Prisma.BusinessUncheckedCreateWithoutCallLogsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutCallLogsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutCallLogsInput, Prisma.BusinessUncheckedUpdateWithoutCallLogsInput>
+}
+
+export type BusinessUpdateWithoutCallLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutCallLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutSubscriptionInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutSubscriptionInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutSubscriptionInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutSubscriptionInput, Prisma.BusinessUncheckedCreateWithoutSubscriptionInput>
+}
+
+export type BusinessUpsertWithoutSubscriptionInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutSubscriptionInput, Prisma.BusinessUncheckedUpdateWithoutSubscriptionInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutSubscriptionInput, Prisma.BusinessUncheckedCreateWithoutSubscriptionInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutSubscriptionInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutSubscriptionInput, Prisma.BusinessUncheckedUpdateWithoutSubscriptionInput>
+}
+
+export type BusinessUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutUsageEventsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutUsageEventsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutUsageEventsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutUsageEventsInput, Prisma.BusinessUncheckedCreateWithoutUsageEventsInput>
+}
+
+export type BusinessUpsertWithoutUsageEventsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutUsageEventsInput, Prisma.BusinessUncheckedUpdateWithoutUsageEventsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutUsageEventsInput, Prisma.BusinessUncheckedCreateWithoutUsageEventsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutUsageEventsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutUsageEventsInput, Prisma.BusinessUncheckedUpdateWithoutUsageEventsInput>
+}
+
+export type BusinessUpdateWithoutUsageEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutUsageEventsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutCreditWalletInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutCreditWalletInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutCreditWalletInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutCreditWalletInput, Prisma.BusinessUncheckedCreateWithoutCreditWalletInput>
+}
+
+export type BusinessUpsertWithoutCreditWalletInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutCreditWalletInput, Prisma.BusinessUncheckedUpdateWithoutCreditWalletInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutCreditWalletInput, Prisma.BusinessUncheckedCreateWithoutCreditWalletInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutCreditWalletInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutCreditWalletInput, Prisma.BusinessUncheckedUpdateWithoutCreditWalletInput>
+}
+
+export type BusinessUpdateWithoutCreditWalletInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutCreditWalletInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutProcurementPoliciesInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutProcurementPoliciesInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutProcurementPoliciesInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutProcurementPoliciesInput, Prisma.BusinessUncheckedCreateWithoutProcurementPoliciesInput>
+}
+
+export type BusinessUpsertWithoutProcurementPoliciesInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutProcurementPoliciesInput, Prisma.BusinessUncheckedUpdateWithoutProcurementPoliciesInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutProcurementPoliciesInput, Prisma.BusinessUncheckedCreateWithoutProcurementPoliciesInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutProcurementPoliciesInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutProcurementPoliciesInput, Prisma.BusinessUncheckedUpdateWithoutProcurementPoliciesInput>
+}
+
+export type BusinessUpdateWithoutProcurementPoliciesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutProcurementPoliciesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutPurchasesInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutPurchasesInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutPurchasesInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutPurchasesInput, Prisma.BusinessUncheckedCreateWithoutPurchasesInput>
+}
+
+export type BusinessUpsertWithoutPurchasesInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutPurchasesInput, Prisma.BusinessUncheckedUpdateWithoutPurchasesInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutPurchasesInput, Prisma.BusinessUncheckedCreateWithoutPurchasesInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutPurchasesInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutPurchasesInput, Prisma.BusinessUncheckedUpdateWithoutPurchasesInput>
+}
+
+export type BusinessUpdateWithoutPurchasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutPurchasesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutIntegrationsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutIntegrationsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutIntegrationsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutIntegrationsInput, Prisma.BusinessUncheckedCreateWithoutIntegrationsInput>
+}
+
+export type BusinessUpsertWithoutIntegrationsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutIntegrationsInput, Prisma.BusinessUncheckedUpdateWithoutIntegrationsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutIntegrationsInput, Prisma.BusinessUncheckedCreateWithoutIntegrationsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutIntegrationsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutIntegrationsInput, Prisma.BusinessUncheckedUpdateWithoutIntegrationsInput>
+}
+
+export type BusinessUpdateWithoutIntegrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutIntegrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutSkillsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutSkillsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutSkillsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutSkillsInput, Prisma.BusinessUncheckedCreateWithoutSkillsInput>
+}
+
+export type BusinessUpsertWithoutSkillsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutSkillsInput, Prisma.BusinessUncheckedUpdateWithoutSkillsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutSkillsInput, Prisma.BusinessUncheckedCreateWithoutSkillsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutSkillsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutSkillsInput, Prisma.BusinessUncheckedUpdateWithoutSkillsInput>
+}
+
+export type BusinessUpdateWithoutSkillsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutSkillsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutFeatureRequestsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutFeatureRequestsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutFeatureRequestsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutFeatureRequestsInput, Prisma.BusinessUncheckedCreateWithoutFeatureRequestsInput>
+}
+
+export type BusinessUpsertWithoutFeatureRequestsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutFeatureRequestsInput, Prisma.BusinessUncheckedUpdateWithoutFeatureRequestsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutFeatureRequestsInput, Prisma.BusinessUncheckedCreateWithoutFeatureRequestsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutFeatureRequestsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutFeatureRequestsInput, Prisma.BusinessUncheckedUpdateWithoutFeatureRequestsInput>
+}
+
+export type BusinessUpdateWithoutFeatureRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutFeatureRequestsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutAuditLogsInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutAuditLogsInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutAuditLogsInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutAuditLogsInput, Prisma.BusinessUncheckedCreateWithoutAuditLogsInput>
+}
+
+export type BusinessUpsertWithoutAuditLogsInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutAuditLogsInput, Prisma.BusinessUncheckedUpdateWithoutAuditLogsInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutAuditLogsInput, Prisma.BusinessUncheckedCreateWithoutAuditLogsInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutAuditLogsInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutAuditLogsInput, Prisma.BusinessUncheckedUpdateWithoutAuditLogsInput>
+}
+
+export type BusinessUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessCreateWithoutMessagingBridgesInput = {
+  id?: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user: Prisma.UserCreateNestedOneWithoutBusinessesInput
+  workspace?: Prisma.WorkspaceCreateNestedOneWithoutBusinessesInput
+  inventory?: Prisma.InventoryItemCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessUncheckedCreateWithoutMessagingBridgesInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
+  inventory?: Prisma.InventoryItemUncheckedCreateNestedManyWithoutBusinessInput
+  agentRuns?: Prisma.AgentRunUncheckedCreateNestedManyWithoutBusinessInput
+  site?: Prisma.GeneratedSiteUncheckedCreateNestedOneWithoutBusinessInput
+  marketing?: Prisma.MarketingPlanUncheckedCreateNestedOneWithoutBusinessInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  pendingActions?: Prisma.PendingActionUncheckedCreateNestedManyWithoutBusinessInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedCreateNestedManyWithoutBusinessInput
+  activityEvents?: Prisma.ActivityEventUncheckedCreateNestedManyWithoutBusinessInput
+  brandKit?: Prisma.BrandKitUncheckedCreateNestedOneWithoutBusinessInput
+  competitors?: Prisma.CompetitorUncheckedCreateNestedManyWithoutBusinessInput
+  deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutBusinessInput
+  agentTasks?: Prisma.AgentTaskUncheckedCreateNestedManyWithoutBusinessInput
+  conversations?: Prisma.ConversationUncheckedCreateNestedManyWithoutBusinessInput
+  memories?: Prisma.MemoryEntryUncheckedCreateNestedManyWithoutBusinessInput
+  contacts?: Prisma.ContactUncheckedCreateNestedManyWithoutBusinessInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedCreateNestedManyWithoutBusinessInput
+  campaigns?: Prisma.CampaignUncheckedCreateNestedManyWithoutBusinessInput
+  adCampaigns?: Prisma.AdCampaignUncheckedCreateNestedManyWithoutBusinessInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedCreateNestedManyWithoutBusinessInput
+  callLogs?: Prisma.CallLogUncheckedCreateNestedManyWithoutBusinessInput
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutBusinessInput
+  usageEvents?: Prisma.UsageEventUncheckedCreateNestedManyWithoutBusinessInput
+  creditWallet?: Prisma.CreditWalletUncheckedCreateNestedOneWithoutBusinessInput
+  integrations?: Prisma.IntegrationConnectionUncheckedCreateNestedManyWithoutBusinessInput
+  skills?: Prisma.SkillUncheckedCreateNestedManyWithoutBusinessInput
+  featureRequests?: Prisma.FeatureRequestUncheckedCreateNestedManyWithoutBusinessInput
+  purchases?: Prisma.PurchaseUncheckedCreateNestedManyWithoutBusinessInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedCreateNestedManyWithoutBusinessInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutBusinessInput
+}
+
+export type BusinessCreateOrConnectWithoutMessagingBridgesInput = {
+  where: Prisma.BusinessWhereUniqueInput
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutMessagingBridgesInput, Prisma.BusinessUncheckedCreateWithoutMessagingBridgesInput>
+}
+
+export type BusinessUpsertWithoutMessagingBridgesInput = {
+  update: Prisma.XOR<Prisma.BusinessUpdateWithoutMessagingBridgesInput, Prisma.BusinessUncheckedUpdateWithoutMessagingBridgesInput>
+  create: Prisma.XOR<Prisma.BusinessCreateWithoutMessagingBridgesInput, Prisma.BusinessUncheckedCreateWithoutMessagingBridgesInput>
+  where?: Prisma.BusinessWhereInput
+}
+
+export type BusinessUpdateToOneWithWhereWithoutMessagingBridgesInput = {
+  where?: Prisma.BusinessWhereInput
+  data: Prisma.XOR<Prisma.BusinessUpdateWithoutMessagingBridgesInput, Prisma.BusinessUncheckedUpdateWithoutMessagingBridgesInput>
+}
+
+export type BusinessUpdateWithoutMessagingBridgesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutMessagingBridgesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessCreateManyUserInput = {
@@ -1618,6 +9758,23 @@ export type BusinessCreateManyUserInput = {
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: string | null
 }
 
 export type BusinessUpdateWithoutUserInput = {
@@ -1632,6 +9789,23 @@ export type BusinessUpdateWithoutUserInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspace?: Prisma.WorkspaceUpdateOneWithoutBusinessesNestedInput
   inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
@@ -1640,6 +9814,28 @@ export type BusinessUpdateWithoutUserInput = {
   pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateWithoutUserInput = {
@@ -1654,6 +9850,23 @@ export type BusinessUncheckedUpdateWithoutUserInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
   agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
   site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
@@ -1662,6 +9875,28 @@ export type BusinessUncheckedUpdateWithoutUserInput = {
   pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
   scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
   activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
 }
 
 export type BusinessUncheckedUpdateManyWithoutUserInput = {
@@ -1676,6 +9911,207 @@ export type BusinessUncheckedUpdateManyWithoutUserInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  workspaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type BusinessCreateManyWorkspaceInput = {
+  id?: string
+  userId: string
+  name: string
+  type: string
+  tagline?: string | null
+  description?: string | null
+  location?: string | null
+  phone?: string | null
+  email?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  addressLine1?: string | null
+  addressLine2?: string | null
+  city?: string | null
+  region?: string | null
+  postalCode?: string | null
+  country?: string | null
+  lat?: number | null
+  lng?: number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: string | null
+  posSystem?: string | null
+  orderMgmtSystem?: string | null
+  websiteUrl?: string | null
+  googleBusinessProfileId?: string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+}
+
+export type BusinessUpdateWithoutWorkspaceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  user?: Prisma.UserUpdateOneRequiredWithoutBusinessesNestedInput
+  inventory?: Prisma.InventoryItemUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateWithoutWorkspaceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  inventory?: Prisma.InventoryItemUncheckedUpdateManyWithoutBusinessNestedInput
+  agentRuns?: Prisma.AgentRunUncheckedUpdateManyWithoutBusinessNestedInput
+  site?: Prisma.GeneratedSiteUncheckedUpdateOneWithoutBusinessNestedInput
+  marketing?: Prisma.MarketingPlanUncheckedUpdateOneWithoutBusinessNestedInput
+  approvalPolicies?: Prisma.ApprovalPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  pendingActions?: Prisma.PendingActionUncheckedUpdateManyWithoutBusinessNestedInput
+  scheduledTasks?: Prisma.ScheduledTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  activityEvents?: Prisma.ActivityEventUncheckedUpdateManyWithoutBusinessNestedInput
+  brandKit?: Prisma.BrandKitUncheckedUpdateOneWithoutBusinessNestedInput
+  competitors?: Prisma.CompetitorUncheckedUpdateManyWithoutBusinessNestedInput
+  deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutBusinessNestedInput
+  agentTasks?: Prisma.AgentTaskUncheckedUpdateManyWithoutBusinessNestedInput
+  conversations?: Prisma.ConversationUncheckedUpdateManyWithoutBusinessNestedInput
+  memories?: Prisma.MemoryEntryUncheckedUpdateManyWithoutBusinessNestedInput
+  contacts?: Prisma.ContactUncheckedUpdateManyWithoutBusinessNestedInput
+  membershipPrograms?: Prisma.MembershipProgramUncheckedUpdateManyWithoutBusinessNestedInput
+  campaigns?: Prisma.CampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  adCampaigns?: Prisma.AdCampaignUncheckedUpdateManyWithoutBusinessNestedInput
+  phoneAgents?: Prisma.PhoneAgentUncheckedUpdateManyWithoutBusinessNestedInput
+  callLogs?: Prisma.CallLogUncheckedUpdateManyWithoutBusinessNestedInput
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutBusinessNestedInput
+  usageEvents?: Prisma.UsageEventUncheckedUpdateManyWithoutBusinessNestedInput
+  creditWallet?: Prisma.CreditWalletUncheckedUpdateOneWithoutBusinessNestedInput
+  integrations?: Prisma.IntegrationConnectionUncheckedUpdateManyWithoutBusinessNestedInput
+  skills?: Prisma.SkillUncheckedUpdateManyWithoutBusinessNestedInput
+  featureRequests?: Prisma.FeatureRequestUncheckedUpdateManyWithoutBusinessNestedInput
+  purchases?: Prisma.PurchaseUncheckedUpdateManyWithoutBusinessNestedInput
+  procurementPolicies?: Prisma.ProcurementPolicyUncheckedUpdateManyWithoutBusinessNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutBusinessNestedInput
+  messagingBridges?: Prisma.MessagingBridgeUncheckedUpdateManyWithoutBusinessNestedInput
+}
+
+export type BusinessUncheckedUpdateManyWithoutWorkspaceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.StringFieldUpdateOperationsInput | string
+  tagline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  addressLine1?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  addressLine2?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  city?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  region?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  postalCode?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  country?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  lat?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  lng?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  hours?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  serviceArea?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  posSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  orderMgmtSystem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  websiteUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  googleBusinessProfileId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  socialHandles?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  categories?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 
@@ -1690,6 +10126,25 @@ export type BusinessCountOutputType = {
   pendingActions: number
   scheduledTasks: number
   activityEvents: number
+  competitors: number
+  deployments: number
+  agentTasks: number
+  conversations: number
+  memories: number
+  contacts: number
+  membershipPrograms: number
+  campaigns: number
+  adCampaigns: number
+  phoneAgents: number
+  callLogs: number
+  usageEvents: number
+  integrations: number
+  skills: number
+  featureRequests: number
+  purchases: number
+  procurementPolicies: number
+  auditLogs: number
+  messagingBridges: number
 }
 
 export type BusinessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1699,6 +10154,25 @@ export type BusinessCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   pendingActions?: boolean | BusinessCountOutputTypeCountPendingActionsArgs
   scheduledTasks?: boolean | BusinessCountOutputTypeCountScheduledTasksArgs
   activityEvents?: boolean | BusinessCountOutputTypeCountActivityEventsArgs
+  competitors?: boolean | BusinessCountOutputTypeCountCompetitorsArgs
+  deployments?: boolean | BusinessCountOutputTypeCountDeploymentsArgs
+  agentTasks?: boolean | BusinessCountOutputTypeCountAgentTasksArgs
+  conversations?: boolean | BusinessCountOutputTypeCountConversationsArgs
+  memories?: boolean | BusinessCountOutputTypeCountMemoriesArgs
+  contacts?: boolean | BusinessCountOutputTypeCountContactsArgs
+  membershipPrograms?: boolean | BusinessCountOutputTypeCountMembershipProgramsArgs
+  campaigns?: boolean | BusinessCountOutputTypeCountCampaignsArgs
+  adCampaigns?: boolean | BusinessCountOutputTypeCountAdCampaignsArgs
+  phoneAgents?: boolean | BusinessCountOutputTypeCountPhoneAgentsArgs
+  callLogs?: boolean | BusinessCountOutputTypeCountCallLogsArgs
+  usageEvents?: boolean | BusinessCountOutputTypeCountUsageEventsArgs
+  integrations?: boolean | BusinessCountOutputTypeCountIntegrationsArgs
+  skills?: boolean | BusinessCountOutputTypeCountSkillsArgs
+  featureRequests?: boolean | BusinessCountOutputTypeCountFeatureRequestsArgs
+  purchases?: boolean | BusinessCountOutputTypeCountPurchasesArgs
+  procurementPolicies?: boolean | BusinessCountOutputTypeCountProcurementPoliciesArgs
+  auditLogs?: boolean | BusinessCountOutputTypeCountAuditLogsArgs
+  messagingBridges?: boolean | BusinessCountOutputTypeCountMessagingBridgesArgs
 }
 
 /**
@@ -1753,6 +10227,139 @@ export type BusinessCountOutputTypeCountActivityEventsArgs<ExtArgs extends runti
   where?: Prisma.ActivityEventWhereInput
 }
 
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountCompetitorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CompetitorWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountDeploymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeploymentWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountAgentTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AgentTaskWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountConversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ConversationWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountMemoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MemoryEntryWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountContactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContactWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountMembershipProgramsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MembershipProgramWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountCampaignsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CampaignWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountAdCampaignsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AdCampaignWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountPhoneAgentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PhoneAgentWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountCallLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.CallLogWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountUsageEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UsageEventWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountIntegrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IntegrationConnectionWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountSkillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SkillWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountFeatureRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeatureRequestWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountPurchasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PurchaseWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountProcurementPoliciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProcurementPolicyWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AuditLogWhereInput
+}
+
+/**
+ * BusinessCountOutputType without action
+ */
+export type BusinessCountOutputTypeCountMessagingBridgesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessagingBridgeWhereInput
+}
+
 
 export type BusinessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1767,7 +10374,25 @@ export type BusinessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  city?: boolean
+  region?: boolean
+  postalCode?: boolean
+  country?: boolean
+  lat?: boolean
+  lng?: boolean
+  hours?: boolean
+  serviceArea?: boolean
+  posSystem?: boolean
+  orderMgmtSystem?: boolean
+  websiteUrl?: boolean
+  googleBusinessProfileId?: boolean
+  socialHandles?: boolean
+  categories?: boolean
+  workspaceId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  workspace?: boolean | Prisma.Business$workspaceArgs<ExtArgs>
   inventory?: boolean | Prisma.Business$inventoryArgs<ExtArgs>
   agentRuns?: boolean | Prisma.Business$agentRunsArgs<ExtArgs>
   site?: boolean | Prisma.Business$siteArgs<ExtArgs>
@@ -1776,6 +10401,28 @@ export type BusinessSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   pendingActions?: boolean | Prisma.Business$pendingActionsArgs<ExtArgs>
   scheduledTasks?: boolean | Prisma.Business$scheduledTasksArgs<ExtArgs>
   activityEvents?: boolean | Prisma.Business$activityEventsArgs<ExtArgs>
+  brandKit?: boolean | Prisma.Business$brandKitArgs<ExtArgs>
+  competitors?: boolean | Prisma.Business$competitorsArgs<ExtArgs>
+  deployments?: boolean | Prisma.Business$deploymentsArgs<ExtArgs>
+  agentTasks?: boolean | Prisma.Business$agentTasksArgs<ExtArgs>
+  conversations?: boolean | Prisma.Business$conversationsArgs<ExtArgs>
+  memories?: boolean | Prisma.Business$memoriesArgs<ExtArgs>
+  contacts?: boolean | Prisma.Business$contactsArgs<ExtArgs>
+  membershipPrograms?: boolean | Prisma.Business$membershipProgramsArgs<ExtArgs>
+  campaigns?: boolean | Prisma.Business$campaignsArgs<ExtArgs>
+  adCampaigns?: boolean | Prisma.Business$adCampaignsArgs<ExtArgs>
+  phoneAgents?: boolean | Prisma.Business$phoneAgentsArgs<ExtArgs>
+  callLogs?: boolean | Prisma.Business$callLogsArgs<ExtArgs>
+  subscription?: boolean | Prisma.Business$subscriptionArgs<ExtArgs>
+  usageEvents?: boolean | Prisma.Business$usageEventsArgs<ExtArgs>
+  creditWallet?: boolean | Prisma.Business$creditWalletArgs<ExtArgs>
+  integrations?: boolean | Prisma.Business$integrationsArgs<ExtArgs>
+  skills?: boolean | Prisma.Business$skillsArgs<ExtArgs>
+  featureRequests?: boolean | Prisma.Business$featureRequestsArgs<ExtArgs>
+  purchases?: boolean | Prisma.Business$purchasesArgs<ExtArgs>
+  procurementPolicies?: boolean | Prisma.Business$procurementPoliciesArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.Business$auditLogsArgs<ExtArgs>
+  messagingBridges?: boolean | Prisma.Business$messagingBridgesArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["business"]>
 
@@ -1792,7 +10439,25 @@ export type BusinessSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  city?: boolean
+  region?: boolean
+  postalCode?: boolean
+  country?: boolean
+  lat?: boolean
+  lng?: boolean
+  hours?: boolean
+  serviceArea?: boolean
+  posSystem?: boolean
+  orderMgmtSystem?: boolean
+  websiteUrl?: boolean
+  googleBusinessProfileId?: boolean
+  socialHandles?: boolean
+  categories?: boolean
+  workspaceId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  workspace?: boolean | Prisma.Business$workspaceArgs<ExtArgs>
 }, ExtArgs["result"]["business"]>
 
 export type BusinessSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1808,7 +10473,25 @@ export type BusinessSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  city?: boolean
+  region?: boolean
+  postalCode?: boolean
+  country?: boolean
+  lat?: boolean
+  lng?: boolean
+  hours?: boolean
+  serviceArea?: boolean
+  posSystem?: boolean
+  orderMgmtSystem?: boolean
+  websiteUrl?: boolean
+  googleBusinessProfileId?: boolean
+  socialHandles?: boolean
+  categories?: boolean
+  workspaceId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  workspace?: boolean | Prisma.Business$workspaceArgs<ExtArgs>
 }, ExtArgs["result"]["business"]>
 
 export type BusinessSelectScalar = {
@@ -1824,11 +10507,29 @@ export type BusinessSelectScalar = {
   status?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  addressLine1?: boolean
+  addressLine2?: boolean
+  city?: boolean
+  region?: boolean
+  postalCode?: boolean
+  country?: boolean
+  lat?: boolean
+  lng?: boolean
+  hours?: boolean
+  serviceArea?: boolean
+  posSystem?: boolean
+  orderMgmtSystem?: boolean
+  websiteUrl?: boolean
+  googleBusinessProfileId?: boolean
+  socialHandles?: boolean
+  categories?: boolean
+  workspaceId?: boolean
 }
 
-export type BusinessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "type" | "tagline" | "description" | "location" | "phone" | "email" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["business"]>
+export type BusinessOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "name" | "type" | "tagline" | "description" | "location" | "phone" | "email" | "status" | "createdAt" | "updatedAt" | "addressLine1" | "addressLine2" | "city" | "region" | "postalCode" | "country" | "lat" | "lng" | "hours" | "serviceArea" | "posSystem" | "orderMgmtSystem" | "websiteUrl" | "googleBusinessProfileId" | "socialHandles" | "categories" | "workspaceId", ExtArgs["result"]["business"]>
 export type BusinessInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  workspace?: boolean | Prisma.Business$workspaceArgs<ExtArgs>
   inventory?: boolean | Prisma.Business$inventoryArgs<ExtArgs>
   agentRuns?: boolean | Prisma.Business$agentRunsArgs<ExtArgs>
   site?: boolean | Prisma.Business$siteArgs<ExtArgs>
@@ -1837,19 +10538,44 @@ export type BusinessInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   pendingActions?: boolean | Prisma.Business$pendingActionsArgs<ExtArgs>
   scheduledTasks?: boolean | Prisma.Business$scheduledTasksArgs<ExtArgs>
   activityEvents?: boolean | Prisma.Business$activityEventsArgs<ExtArgs>
+  brandKit?: boolean | Prisma.Business$brandKitArgs<ExtArgs>
+  competitors?: boolean | Prisma.Business$competitorsArgs<ExtArgs>
+  deployments?: boolean | Prisma.Business$deploymentsArgs<ExtArgs>
+  agentTasks?: boolean | Prisma.Business$agentTasksArgs<ExtArgs>
+  conversations?: boolean | Prisma.Business$conversationsArgs<ExtArgs>
+  memories?: boolean | Prisma.Business$memoriesArgs<ExtArgs>
+  contacts?: boolean | Prisma.Business$contactsArgs<ExtArgs>
+  membershipPrograms?: boolean | Prisma.Business$membershipProgramsArgs<ExtArgs>
+  campaigns?: boolean | Prisma.Business$campaignsArgs<ExtArgs>
+  adCampaigns?: boolean | Prisma.Business$adCampaignsArgs<ExtArgs>
+  phoneAgents?: boolean | Prisma.Business$phoneAgentsArgs<ExtArgs>
+  callLogs?: boolean | Prisma.Business$callLogsArgs<ExtArgs>
+  subscription?: boolean | Prisma.Business$subscriptionArgs<ExtArgs>
+  usageEvents?: boolean | Prisma.Business$usageEventsArgs<ExtArgs>
+  creditWallet?: boolean | Prisma.Business$creditWalletArgs<ExtArgs>
+  integrations?: boolean | Prisma.Business$integrationsArgs<ExtArgs>
+  skills?: boolean | Prisma.Business$skillsArgs<ExtArgs>
+  featureRequests?: boolean | Prisma.Business$featureRequestsArgs<ExtArgs>
+  purchases?: boolean | Prisma.Business$purchasesArgs<ExtArgs>
+  procurementPolicies?: boolean | Prisma.Business$procurementPoliciesArgs<ExtArgs>
+  auditLogs?: boolean | Prisma.Business$auditLogsArgs<ExtArgs>
+  messagingBridges?: boolean | Prisma.Business$messagingBridgesArgs<ExtArgs>
   _count?: boolean | Prisma.BusinessCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BusinessIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  workspace?: boolean | Prisma.Business$workspaceArgs<ExtArgs>
 }
 export type BusinessIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  workspace?: boolean | Prisma.Business$workspaceArgs<ExtArgs>
 }
 
 export type $BusinessPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Business"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    workspace: Prisma.$WorkspacePayload<ExtArgs> | null
     inventory: Prisma.$InventoryItemPayload<ExtArgs>[]
     agentRuns: Prisma.$AgentRunPayload<ExtArgs>[]
     site: Prisma.$GeneratedSitePayload<ExtArgs> | null
@@ -1858,6 +10584,28 @@ export type $BusinessPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     pendingActions: Prisma.$PendingActionPayload<ExtArgs>[]
     scheduledTasks: Prisma.$ScheduledTaskPayload<ExtArgs>[]
     activityEvents: Prisma.$ActivityEventPayload<ExtArgs>[]
+    brandKit: Prisma.$BrandKitPayload<ExtArgs> | null
+    competitors: Prisma.$CompetitorPayload<ExtArgs>[]
+    deployments: Prisma.$DeploymentPayload<ExtArgs>[]
+    agentTasks: Prisma.$AgentTaskPayload<ExtArgs>[]
+    conversations: Prisma.$ConversationPayload<ExtArgs>[]
+    memories: Prisma.$MemoryEntryPayload<ExtArgs>[]
+    contacts: Prisma.$ContactPayload<ExtArgs>[]
+    membershipPrograms: Prisma.$MembershipProgramPayload<ExtArgs>[]
+    campaigns: Prisma.$CampaignPayload<ExtArgs>[]
+    adCampaigns: Prisma.$AdCampaignPayload<ExtArgs>[]
+    phoneAgents: Prisma.$PhoneAgentPayload<ExtArgs>[]
+    callLogs: Prisma.$CallLogPayload<ExtArgs>[]
+    subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
+    usageEvents: Prisma.$UsageEventPayload<ExtArgs>[]
+    creditWallet: Prisma.$CreditWalletPayload<ExtArgs> | null
+    integrations: Prisma.$IntegrationConnectionPayload<ExtArgs>[]
+    skills: Prisma.$SkillPayload<ExtArgs>[]
+    featureRequests: Prisma.$FeatureRequestPayload<ExtArgs>[]
+    purchases: Prisma.$PurchasePayload<ExtArgs>[]
+    procurementPolicies: Prisma.$ProcurementPolicyPayload<ExtArgs>[]
+    auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
+    messagingBridges: Prisma.$MessagingBridgePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1872,6 +10620,23 @@ export type $BusinessPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     status: string
     createdAt: Date
     updatedAt: Date
+    addressLine1: string | null
+    addressLine2: string | null
+    city: string | null
+    region: string | null
+    postalCode: string | null
+    country: string | null
+    lat: number | null
+    lng: number | null
+    hours: runtime.JsonValue | null
+    serviceArea: string | null
+    posSystem: string | null
+    orderMgmtSystem: string | null
+    websiteUrl: string | null
+    googleBusinessProfileId: string | null
+    socialHandles: runtime.JsonValue | null
+    categories: runtime.JsonValue | null
+    workspaceId: string | null
   }, ExtArgs["result"]["business"]>
   composites: {}
 }
@@ -2267,6 +11032,7 @@ readonly fields: BusinessFieldRefs;
 export interface Prisma__BusinessClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  workspace<T extends Prisma.Business$workspaceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$workspaceArgs<ExtArgs>>): Prisma.Prisma__WorkspaceClient<runtime.Types.Result.GetResult<Prisma.$WorkspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   inventory<T extends Prisma.Business$inventoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$inventoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$InventoryItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   agentRuns<T extends Prisma.Business$agentRunsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$agentRunsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgentRunPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   site<T extends Prisma.Business$siteArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$siteArgs<ExtArgs>>): Prisma.Prisma__GeneratedSiteClient<runtime.Types.Result.GetResult<Prisma.$GeneratedSitePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2275,6 +11041,28 @@ export interface Prisma__BusinessClient<T, Null = never, ExtArgs extends runtime
   pendingActions<T extends Prisma.Business$pendingActionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$pendingActionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PendingActionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   scheduledTasks<T extends Prisma.Business$scheduledTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$scheduledTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ScheduledTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   activityEvents<T extends Prisma.Business$activityEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$activityEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  brandKit<T extends Prisma.Business$brandKitArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$brandKitArgs<ExtArgs>>): Prisma.Prisma__BrandKitClient<runtime.Types.Result.GetResult<Prisma.$BrandKitPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  competitors<T extends Prisma.Business$competitorsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$competitorsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CompetitorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  deployments<T extends Prisma.Business$deploymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$deploymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeploymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  agentTasks<T extends Prisma.Business$agentTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$agentTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AgentTaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  conversations<T extends Prisma.Business$conversationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$conversationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ConversationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  memories<T extends Prisma.Business$memoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$memoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MemoryEntryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  contacts<T extends Prisma.Business$contactsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$contactsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  membershipPrograms<T extends Prisma.Business$membershipProgramsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$membershipProgramsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MembershipProgramPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  campaigns<T extends Prisma.Business$campaignsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$campaignsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  adCampaigns<T extends Prisma.Business$adCampaignsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$adCampaignsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AdCampaignPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  phoneAgents<T extends Prisma.Business$phoneAgentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$phoneAgentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PhoneAgentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  callLogs<T extends Prisma.Business$callLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$callLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CallLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subscription<T extends Prisma.Business$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  usageEvents<T extends Prisma.Business$usageEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$usageEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UsageEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  creditWallet<T extends Prisma.Business$creditWalletArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$creditWalletArgs<ExtArgs>>): Prisma.Prisma__CreditWalletClient<runtime.Types.Result.GetResult<Prisma.$CreditWalletPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  integrations<T extends Prisma.Business$integrationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$integrationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationConnectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  skills<T extends Prisma.Business$skillsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$skillsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SkillPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  featureRequests<T extends Prisma.Business$featureRequestsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$featureRequestsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeatureRequestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  purchases<T extends Prisma.Business$purchasesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$purchasesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PurchasePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  procurementPolicies<T extends Prisma.Business$procurementPoliciesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$procurementPoliciesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProcurementPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  auditLogs<T extends Prisma.Business$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  messagingBridges<T extends Prisma.Business$messagingBridgesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Business$messagingBridgesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagingBridgePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2316,6 +11104,23 @@ export interface BusinessFieldRefs {
   readonly status: Prisma.FieldRef<"Business", 'String'>
   readonly createdAt: Prisma.FieldRef<"Business", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Business", 'DateTime'>
+  readonly addressLine1: Prisma.FieldRef<"Business", 'String'>
+  readonly addressLine2: Prisma.FieldRef<"Business", 'String'>
+  readonly city: Prisma.FieldRef<"Business", 'String'>
+  readonly region: Prisma.FieldRef<"Business", 'String'>
+  readonly postalCode: Prisma.FieldRef<"Business", 'String'>
+  readonly country: Prisma.FieldRef<"Business", 'String'>
+  readonly lat: Prisma.FieldRef<"Business", 'Float'>
+  readonly lng: Prisma.FieldRef<"Business", 'Float'>
+  readonly hours: Prisma.FieldRef<"Business", 'Json'>
+  readonly serviceArea: Prisma.FieldRef<"Business", 'String'>
+  readonly posSystem: Prisma.FieldRef<"Business", 'String'>
+  readonly orderMgmtSystem: Prisma.FieldRef<"Business", 'String'>
+  readonly websiteUrl: Prisma.FieldRef<"Business", 'String'>
+  readonly googleBusinessProfileId: Prisma.FieldRef<"Business", 'String'>
+  readonly socialHandles: Prisma.FieldRef<"Business", 'Json'>
+  readonly categories: Prisma.FieldRef<"Business", 'Json'>
+  readonly workspaceId: Prisma.FieldRef<"Business", 'String'>
 }
     
 
@@ -2717,6 +11522,25 @@ export type BusinessDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
+ * Business.workspace
+ */
+export type Business$workspaceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Workspace
+   */
+  select?: Prisma.WorkspaceSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Workspace
+   */
+  omit?: Prisma.WorkspaceOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WorkspaceInclude<ExtArgs> | null
+  where?: Prisma.WorkspaceWhereInput
+}
+
+/**
  * Business.inventory
  */
 export type Business$inventoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2896,6 +11720,519 @@ export type Business$activityEventsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.ActivityEventScalarFieldEnum | Prisma.ActivityEventScalarFieldEnum[]
+}
+
+/**
+ * Business.brandKit
+ */
+export type Business$brandKitArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the BrandKit
+   */
+  select?: Prisma.BrandKitSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the BrandKit
+   */
+  omit?: Prisma.BrandKitOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BrandKitInclude<ExtArgs> | null
+  where?: Prisma.BrandKitWhereInput
+}
+
+/**
+ * Business.competitors
+ */
+export type Business$competitorsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Competitor
+   */
+  select?: Prisma.CompetitorSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Competitor
+   */
+  omit?: Prisma.CompetitorOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompetitorInclude<ExtArgs> | null
+  where?: Prisma.CompetitorWhereInput
+  orderBy?: Prisma.CompetitorOrderByWithRelationInput | Prisma.CompetitorOrderByWithRelationInput[]
+  cursor?: Prisma.CompetitorWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CompetitorScalarFieldEnum | Prisma.CompetitorScalarFieldEnum[]
+}
+
+/**
+ * Business.deployments
+ */
+export type Business$deploymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Deployment
+   */
+  select?: Prisma.DeploymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Deployment
+   */
+  omit?: Prisma.DeploymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeploymentInclude<ExtArgs> | null
+  where?: Prisma.DeploymentWhereInput
+  orderBy?: Prisma.DeploymentOrderByWithRelationInput | Prisma.DeploymentOrderByWithRelationInput[]
+  cursor?: Prisma.DeploymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DeploymentScalarFieldEnum | Prisma.DeploymentScalarFieldEnum[]
+}
+
+/**
+ * Business.agentTasks
+ */
+export type Business$agentTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AgentTask
+   */
+  select?: Prisma.AgentTaskSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AgentTask
+   */
+  omit?: Prisma.AgentTaskOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AgentTaskInclude<ExtArgs> | null
+  where?: Prisma.AgentTaskWhereInput
+  orderBy?: Prisma.AgentTaskOrderByWithRelationInput | Prisma.AgentTaskOrderByWithRelationInput[]
+  cursor?: Prisma.AgentTaskWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AgentTaskScalarFieldEnum | Prisma.AgentTaskScalarFieldEnum[]
+}
+
+/**
+ * Business.conversations
+ */
+export type Business$conversationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Conversation
+   */
+  select?: Prisma.ConversationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Conversation
+   */
+  omit?: Prisma.ConversationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ConversationInclude<ExtArgs> | null
+  where?: Prisma.ConversationWhereInput
+  orderBy?: Prisma.ConversationOrderByWithRelationInput | Prisma.ConversationOrderByWithRelationInput[]
+  cursor?: Prisma.ConversationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ConversationScalarFieldEnum | Prisma.ConversationScalarFieldEnum[]
+}
+
+/**
+ * Business.memories
+ */
+export type Business$memoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MemoryEntry
+   */
+  select?: Prisma.MemoryEntrySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MemoryEntry
+   */
+  omit?: Prisma.MemoryEntryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MemoryEntryInclude<ExtArgs> | null
+  where?: Prisma.MemoryEntryWhereInput
+  orderBy?: Prisma.MemoryEntryOrderByWithRelationInput | Prisma.MemoryEntryOrderByWithRelationInput[]
+  cursor?: Prisma.MemoryEntryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemoryEntryScalarFieldEnum | Prisma.MemoryEntryScalarFieldEnum[]
+}
+
+/**
+ * Business.contacts
+ */
+export type Business$contactsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Contact
+   */
+  select?: Prisma.ContactSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Contact
+   */
+  omit?: Prisma.ContactOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactInclude<ExtArgs> | null
+  where?: Prisma.ContactWhereInput
+  orderBy?: Prisma.ContactOrderByWithRelationInput | Prisma.ContactOrderByWithRelationInput[]
+  cursor?: Prisma.ContactWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContactScalarFieldEnum | Prisma.ContactScalarFieldEnum[]
+}
+
+/**
+ * Business.membershipPrograms
+ */
+export type Business$membershipProgramsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MembershipProgram
+   */
+  select?: Prisma.MembershipProgramSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MembershipProgram
+   */
+  omit?: Prisma.MembershipProgramOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MembershipProgramInclude<ExtArgs> | null
+  where?: Prisma.MembershipProgramWhereInput
+  orderBy?: Prisma.MembershipProgramOrderByWithRelationInput | Prisma.MembershipProgramOrderByWithRelationInput[]
+  cursor?: Prisma.MembershipProgramWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MembershipProgramScalarFieldEnum | Prisma.MembershipProgramScalarFieldEnum[]
+}
+
+/**
+ * Business.campaigns
+ */
+export type Business$campaignsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Campaign
+   */
+  select?: Prisma.CampaignSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Campaign
+   */
+  omit?: Prisma.CampaignOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CampaignInclude<ExtArgs> | null
+  where?: Prisma.CampaignWhereInput
+  orderBy?: Prisma.CampaignOrderByWithRelationInput | Prisma.CampaignOrderByWithRelationInput[]
+  cursor?: Prisma.CampaignWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CampaignScalarFieldEnum | Prisma.CampaignScalarFieldEnum[]
+}
+
+/**
+ * Business.adCampaigns
+ */
+export type Business$adCampaignsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AdCampaign
+   */
+  select?: Prisma.AdCampaignSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AdCampaign
+   */
+  omit?: Prisma.AdCampaignOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AdCampaignInclude<ExtArgs> | null
+  where?: Prisma.AdCampaignWhereInput
+  orderBy?: Prisma.AdCampaignOrderByWithRelationInput | Prisma.AdCampaignOrderByWithRelationInput[]
+  cursor?: Prisma.AdCampaignWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AdCampaignScalarFieldEnum | Prisma.AdCampaignScalarFieldEnum[]
+}
+
+/**
+ * Business.phoneAgents
+ */
+export type Business$phoneAgentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PhoneAgent
+   */
+  select?: Prisma.PhoneAgentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PhoneAgent
+   */
+  omit?: Prisma.PhoneAgentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PhoneAgentInclude<ExtArgs> | null
+  where?: Prisma.PhoneAgentWhereInput
+  orderBy?: Prisma.PhoneAgentOrderByWithRelationInput | Prisma.PhoneAgentOrderByWithRelationInput[]
+  cursor?: Prisma.PhoneAgentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PhoneAgentScalarFieldEnum | Prisma.PhoneAgentScalarFieldEnum[]
+}
+
+/**
+ * Business.callLogs
+ */
+export type Business$callLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CallLog
+   */
+  select?: Prisma.CallLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CallLog
+   */
+  omit?: Prisma.CallLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CallLogInclude<ExtArgs> | null
+  where?: Prisma.CallLogWhereInput
+  orderBy?: Prisma.CallLogOrderByWithRelationInput | Prisma.CallLogOrderByWithRelationInput[]
+  cursor?: Prisma.CallLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.CallLogScalarFieldEnum | Prisma.CallLogScalarFieldEnum[]
+}
+
+/**
+ * Business.subscription
+ */
+export type Business$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
+}
+
+/**
+ * Business.usageEvents
+ */
+export type Business$usageEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the UsageEvent
+   */
+  select?: Prisma.UsageEventSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the UsageEvent
+   */
+  omit?: Prisma.UsageEventOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UsageEventInclude<ExtArgs> | null
+  where?: Prisma.UsageEventWhereInput
+  orderBy?: Prisma.UsageEventOrderByWithRelationInput | Prisma.UsageEventOrderByWithRelationInput[]
+  cursor?: Prisma.UsageEventWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.UsageEventScalarFieldEnum | Prisma.UsageEventScalarFieldEnum[]
+}
+
+/**
+ * Business.creditWallet
+ */
+export type Business$creditWalletArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CreditWallet
+   */
+  select?: Prisma.CreditWalletSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CreditWallet
+   */
+  omit?: Prisma.CreditWalletOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CreditWalletInclude<ExtArgs> | null
+  where?: Prisma.CreditWalletWhereInput
+}
+
+/**
+ * Business.integrations
+ */
+export type Business$integrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the IntegrationConnection
+   */
+  select?: Prisma.IntegrationConnectionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the IntegrationConnection
+   */
+  omit?: Prisma.IntegrationConnectionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IntegrationConnectionInclude<ExtArgs> | null
+  where?: Prisma.IntegrationConnectionWhereInput
+  orderBy?: Prisma.IntegrationConnectionOrderByWithRelationInput | Prisma.IntegrationConnectionOrderByWithRelationInput[]
+  cursor?: Prisma.IntegrationConnectionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IntegrationConnectionScalarFieldEnum | Prisma.IntegrationConnectionScalarFieldEnum[]
+}
+
+/**
+ * Business.skills
+ */
+export type Business$skillsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Skill
+   */
+  select?: Prisma.SkillSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Skill
+   */
+  omit?: Prisma.SkillOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SkillInclude<ExtArgs> | null
+  where?: Prisma.SkillWhereInput
+  orderBy?: Prisma.SkillOrderByWithRelationInput | Prisma.SkillOrderByWithRelationInput[]
+  cursor?: Prisma.SkillWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SkillScalarFieldEnum | Prisma.SkillScalarFieldEnum[]
+}
+
+/**
+ * Business.featureRequests
+ */
+export type Business$featureRequestsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FeatureRequest
+   */
+  select?: Prisma.FeatureRequestSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FeatureRequest
+   */
+  omit?: Prisma.FeatureRequestOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FeatureRequestInclude<ExtArgs> | null
+  where?: Prisma.FeatureRequestWhereInput
+  orderBy?: Prisma.FeatureRequestOrderByWithRelationInput | Prisma.FeatureRequestOrderByWithRelationInput[]
+  cursor?: Prisma.FeatureRequestWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FeatureRequestScalarFieldEnum | Prisma.FeatureRequestScalarFieldEnum[]
+}
+
+/**
+ * Business.purchases
+ */
+export type Business$purchasesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Purchase
+   */
+  select?: Prisma.PurchaseSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Purchase
+   */
+  omit?: Prisma.PurchaseOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PurchaseInclude<ExtArgs> | null
+  where?: Prisma.PurchaseWhereInput
+  orderBy?: Prisma.PurchaseOrderByWithRelationInput | Prisma.PurchaseOrderByWithRelationInput[]
+  cursor?: Prisma.PurchaseWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PurchaseScalarFieldEnum | Prisma.PurchaseScalarFieldEnum[]
+}
+
+/**
+ * Business.procurementPolicies
+ */
+export type Business$procurementPoliciesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProcurementPolicy
+   */
+  select?: Prisma.ProcurementPolicySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProcurementPolicy
+   */
+  omit?: Prisma.ProcurementPolicyOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProcurementPolicyInclude<ExtArgs> | null
+  where?: Prisma.ProcurementPolicyWhereInput
+  orderBy?: Prisma.ProcurementPolicyOrderByWithRelationInput | Prisma.ProcurementPolicyOrderByWithRelationInput[]
+  cursor?: Prisma.ProcurementPolicyWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProcurementPolicyScalarFieldEnum | Prisma.ProcurementPolicyScalarFieldEnum[]
+}
+
+/**
+ * Business.auditLogs
+ */
+export type Business$auditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the AuditLog
+   */
+  select?: Prisma.AuditLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the AuditLog
+   */
+  omit?: Prisma.AuditLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AuditLogInclude<ExtArgs> | null
+  where?: Prisma.AuditLogWhereInput
+  orderBy?: Prisma.AuditLogOrderByWithRelationInput | Prisma.AuditLogOrderByWithRelationInput[]
+  cursor?: Prisma.AuditLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AuditLogScalarFieldEnum | Prisma.AuditLogScalarFieldEnum[]
+}
+
+/**
+ * Business.messagingBridges
+ */
+export type Business$messagingBridgesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MessagingBridge
+   */
+  select?: Prisma.MessagingBridgeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MessagingBridge
+   */
+  omit?: Prisma.MessagingBridgeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MessagingBridgeInclude<ExtArgs> | null
+  where?: Prisma.MessagingBridgeWhereInput
+  orderBy?: Prisma.MessagingBridgeOrderByWithRelationInput | Prisma.MessagingBridgeOrderByWithRelationInput[]
+  cursor?: Prisma.MessagingBridgeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MessagingBridgeScalarFieldEnum | Prisma.MessagingBridgeScalarFieldEnum[]
 }
 
 /**

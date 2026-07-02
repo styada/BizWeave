@@ -1,0 +1,105 @@
+[
+  {
+    "id": "wing-1",
+    "title": "Agent Pipeline & Business Logic",
+    "goal": "Audit the core agent system \u2014 agent pipeline (6-agent orchestration loop), types, contracts, prompts, fallback templates, dreaming cycle, weekly learning, guard system, MCP servers. Focus on reliability, completeness, error handling, fallback behavior, and architectural soundness.",
+    "acceptance_criteria": [
+      "Identify at least 3 critical issues in the agent pipeline (orchestrator, contracts, prompts, fallbacks)",
+      "Evaluate the dreaming/learning cycle for robustness",
+      "Assess the guard system for safety completeness",
+      "Flag any missing error handling or fallback gaps"
+    ],
+    "toolsets": [
+      "file"
+    ],
+    "output_path": "/Users/saityada/Desktop/coding/startups/Polsai-competitor/.hermes/butterfly/polsia-audit/wings/wing-1-agent-pipeline.md",
+    "decision_log": "/Users/saityada/Desktop/coding/startups/Polsai-competitor/.hermes/butterfly/polsia-audit/wings/wing-1-decisions.md",
+    "source_dirs": [
+      "src/lib/agents/",
+      "src/lib/dreaming/",
+      "src/lib/learning/",
+      "src/lib/guard/",
+      "src/lib/executor/",
+      "src/lib/mcp/"
+    ]
+  },
+  {
+    "id": "wing-2",
+    "title": "LLM Infrastructure & Integrations",
+    "goal": "Audit the LLM client architecture \u2014 OpenAI/Anthropic integration, BYOK key management, LLM resolution and routing, chat operator, usage metering, MCP communications, email integration, memory system, Temporal workflows. Focus on provider abstraction, key security, cost tracking, and integration reliability.",
+    "acceptance_criteria": [
+      "Identify at least 3 critical issues in LLM client/key management",
+      "Evaluate integration quality (email, MCP, Temporal, chat)",
+      "Assess usage metering for accuracy and scalability",
+      "Flag security concerns with API key handling and provider resolution"
+    ],
+    "toolsets": [
+      "file"
+    ],
+    "output_path": "/Users/saityada/Desktop/coding/startups/Polsai-competitor/.hermes/butterfly/polsia-audit/wings/wing-2-llm-infra.md",
+    "decision_log": "/Users/saityada/Desktop/coding/startups/Polsai-competitor/.hermes/butterfly/polsia-audit/wings/wing-2-decisions.md",
+    "source_dirs": [
+      "src/lib/llm/",
+      "src/lib/chat/",
+      "src/lib/usage/",
+      "src/lib/integrations/",
+      "src/lib/memory/",
+      "src/lib/temporal/",
+      "src/lib/env/"
+    ]
+  },
+  {
+    "id": "wing-3",
+    "title": "Frontend, Data & API Architecture",
+    "goal": "Audit the frontend architecture \u2014 Next.js App Router pages, API route handlers, React components, Prisma schema and generated models, Zod validations, data flow patterns, Supabase auth provision. Focus on route organization, data fetching patterns, component structure, schema design quality, and API design consistency.",
+    "acceptance_criteria": [
+      "Identify at least 3 critical issues in frontend or API design",
+      "Evaluate Prisma schema design (relationships, indexes, migrations)",
+      "Assess API route error handling and validation patterns",
+      "Flag any data flow or state management concerns"
+    ],
+    "toolsets": [
+      "file"
+    ],
+    "output_path": "/Users/saityada/Desktop/coding/startups/Polsai-competitor/.hermes/butterfly/polsia-audit/wings/wing-3-frontend-data.md",
+    "decision_log": "/Users/saityada/Desktop/coding/startups/Polsai-competitor/.hermes/butterfly/polsia-audit/wings/wing-3-decisions.md",
+    "source_dirs": [
+      "src/app/",
+      "src/components/",
+      "src/lib/supabase/",
+      "prisma/",
+      "src/generated/prisma/",
+      "src/lib/validations.ts",
+      "src/lib/schemas/"
+    ]
+  },
+  {
+    "id": "wing-4",
+    "title": "Backend, Security & Infrastructure",
+    "goal": "Audit the Python FastAPI backend, authentication system, crypto/encryption, infrastructure configuration, Docker setup, testing coverage, and devops maturity. Focus on backend security, auth integrity, deployment readiness, and test quality.",
+    "acceptance_criteria": [
+      "Identify at least 3 critical issues in backend or security",
+      "Evaluate auth system (Supabase, JWT, OAuth, sessions) for vulnerabilities",
+      "Assess crypto/AES-256-GCM implementation for correctness",
+      "Flag infrastructure gaps (Docker, CI/CD, testing coverage, error monitoring)"
+    ],
+    "toolsets": [
+      "file"
+    ],
+    "output_path": "/Users/saityada/Desktop/coding/startups/Polsai-competitor/.hermes/butterfly/polsia-audit/wings/wing-4-sec-infra.md",
+    "decision_log": "/Users/saityada/Desktop/coding/startups/Polsai-competitor/.hermes/butterfly/polsia-audit/wings/wing-4-decisions.md",
+    "source_dirs": [
+      "backend/",
+      "src/lib/supabase/providers.ts",
+      "src/lib/supabase/provision.ts",
+      "src/lib/crypto.ts",
+      "src/lib/auth.ts",
+      "src/lib/rate-limit.ts",
+      "docker-compose.yml",
+      "Makefile",
+      "src/middleware.ts",
+      "src/app/(auth)/",
+      "src/app/api/auth/"
+    ]
+  }
+]

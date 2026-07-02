@@ -104,6 +104,8 @@ export type SiteOutput = {
   meta: {
     title: string;
     description: string;
+    templateId?: string;
+    tier?: string;
   };
 };
 

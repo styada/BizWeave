@@ -17,6 +17,7 @@ export const flags = {
   deepExecutor: bool(process.env.FEATURE_DEEP_EXECUTOR),
   dreaming: bool(process.env.FEATURE_DREAMING),
   backlinkFreeTier: bool(process.env.FEATURE_BACKLINK_FREE_TIER, true),
+  temporal: bool(process.env.FEATURE_TEMPORAL),
 } as const;
 
 /** Returns the value or undefined if empty/unset (treats "" as unset). */

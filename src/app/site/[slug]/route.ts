@@ -9,11 +9,10 @@ export const dynamic = "force-dynamic";
  * Wildcard subdomain renderer: {slug}.bizweave.site → live Deployment.
  * Middleware rewrites subdomain hosts to /site/[slug].
  */
-export default async function SubdomainSitePage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export async function GET(
+  _request: Request,
+  { params }: { params: Promise<{ slug: string }> },
+) {
   const { slug } = await params;
   const root = wildcardRootDomain();
   const subdomain = `${slug}.${root}`;

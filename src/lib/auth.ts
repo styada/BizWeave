@@ -5,8 +5,9 @@ import { db } from "@/lib/db";
 import { createClient } from "@/lib/supabase/server";
 import bcrypt from "bcryptjs";
 
-export const COOKIE_NAME = "bizweave_session";
-const SESSION_MAX_AGE = 60 * 60 * 24 * 7;
+import { COOKIE_NAME, SESSION_MAX_AGE } from "@/lib/auth-constants";
+
+export { COOKIE_NAME, SESSION_MAX_AGE };
 
 const sessionCookieOptions = {
   httpOnly: true,

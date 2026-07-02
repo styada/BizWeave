@@ -1,4 +1,5 @@
 import { db } from "@/lib/db";
+import type { Prisma } from "@/generated/prisma/client";
 import type { Entitlements } from "@/lib/types/entitlements";
 import { entitlementsForTier, entitlementKeyForUsage } from "@/lib/billing/entitlements";
 import type { Tier } from "@/lib/types/entitlements";
@@ -37,7 +38,7 @@ export async function recordUsage(params: {
         kind: params.kind,
         quantity: params.quantity,
         costUsd: params.costUsd ?? 0,
-        meta: params.meta ?? undefined,
+        meta: params.meta as Prisma.InputJsonValue | undefined,
       },
     });
   } catch (err) {

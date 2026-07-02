@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { COOKIE_NAME } from "@/lib/auth";
+import { COOKIE_NAME } from "@/lib/auth-constants";
 import { wildcardRootDomain } from "@/lib/env";
 
 /**

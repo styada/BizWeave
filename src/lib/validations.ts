@@ -12,8 +12,14 @@ export const signInSchema = z.object({
 });
 
 export const apiKeySchema = z.object({
-  provider: z.enum(["openai", "anthropic"]),
+  // Provider id is a free string. The registry in
+  // src/lib/llm/providers.ts decides which are accepted by the UI.
+  provider: z.string().min(1).max(64),
   apiKey: z.string().min(10, "API key looks too short"),
+  /** Optional model id. Defaults to the provider's defaultModel. */
+  model: z.string().max(200).optional(),
+  /** Required for custom OpenAI-compatible providers. */
+  baseUrl: z.string().url().max(500).optional(),
 });
 
 /** Physical, owner-operated local-business categories (Bizweave's target market). */
@@ -82,7 +88,7 @@ export const onboardingSchema = z.object({
   requireApprovalForSpend: z.boolean().default(true),
   // Legal: owner authorizes the AI operator (Phase 26).
   authorizeOperator: z.literal(true, {
-    errorMap: () => ({ message: "You must authorize the AI operator to continue." }),
+    message: "You must authorize the AI operator to continue.",
   }),
 });
 
