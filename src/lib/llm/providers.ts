@@ -62,33 +62,111 @@ export const PROVIDERS: ProviderDef[] = [
   {
     id: "opencode-go",
     label: "OpenCode Go",
-    blurb: "OpenAI-compatible. Free tier for local dev experiments.",
+    blurb: "OpenCode's low-cost subscription for open coding models.",
     kind: "openai",
-    baseUrl: "https://go.opencode.ai/v1/chat/completions",
+    baseUrl: "https://opencode.ai/zen/go/v1/chat/completions",
+    /**
+     * Fallback list of models available through OpenCode Go as of
+     * 2026-07-02. The live list is fetched at
+     * https://opencode.ai/zen/go/v1/models and may change as new
+     * open models are benchmarked.
+     */
     models: [
-      "gpt-4o-mini",
-      "claude-3-5-sonnet",
-      "qwen2.5-coder:32b",
-      "llama-3.3-70b",
+      "minimax-m3",
+      "minimax-m2.7",
+      "minimax-m2.5",
+      "kimi-k2.7-code",
+      "kimi-k2.6",
+      "kimi-k2.5",
+      "glm-5.2",
+      "glm-5.1",
+      "glm-5",
+      "deepseek-v4-pro",
+      "deepseek-v4-flash",
+      "qwen3.7-max",
+      "qwen3.7-plus",
+      "qwen3.6-plus",
+      "qwen3.5-plus",
+      "mimo-v2.5-pro",
+      "mimo-v2.5",
+      "hy3-preview",
     ],
-    defaultModel: "gpt-4o-mini",
-    docs: "https://opencode.ai/docs/go",
+    defaultModel: "minimax-m3",
+    docs: "https://opencode.ai/auth",
   },
   {
     id: "opencode-zen",
     label: "OpenCode Zen",
-    blurb: "OpenAI-compatible. Curated model marketplace.",
+    blurb: "OpenCode's curated model gateway (Claude, GPT, Gemini, more).",
     kind: "openai",
-    baseUrl: "https://zen.opencode.ai/v1/chat/completions",
+    baseUrl: "https://opencode.ai/zen/v1/chat/completions",
+    /**
+     * Fallback list of models available through OpenCode Zen as of
+     * 2026-07-02. The live list is fetched at
+     * https://opencode.ai/zen/v1/models and may change as new models
+     * are added or deprecated.
+     *
+     * NOTE: OpenCode Zen exposes several endpoint shapes depending on
+     * the model (chat/completions, messages, responses, and per-Gemini
+     * model routes). The gateway accepts chat-completions format for
+     * any model, so this single baseUrl is the recommended entry
+     * point. Users who need a specific endpoint can use the Custom
+     * provider.
+     */
     models: [
-      "gpt-4o",
-      "gpt-4o-mini",
-      "claude-3-5-sonnet",
-      "claude-3-7-sonnet",
-      "gemini-2.0-flash",
+      "claude-fable-5",
+      "claude-opus-4-8",
+      "claude-opus-4-7",
+      "claude-opus-4-6",
+      "claude-opus-4-5",
+      "claude-opus-4-1",
+      "claude-sonnet-5",
+      "claude-sonnet-4-6",
+      "claude-sonnet-4-5",
+      "claude-sonnet-4",
+      "claude-haiku-4-5",
+      "gemini-3.5-flash",
+      "gemini-3.1-pro",
+      "gemini-3-flash",
+      "gpt-5.5",
+      "gpt-5.5-pro",
+      "gpt-5.4",
+      "gpt-5.4-pro",
+      "gpt-5.4-mini",
+      "gpt-5.4-nano",
+      "gpt-5.3-codex-spark",
+      "gpt-5.3-codex",
+      "gpt-5.2",
+      "gpt-5.2-codex",
+      "gpt-5.1",
+      "gpt-5.1-codex-max",
+      "gpt-5.1-codex",
+      "gpt-5.1-codex-mini",
+      "gpt-5",
+      "gpt-5-codex",
+      "gpt-5-nano",
+      "grok-build-0.1",
+      "deepseek-v4-pro",
+      "deepseek-v4-flash",
+      "glm-5.2",
+      "glm-5.1",
+      "glm-5",
+      "minimax-m3",
+      "minimax-m2.7",
+      "minimax-m2.5",
+      "kimi-k2.7-code",
+      "kimi-k2.6",
+      "kimi-k2.5",
+      "qwen3.6-plus",
+      "qwen3.5-plus",
+      "big-pickle",
+      "deepseek-v4-flash-free",
+      "mimo-v2.5-free",
+      "nemotron-3-ultra-free",
+      "north-mini-code-free",
     ],
-    defaultModel: "gpt-4o",
-    docs: "https://opencode.ai/docs/zen",
+    defaultModel: "claude-sonnet-5",
+    docs: "https://opencode.ai/auth",
   },
   {
     id: "custom-openai",

@@ -94,11 +94,28 @@ describe("resolveModelsUrl", () => {
 
   it("derives OpenCode Go + Zen models URLs from their OpenAI-compatible baseUrls", () => {
     expect(resolveModelsUrl(getProvider("opencode-go")!)).toBe(
-      "https://go.opencode.ai/v1/models"
+      "https://opencode.ai/zen/go/v1/models"
     );
     expect(resolveModelsUrl(getProvider("opencode-zen")!)).toBe(
-      "https://zen.opencode.ai/v1/models"
+      "https://opencode.ai/zen/v1/models"
     );
+  });
+
+  it("OpenCode Go and Zen are real, publicly resolvable endpoints", () => {
+    // This guards against hallucinated URLs sneaking back into the
+    // registry. The baseUrls must point to the actual OpenCode AI
+    // gateway (opencode.ai), not made-up subdomains.
+    const go = getProvider("opencode-go")!;
+    const zen = getProvider("opencode-zen")!;
+    expect(go.baseUrl).toMatch(/^https:\/\/opencode\.ai\//);
+    expect(zen.baseUrl).toMatch(/^https:\/\/opencode\.ai\//);
+    // And the curated model lists should contain real Zen/Go models,
+    // not hallucinated names like 'gpt-4o-mini' that aren't on Zen/Go.
+    expect(zen.models).toContain("claude-sonnet-5");
+    expect(zen.models).toContain("gpt-5.4");
+    expect(zen.models).toContain("minimax-m3");
+    expect(go.models).toContain("kimi-k2.7-code");
+    expect(go.models).toContain("glm-5.2");
   });
 
   it("normalizes a bare custom base URL to /v1/models", () => {
