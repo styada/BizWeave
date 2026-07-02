@@ -1,29 +1,42 @@
+/**
+ * Resolve an LLM credential for a user.
+ *
+ * Order: BYOK (any provider in the registry) -> platform-managed env
+ * key (OpenAI or Anthropic) -> null. Returns null when no key exists;
+ * callers fall back to deterministic templates.
+ */
 import { getPreferredProvider } from "@/lib/llm/keys";
 import { optionalEnv } from "@/lib/env";
-import type { LLMProvider } from "@/lib/llm/types";
+import { getProvider, type ProviderDef } from "./providers";
 
 export type ResolvedLlm = {
-  provider: LLMProvider;
+  provider: string;
   apiKey: string;
-  managed: boolean; // true if using the platform key (not the user's BYOK)
+  /** Resolved model id (from the saved key, or provider default). */
+  model: string | null;
+  /** Custom base URL (only for custom providers). */
+  baseUrl: string | null;
+  managed: boolean; // true if using the platform env key, not BYOK
+  def: ProviderDef;
 };
 
-/**
- * Resolve an LLM credential for a user: prefer their BYOK key, else fall back
- * to the platform-managed key. Returns null if neither exists or if the
- * resolved key is empty — callers then use the deterministic template
- * fallback (demo mode). An empty key is treated as no key, otherwise we'd
- * make fetch() calls with `Authorization: Bearer ` and hang on the timeout.
- */
 export async function resolveLlm(userId: string): Promise<ResolvedLlm | null> {
   const byok = await getPreferredProvider(userId);
-  if (byok?.apiKey) return { ...byok, managed: false };
+  if (byok?.apiKey) {
+    const def = getProvider(byok.provider);
+    if (!def) return null;
+    return { ...byok, managed: false, def };
+  }
 
   const openai = optionalEnv("OPENAI_API_KEY");
-  if (openai) return { provider: "openai", apiKey: openai, managed: true };
-
+  if (openai) {
+    const def = getProvider("openai");
+    if (def) return { provider: "openai", apiKey: openai, model: null, baseUrl: null, managed: true, def };
+  }
   const anthropic = optionalEnv("ANTHROPIC_API_KEY");
-  if (anthropic) return { provider: "anthropic", apiKey: anthropic, managed: true };
-
+  if (anthropic) {
+    const def = getProvider("anthropic");
+    if (def) return { provider: "anthropic", apiKey: anthropic, model: null, baseUrl: null, managed: true, def };
+  }
   return null;
 }

@@ -45,7 +45,10 @@ describe("resolveLlm", () => {
     expect(result).toEqual({
       provider: "openai",
       apiKey: "sk-real-key",
+      model: null,
+      baseUrl: null,
       managed: true,
+      def: expect.objectContaining({ id: "openai", kind: "openai" }),
     });
   });
 

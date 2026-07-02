@@ -1,9 +1,12 @@
+/**
+ * LLM client. Dispatches by `kind` (openai | anthropic) from the
+ * provider registry. No hardcoded provider branches.
+ *
+ * Adding a new OpenAI-compatible provider is one entry in
+ * providers.ts; nothing in this file needs to change.
+ */
 import type { LLMMessage, LLMOptions, LLMResponse } from "./types";
-
-const DEFAULT_MODELS: Record<LLMOptions["provider"], string> = {
-  openai: "gpt-4o-mini",
-  anthropic: "claude-3-5-haiku-20241022",
-};
+import { getProvider, resolveChatUrl, type ProviderDef } from "./providers";
 
 // 30s default — long enough for a slow model, short enough that a hung
 // fetch (e.g. bad key, blocked egress) doesn't tie up the chat handler.
@@ -23,23 +26,39 @@ async function fetchWithTimeout(
   }
 }
 
+function resolveProvider(options: LLMOptions): ProviderDef {
+  const def = getProvider(options.provider);
+  if (!def) {
+    throw new Error(
+      `Unknown LLM provider: ${options.provider}. Add it to src/lib/llm/providers.ts.`
+    );
+  }
+  return def;
+}
+
 export async function complete(
   messages: LLMMessage[],
   options: LLMOptions
 ): Promise<LLMResponse> {
-  const model = options.model ?? DEFAULT_MODELS[options.provider];
-
-  if (options.provider === "openai") {
-    return completeOpenAI(messages, { ...options, model });
+  const def = resolveProvider(options);
+  const model = options.model ?? def.defaultModel;
+  if (!model) {
+    throw new Error(
+      `Provider ${def.id} requires a model. Pass options.model or set a default in providers.ts.`
+    );
   }
-  return completeAnthropic(messages, { ...options, model });
+  if (def.kind === "openai") {
+    return completeOpenAI(messages, { ...options, def, model });
+  }
+  return completeAnthropic(messages, { ...options, def, model });
 }
 
 async function completeOpenAI(
   messages: LLMMessage[],
-  options: LLMOptions & { model: string }
+  options: LLMOptions & { def: ProviderDef; model: string }
 ): Promise<LLMResponse> {
-  const res = await fetchWithTimeout("https://api.openai.com/v1/chat/completions", {
+  const url = resolveChatUrl(options.def, options.baseUrl);
+  const res = await fetchWithTimeout(url, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${options.apiKey}`,
@@ -54,8 +73,9 @@ async function completeOpenAI(
   });
 
   if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`OpenAI error: ${res.status} ${err}`);
+    throw new Error(
+      `OpenAI-compatible error (${options.def.id}, ${res.status}): ${await res.text()}`
+    );
   }
 
   const data = (await res.json()) as {
@@ -66,14 +86,15 @@ async function completeOpenAI(
   return {
     content: data.choices[0]?.message?.content ?? "",
     model: data.model,
-    provider: "openai",
+    provider: options.def.id,
   };
 }
 
 async function completeAnthropic(
   messages: LLMMessage[],
-  options: LLMOptions & { model: string }
+  options: LLMOptions & { def: ProviderDef; model: string }
 ): Promise<LLMResponse> {
+  const url = options.def.baseUrl;
   const system = messages.find((m) => m.role === "system")?.content;
   const chatMessages = messages
     .filter((m) => m.role !== "system")
@@ -82,7 +103,7 @@ async function completeAnthropic(
       content: m.content,
     }));
 
-  const res = await fetchWithTimeout("https://api.anthropic.com/v1/messages", {
+  const res = await fetchWithTimeout(url, {
     method: "POST",
     headers: {
       "x-api-key": options.apiKey,
@@ -99,8 +120,9 @@ async function completeAnthropic(
   });
 
   if (!res.ok) {
-    const err = await res.text();
-    throw new Error(`Anthropic error: ${res.status} ${err}`);
+    throw new Error(
+      `Anthropic-compatible error (${options.def.id}, ${res.status}): ${await res.text()}`
+    );
   }
 
   const data = (await res.json()) as {
@@ -116,18 +138,23 @@ async function completeAnthropic(
   return {
     content: text,
     model: data.model,
-    provider: "anthropic",
+    provider: options.def.id,
   };
 }
 
+/**
+ * Probe the provider with a 1-token call. Used by /api/keys to verify
+ * a key before persisting it.
+ */
 export async function testConnection(
-  provider: LLMOptions["provider"],
-  apiKey: string
+  provider: string,
+  apiKey: string,
+  model?: string
 ): Promise<boolean> {
   try {
     await complete(
-      [{ role: "user", content: 'Reply with exactly: OK' }],
-      { provider, apiKey, maxTokens: 10, temperature: 0 }
+      [{ role: "user", content: "Reply with exactly: OK" }],
+      { provider, apiKey, model, maxTokens: 10, temperature: 0 }
     );
     return true;
   } catch {

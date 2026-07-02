@@ -43,7 +43,13 @@ export async function runStructuredAgent<T>(params: {
             },
             { role: "user", content: params.prompt },
           ],
-          { provider: llm.provider, apiKey: llm.apiKey, temperature: 0.6 }
+          {
+            provider: llm.provider,
+            apiKey: llm.apiKey,
+            model: llm.model ?? undefined,
+            baseUrl: llm.baseUrl ?? undefined,
+            temperature: 0.6,
+          }
         ),
         AGENT_TIMEOUT_MS,
         params.agent

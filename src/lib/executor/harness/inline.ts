@@ -46,7 +46,14 @@ Return ONLY the JSON object.`;
         { role: "system", content: "You output only valid JSON. No prose." },
         { role: "user", content: prompt },
       ],
-      { provider: llm.provider, apiKey: llm.apiKey, maxTokens: 4096, temperature: 0.6 }
+      {
+        provider: llm.provider,
+        apiKey: llm.apiKey,
+        model: llm.model ?? undefined,
+        baseUrl: llm.baseUrl ?? undefined,
+        maxTokens: 4096,
+        temperature: 0.6,
+      }
     );
     const site = parseJson<SiteOutput>(res.content, fallbackSite(ctx));
     // Basic validity guard.
@@ -86,7 +93,14 @@ export async function runGenericGoal(
           content: `Business: ${ctx.name} (${ctx.type}). Goal: ${goal}`,
         },
       ],
-      { provider: llm.provider, apiKey: llm.apiKey, maxTokens: 1200, temperature: 0.5 }
+      {
+        provider: llm.provider,
+        apiKey: llm.apiKey,
+        model: llm.model ?? undefined,
+        baseUrl: llm.baseUrl ?? undefined,
+        maxTokens: 1200,
+        temperature: 0.5,
+      }
     );
     return {
       ok: true,

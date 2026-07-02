@@ -271,7 +271,14 @@ async function answerQuestion(
           content: `${memBlock ? memBlock + "\n\n" : ""}Business: ${ctx.name}. ${ctx.description ?? ""}\n\nQuestion: ${text}`,
         },
       ],
-      { provider: llm.provider, apiKey: llm.apiKey, maxTokens: 800, temperature: 0.5 }
+      {
+        provider: llm.provider,
+        apiKey: llm.apiKey,
+        model: llm.model ?? undefined,
+        baseUrl: llm.baseUrl ?? undefined,
+        maxTokens: 800,
+        temperature: 0.5,
+      }
     );
     return res.content.trim() || "I'm not sure — could you rephrase?";
   } catch {

@@ -30,6 +30,10 @@ model ApiKey {
   encryptedKey String
   keyHint      String
   isValid      Boolean  @default(false)
+  /// User-selected model id (free string). Empty means use the provider default.
+  model        String?
+  /// Custom base URL for OpenAI-compatible providers. Empty for built-in ones.
+  baseUrl      String?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 

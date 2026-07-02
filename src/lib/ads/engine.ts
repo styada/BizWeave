@@ -97,7 +97,14 @@ async function generateCreatives(
           content: `Business: ${name} (${type}). Campaign brief: ${brief}. Nearby competitors: ${competitors.map((c) => c.name).join(", ") || "unknown"}. Write 3 high-converting, locally-relevant ad creatives. JSON array only.`,
         },
       ],
-      { provider: llm.provider, apiKey: llm.apiKey, maxTokens: 700, temperature: 0.8 }
+      {
+        provider: llm.provider,
+        apiKey: llm.apiKey,
+        model: llm.model ?? undefined,
+        baseUrl: llm.baseUrl ?? undefined,
+        maxTokens: 700,
+        temperature: 0.8,
+      }
     );
     const parsed = parseJson<Creative[]>(res.content, fallback);
     return Array.isArray(parsed) && parsed.length > 0 ? parsed.slice(0, 3) : fallback;

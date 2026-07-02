@@ -141,7 +141,14 @@ async function generateBrief(
           content: `Business: ${name}. Mood: ${mood}. Proposals: ${JSON.stringify(proposals)}`,
         },
       ],
-      { provider: llm.provider, apiKey: llm.apiKey, maxTokens: 300, temperature: 0.6 }
+      {
+        provider: llm.provider,
+        apiKey: llm.apiKey,
+        model: llm.model ?? undefined,
+        baseUrl: llm.baseUrl ?? undefined,
+        maxTokens: 300,
+        temperature: 0.6,
+      }
     );
     return res.content.trim() || fallback;
   } catch {

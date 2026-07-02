@@ -109,7 +109,13 @@ async function runAgentStep(
       },
       { role: "user", content: prompt },
     ],
-    { provider: creds.provider, apiKey: creds.apiKey, temperature: 0.6 }
+    {
+      provider: creds.provider,
+      apiKey: creds.apiKey,
+      model: creds.model ?? undefined,
+      baseUrl: creds.baseUrl ?? undefined,
+      temperature: 0.6,
+    }
   );
 
   const timeoutPromise = new Promise<never>((_, reject) => {
